@@ -12,6 +12,7 @@
     "@notionhq/client": "^2.2.15",
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.18.0",
+    "@react-three/gltfjsx": "^4.3.4",
     "framer-motion": "^12.4.3",
     "gsap": "^3.12.7",
     "next": "15.1.7",
