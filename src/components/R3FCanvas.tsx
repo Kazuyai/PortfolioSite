@@ -46,6 +46,7 @@ const R3FCanvas = () => {
         <Character castShadow receiveShadow />
         <Building position={[0, 10, 0]} scale={[0.5, 0.5, 0.5]} castShadow receiveShadow />
       </Suspense>
+      <Environment files="/images/sky.hdr" background />
       <OrbitControls />
     </Canvas>
   );
