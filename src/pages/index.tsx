@@ -1,5 +1,6 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import styles from "@/styles/Home.module.scss";
 
 const R3FCanvas = dynamic(() => import("@/components/R3FCanvas"), { ssr: false });
 
@@ -12,6 +13,10 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <R3FCanvas />
+      <div className={styles.text__container}>
+        <h1>Hello!</h1>
+        <p>Welcome to my portfolio!</p>
+      </div>
     </>
   );
 };
