@@ -5,141 +5,64 @@ Command: npx gltfjsx@6.5.3 ./public/models/building.glb --types --shadows
 
 import * as THREE from 'three'
 import React from 'react'
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, useAnimations } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
+
+type ActionName = 'エレベータードア.LAction' | 'エレベータードア.RAction'
+
+interface GLTFAction extends THREE.AnimationClip {
+  name: ActionName
+}
 
 type GLTFResult = GLTF & {
   nodes: {
-    円柱: THREE.Mesh
-    円柱001: THREE.Mesh
-    立方体002: THREE.Mesh
-    立方体010: THREE.Mesh
-    円柱009: THREE.Mesh
-    円柱011: THREE.Mesh
-    円柱002: THREE.Mesh
-    円柱003: THREE.Mesh
-    円柱005: THREE.Mesh
-    円柱006: THREE.Mesh
-    円柱007: THREE.Mesh
-    円柱008: THREE.Mesh
-    立方体: THREE.Mesh
-    立方体001: THREE.Mesh
-    立方体003: THREE.Mesh
-    球: THREE.Mesh
-    球001: THREE.Mesh
-    球002: THREE.Mesh
-    球003: THREE.Mesh
-    立方体004: THREE.Mesh
-    円柱004_1: THREE.Mesh
-    円柱004_2: THREE.Mesh
-    立方体005: THREE.Mesh
-    Cube: THREE.Mesh
-    Cube001_1: THREE.Mesh
-    Cube001_2: THREE.Mesh
-    Cube001_3: THREE.Mesh
-    Cube002: THREE.Mesh
-    Cube003: THREE.Mesh
-    マウス: THREE.Mesh
-    立方体008_1: THREE.Mesh
-    立方体008_2: THREE.Mesh
-    円柱012: THREE.Mesh
-    円柱012_1: THREE.Mesh
-    立方体007: THREE.Mesh
-    立方体008: THREE.Mesh
-    立方体005_1: THREE.Mesh
-    立方体005_2: THREE.Mesh
-    ダクト: THREE.Mesh
-    ティーカップ: THREE.Mesh
-    ティーポット: THREE.Mesh
-    丸机: THREE.Mesh
-    丸机足: THREE.Mesh
-    本: THREE.Mesh
-    本棚: THREE.Mesh
-    椅子: THREE.Mesh
-    皿: THREE.Mesh
+    球006: THREE.Mesh
+    球006_1: THREE.Mesh
+    建物: THREE.Mesh
+    柵: THREE.Mesh
+    屋上床: THREE.Mesh
+    屋上エレベーター乗り口: THREE.Mesh
+    エレベータードアL: THREE.Mesh
+    エレベータードアR: THREE.Mesh
+    屋上ライト: THREE.Mesh
+    屋上ライト001: THREE.Mesh
+    屋上ライト002: THREE.Mesh
+    屋上ライト003: THREE.Mesh
+    エレベーター箱: THREE.Mesh
+    エレベーターボタン: THREE.Mesh
   }
   materials: {
-    ['Material.002']: THREE.MeshStandardMaterial
-    マテリアル: THREE.MeshStandardMaterial
-    ガラス: THREE.MeshStandardMaterial
-    液体: THREE.MeshStandardMaterial
-    Black: THREE.MeshStandardMaterial
-    White: THREE.MeshStandardMaterial
-    Fire: THREE.MeshStandardMaterial
-    液体2: THREE.MeshStandardMaterial
-    Desk: THREE.MeshStandardMaterial
-    Chair: THREE.MeshStandardMaterial
-    ['Material.001']: THREE.MeshStandardMaterial
-    ['Material.003']: THREE.MeshStandardMaterial
-    ['Material.004']: THREE.MeshStandardMaterial
-    Red: THREE.MeshStandardMaterial
-    ['マテリアル.002']: THREE.MeshStandardMaterial
-    Brown: THREE.MeshStandardMaterial
+    ['Black.001']: THREE.MeshStandardMaterial
+    ['マテリアル.001']: THREE.MeshStandardMaterial
+    Light: THREE.MeshStandardMaterial
   }
-  // animations: GLTFAction[]
+  animations: GLTFAction[]
 }
 
 export default function Model(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF('/models/building.glb') as GLTFResult
+  const group = React.useRef<THREE.Group>()
+  const { nodes, materials, animations } = useGLTF('/models/building.glb') as GLTFResult
+  const { actions } = useAnimations(animations, group)
   return (
     <group {...props} dispose={null}>
-      <mesh castShadow receiveShadow geometry={nodes.円柱.geometry} material={materials['Material.002']} position={[8, -15, -5.895]} scale={[1.139, 1, 1.139]} />
-      <mesh castShadow receiveShadow geometry={nodes.円柱001.geometry} material={materials.マテリアル} position={[8, -8.5, -5.895]} scale={[1.139, 1, 1.139]} />
-      <mesh castShadow receiveShadow geometry={nodes.立方体002.geometry} material={nodes.立方体002.material} position={[0, -16, 0]} scale={[1.414, 1, 1]} />
-      <mesh castShadow receiveShadow geometry={nodes.立方体010.geometry} material={nodes.立方体010.material} scale={[1.414, 1, 1]} />
-      <mesh castShadow receiveShadow geometry={nodes.円柱009.geometry} material={materials['Material.002']} position={[8, 1, -5.895]} scale={[1.139, 1, 1.139]} />
-      <mesh castShadow receiveShadow geometry={nodes.円柱011.geometry} material={materials.マテリアル} position={[8, 7.5, -5.895]} scale={[1.139, 1, 1.139]} />
-      <mesh castShadow receiveShadow geometry={nodes.円柱002.geometry} material={materials.ガラス} position={[-18.737, -10.654, -11.449]} />
-      <mesh castShadow receiveShadow geometry={nodes.円柱003.geometry} material={materials.液体} position={[-18.737, -10.744, -11.449]} />
-      <mesh castShadow receiveShadow geometry={nodes.円柱005.geometry} material={materials.ガラス} position={[-15.913, -10.654, -11.183]} />
-      <mesh castShadow receiveShadow geometry={nodes.円柱006.geometry} material={materials.液体} position={[-15.913, -10.744, -11.183]} />
-      <mesh castShadow receiveShadow geometry={nodes.円柱007.geometry} material={materials.ガラス} position={[-17.277, -10.654, -12.409]} />
-      <mesh castShadow receiveShadow geometry={nodes.円柱008.geometry} material={materials.液体} position={[-17.277, -10.744, -12.409]} />
-      <mesh castShadow receiveShadow geometry={nodes.立方体.geometry} material={materials.Black} position={[-13.755, -11.312, -11.453]} scale={1.113} />
-      <mesh castShadow receiveShadow geometry={nodes.立方体001.geometry} material={materials.Black} position={[-14.534, -10.199, -11.453]} scale={1.113} />
-      <mesh castShadow receiveShadow geometry={nodes.立方体003.geometry} material={materials.Black} position={[-14.012, -9.452, -11.453]} scale={1.113} />
-      <mesh castShadow receiveShadow geometry={nodes.球.geometry} material={materials.ガラス} position={[-13.513, -10.05, -11.453]} scale={0.875} />
-      <mesh castShadow receiveShadow geometry={nodes.球001.geometry} material={materials.White} position={[-13.53, -11.08, -11.453]} scale={1.113} />
-      <mesh castShadow receiveShadow geometry={nodes.球002.geometry} material={materials.Fire} position={[-13.533, -10.823, -11.453]} scale={0.107} />
-      <mesh castShadow receiveShadow geometry={nodes.球003.geometry} material={materials.液体2} position={[-13.513, -10.05, -11.453]} scale={0.801} />
-      <mesh castShadow receiveShadow geometry={nodes.立方体004.geometry} material={materials.Desk} position={[-8.042, -11.819, -11.884]} scale={1.931} />
-      <group position={[-8.042, -13.274, -8.571]} scale={1.931}>
-        <mesh castShadow receiveShadow geometry={nodes.円柱004_1.geometry} material={materials.Chair} />
-        <mesh castShadow receiveShadow geometry={nodes.円柱004_2.geometry} material={materials.マテリアル} />
+      <group name="Scene">
+        <group name="人" position={[-1.3, 0.2, 0.2]} scale={0.263}>
+          <mesh name="球006" castShadow receiveShadow geometry={nodes.球006.geometry} material={materials['Black.001']} />
+          <mesh name="球006_1" castShadow receiveShadow geometry={nodes.球006_1.geometry} material={materials['マテリアル.001']} />
+        </group>
+        <mesh name="建物" castShadow receiveShadow geometry={nodes.建物.geometry} material={nodes.建物.material} position={[0, -3.2, 0]} />
+        <mesh name="柵" castShadow receiveShadow geometry={nodes.柵.geometry} material={nodes.柵.material} position={[-2.9, 0.46, 2.9]} scale={0.2} />
+        <mesh name="屋上床" castShadow receiveShadow geometry={nodes.屋上床.geometry} material={nodes.屋上床.material} scale={0.2} />
+        <mesh name="屋上エレベーター乗り口" castShadow receiveShadow geometry={nodes.屋上エレベーター乗り口.geometry} material={nodes.屋上エレベーター乗り口.material} position={[-1.3, 1.2, -1.3]} />
+        <mesh name="エレベータードアL" castShadow receiveShadow geometry={nodes.エレベータードアL.geometry} material={nodes.エレベータードアL.material} position={[-1.3, 1.2, -1.5]} scale={0.2} />
+        <mesh name="エレベータードアR" castShadow receiveShadow geometry={nodes.エレベータードアR.geometry} material={nodes.エレベータードアR.material} position={[-1.3, 1.2, -1.5]} scale={0.2} />
+        <mesh name="屋上ライト" castShadow receiveShadow geometry={nodes.屋上ライト.geometry} material={materials.Light} position={[-2.6, 0.2, -2.6]} scale={0.2} />
+        <mesh name="屋上ライト001" castShadow receiveShadow geometry={nodes.屋上ライト001.geometry} material={materials.Light} position={[2.6, 0.2, 2.6]} rotation={[Math.PI, 0, Math.PI]} scale={0.2} />
+        <mesh name="屋上ライト002" castShadow receiveShadow geometry={nodes.屋上ライト002.geometry} material={materials.Light} position={[-2.6, 0.2, 2.6]} rotation={[0, Math.PI / 2, 0]} scale={0.2} />
+        <mesh name="屋上ライト003" castShadow receiveShadow geometry={nodes.屋上ライト003.geometry} material={materials.Light} position={[2.6, 0.2, -2.6]} rotation={[0, -1.571, 0]} scale={0.2} />
+        <mesh name="エレベーター箱" castShadow receiveShadow geometry={nodes.エレベーター箱.geometry} material={nodes.エレベーター箱.material} position={[-1.3, 1.01, -1.5]} />
+        <mesh name="エレベーターボタン" castShadow receiveShadow geometry={nodes.エレベーターボタン.geometry} material={nodes.エレベーターボタン.material} position={[-0.568, 1.118, -0.322]} scale={0.2} />
       </group>
-      <mesh castShadow receiveShadow geometry={nodes.立方体005.geometry} material={materials.Desk} position={[-15.958, -11.819, -11.884]} rotation={[Math.PI, 0, Math.PI]} scale={1.931} />
-      <mesh castShadow receiveShadow geometry={nodes.Cube.geometry} material={materials['Material.001']} position={[-8.186, -11.379, -11.697]} scale={[0.912, 1, 1.075]} />
-      <group position={[-8.186, -10.343, -13.167]} rotation={[1.137, 0, 0]} scale={[0.912, 1, 1.075]}>
-        <mesh castShadow receiveShadow geometry={nodes.Cube001_1.geometry} material={materials['Material.001']} />
-        <mesh castShadow receiveShadow geometry={nodes.Cube001_2.geometry} material={materials['Material.003']} />
-        <mesh castShadow receiveShadow geometry={nodes.Cube001_3.geometry} material={materials['Material.004']} />
-      </group>
-      <mesh castShadow receiveShadow geometry={nodes.Cube002.geometry} material={materials['Material.002']} position={[-9.328, -11.33, -12.352]} scale={[0.063, 0.015, 0.063]} />
-      <mesh castShadow receiveShadow geometry={nodes.Cube003.geometry} material={materials['Material.001']} position={[-8.186, -11.334, -11.367]} scale={[0.912, 1, 1.075]} />
-      <mesh castShadow receiveShadow geometry={nodes.マウス.geometry} material={nodes.マウス.material} position={[-5.789, -11.214, -11.523]} scale={0.375} />
-      <group position={[15.617, -9.5, -11.751]}>
-        <mesh castShadow receiveShadow geometry={nodes.立方体008_1.geometry} material={materials.Desk} />
-        <mesh castShadow receiveShadow geometry={nodes.立方体008_2.geometry} material={materials.ガラス} />
-      </group>
-      <group position={[-10.684, -11.287, -11.493]} rotation={[0, -0.32, 0]}>
-        <mesh castShadow receiveShadow geometry={nodes.円柱012.geometry} material={materials.Red} />
-        <mesh castShadow receiveShadow geometry={nodes.円柱012_1.geometry} material={materials['マテリアル.002']} />
-      </group>
-      <mesh castShadow receiveShadow geometry={nodes.立方体007.geometry} material={materials.Brown} position={[-10.659, -10.589, -11.43]} rotation={[Math.PI / 2, 0, 0.491]} scale={[0.459, 0.025, 0.025]} />
-      <mesh castShadow receiveShadow geometry={nodes.立方体008.geometry} material={materials.Brown} position={[-10.593, -10.589, -11.531]} rotation={[Math.PI / 2, 0, 0.558]} scale={[0.459, 0.025, 0.025]} />
-      <group position={[0.607, -10.5, -11.845]}>
-        <mesh castShadow receiveShadow geometry={nodes.立方体005_1.geometry} material={materials.ガラス} />
-        <mesh castShadow receiveShadow geometry={nodes.立方体005_2.geometry} material={materials.Desk} />
-      </group>
-      <mesh castShadow receiveShadow geometry={nodes.ダクト.geometry} material={materials.Black} position={[0.645, -4.736, -12.023]} rotation={[Math.PI, 0, Math.PI / 2]} />
-      <mesh castShadow receiveShadow geometry={nodes.ティーカップ.geometry} material={nodes.ティーカップ.material} position={[-13.159, 5.544, 0.503]} rotation={[0, 0.717, Math.PI / 2]} scale={0.408} />
-      <mesh castShadow receiveShadow geometry={nodes.ティーポット.geometry} material={nodes.ティーポット.material} position={[-14.161, 5.671, -0.643]} rotation={[0, 0.258, 0]} scale={0.543} />
-      <mesh castShadow receiveShadow geometry={nodes.丸机.geometry} material={nodes.丸机.material} position={[-13.874, 4.862, 0]} scale={0.817} />
-      <mesh castShadow receiveShadow geometry={nodes.丸机足.geometry} material={nodes.丸机足.material} position={[-13.874, 1.362, 0]} rotation={[Math.PI / 2, 0, 2.094]} scale={0.817} />
-      <mesh castShadow receiveShadow geometry={nodes.本.geometry} material={nodes.本.material} position={[0, 1.763, 0]} scale={[0.2, 0.8, 0.6]} />
-      <mesh castShadow receiveShadow geometry={nodes.本棚.geometry} material={nodes.本棚.material} position={[-0.862, 6.5, -12.186]} />
-      <mesh castShadow receiveShadow geometry={nodes.椅子.geometry} material={nodes.椅子.material} position={[-10.7, 3.043, -1.985]} rotation={[0, -0.404, 0]} scale={0.537} />
-      <mesh castShadow receiveShadow geometry={nodes.皿.geometry} material={nodes.皿.material} position={[-13.159, 5.31, 0.503]} scale={0.566} />
     </group>
   )
 }
