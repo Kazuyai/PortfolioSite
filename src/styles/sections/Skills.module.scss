@@ -1,0 +1,6 @@
+@import "Common.modules.scss";
+
+.skills {
+  @extend .section;
+  --primaryColor: #97dfd8;
+}

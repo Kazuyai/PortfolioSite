@@ -1,21 +1,10 @@
 .text__container {
   width: 40%;
   height: 100%;
-  background: #8ea5dc;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  .section {
-    width: 100%;
-    max-width: 1000px;
-    min-height: 100vh;
-    margin: 0 auto;
-    padding-inline: 30px;
-
-    &__top {
-      background: #8ce29d;
-    }
-
-    &__skills {
-      background: #a9eeda;
-    }
+  // background: #8ea5dc;
+  // box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  
+  .spacer {
+    height: 300vh;
   }
 }
