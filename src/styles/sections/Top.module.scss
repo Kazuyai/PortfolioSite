@@ -3,13 +3,15 @@
 .top {
   @extend .section;
   --primaryColor: #0000;
-  padding-top: 40vh;
+  padding: 40vh 0 0 10rem;
   color: #fff;
   box-shadow: none;
   h1 {
     font-size: 4.8rem;
+    font-weight: bold;
   }
   p {
     font-size: 2.4rem;
+    font-weight: bold;
   }
 }

@@ -5,7 +5,7 @@ function Top() {
   return (
     <section className={styles.top}>
       <h1>Hello!</h1>
-      <p>Welcome to my portfolio!</p>
+      <p>Welcome to my portfolio site</p>
     </section>
   );
 }
