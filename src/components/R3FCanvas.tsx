@@ -2,10 +2,16 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { Environment, OrbitControls, useHelper } from "@react-three/drei";
 import { Suspense, useRef, useEffect } from "react";
 import * as THREE from "three";
+import CameraController from "@/components/utils/CameraController";
 import Character from "@/components/models/Character";
 import Building from "@/components/models/Building";
 import Loader from "@/components/common/Loader";
 import styles from "@/styles/R3FCanvas.module.scss";
+import { render } from "sass";
+
+interface Props {
+  spacerRefs: React.MutableRefObject<HTMLDivElement[]>;
+}
 
 const Lights = () => {
   const directionalLightRef = useRef<THREE.DirectionalLight>(new THREE.DirectionalLight());
@@ -16,35 +22,28 @@ const Lights = () => {
 
   return (
     <>
-      <ambientLight intensity={3} />
+      {/* <ambientLight intensity={3} /> */}
       <directionalLight
         ref={directionalLightRef}
-        position={[10, 10, 10]}
-        intensity={5}
+        position={[7, 7, 7]}
+        intensity={1}
         castShadow
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
       />
-      <pointLight
-        ref={pointLightRef}
-        position={[0, 5, 0]}
-        intensity={10} 
-      />
+      {/* <pointLight ref={pointLightRef} position={[0, 5, 0]} intensity={10} /> */}
     </>
   );
 };
 
-const R3FCanvas = () => {
+const R3FCanvas = ({ spacerRefs }: Props) => {
   return (
-    <Canvas
-      className={styles.canvas}
-      camera={{ position: [0, 5, 5] }}
-      shadows
-    >
+    <Canvas className={styles.canvas} camera={{ position: [0, 5, 5] }} flat shadows>
+      <CameraController spacerRefs={spacerRefs} />
       <Lights />
       <Suspense fallback={<Loader />}>
-        <Character castShadow receiveShadow />
-        <Building position={[0, 10, 0]} scale={[0.5, 0.5, 0.5]} castShadow receiveShadow />
+        <Character position={[10, 0.5, -5]} castShadow receiveShadow />
+        <Building position={[10, 0, -5]} scale={[2, 2, 2]} castShadow receiveShadow />
       </Suspense>
       <Environment files="/images/sky.hdr" background />
       <OrbitControls />
