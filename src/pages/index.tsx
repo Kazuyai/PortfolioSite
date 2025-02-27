@@ -14,8 +14,14 @@ const Home = () => {
       </Head>
       <R3FCanvas />
       <div className={styles.text__container}>
-        <h1>Hello!</h1>
-        <p>Welcome to my portfolio!</p>
+        <section className={styles.section + " " + styles.section__top}>
+          <h1>Hello!</h1>
+          <p>Welcome to my portfolio!</p>
+        </section>
+        <section className={styles.section + " " + styles.section__skills}>
+          <h1>Hello!</h1>
+          <p>Welcome to my portfolio!</p>
+        </section>
       </div>
     </>
   );
