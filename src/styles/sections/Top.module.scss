@@ -3,6 +3,7 @@
 .top {
   @extend .section;
   --primaryColor: #0000;
+  min-height: 100vh;
   padding: 40vh 0 0 10rem;
   color: #fff;
   box-shadow: none;
@@ -13,5 +14,44 @@
   p {
     font-size: 2.4rem;
     font-weight: bold;
+  }
+
+  .scroll {
+    position: fixed;
+    bottom: 3rem;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    width: 5rem;
+    transform: translateX(-50%);
+
+    img {
+      animation: blinking 2s infinite;
+      &:nth-of-type(1) {
+        margin-bottom: -1rem;
+      }
+      &:nth-of-type(2) {
+        animation-delay: 0.2s;
+      }
+      &:nth-of-type(3) {
+        margin-top: -1rem;
+        animation-delay: 0.4s;
+      }
+  
+      @keyframes blinking {
+        0% {
+          opacity: 0;
+          transform: translateY(-0.5rem);
+        }
+        50% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(0.5rem);
+        }
+      }
+    }
   }
 }
