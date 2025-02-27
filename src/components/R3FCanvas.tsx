@@ -22,7 +22,7 @@ const Lights = () => {
 
   return (
     <>
-      {/* <ambientLight intensity={3} /> */}
+      <ambientLight intensity={0.3} />
       <directionalLight
         ref={directionalLightRef}
         position={[7, 7, 7]}
@@ -30,6 +30,11 @@ const Lights = () => {
         castShadow
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
+        shadow-camera-far={50}
+        shadow-camera-left={-20}
+        shadow-camera-right={20}
+        shadow-camera-top={20}
+        shadow-camera-bottom={-20}
       />
       {/* <pointLight ref={pointLightRef} position={[0, 5, 0]} intensity={10} /> */}
     </>
