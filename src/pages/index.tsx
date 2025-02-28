@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import styles from "@/styles/Home.module.scss";
 import Top from "@/components/sections/Top";
 import Skills from "@/components/sections/Skills";
-import React, { useRef } from "react";
+import React, { use, useEffect, useRef } from "react";
 
 const R3FCanvas = dynamic(() => import("@/components/R3FCanvas"), { ssr: false });
 
@@ -13,8 +13,27 @@ const Home = () => {
     { id: "skills", label: "Skillsセクション", component: Skills },
   ];
 
+  const [isOpeningAnimationFinished, setIsOpeningAnimationFinished] = React.useState(false);
   const spacerRefs = useRef<HTMLDivElement[]>([]);
   spacerRefs.current = [];
+
+  useEffect(() => {
+    const openingAnimation = () => {
+      setTimeout(() => {
+        setIsOpeningAnimationFinished(true);
+      }, 3000);
+    };
+    openingAnimation();
+  }, []);
+
+
+  useEffect(() => {
+    if (isOpeningAnimationFinished) {
+      document.body.style.overflow = "auto";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
+  }, [isOpeningAnimationFinished]);
 
   return (
     <>
