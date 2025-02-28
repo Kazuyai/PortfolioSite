@@ -3,6 +3,7 @@ import { Environment, OrbitControls, useHelper } from "@react-three/drei";
 import { Suspense, useRef, useEffect } from "react";
 import * as THREE from "three";
 import CameraController from "@/components/utils/CameraController";
+import CharacterController from "@/components/utils/CharacterController";
 import Character from "@/components/models/Character";
 import Building from "@/components/models/Building";
 import Loader from "@/components/common/Loader";
@@ -17,8 +18,8 @@ const Lights = () => {
   const directionalLightRef = useRef<THREE.DirectionalLight>(new THREE.DirectionalLight());
   const pointLightRef = useRef<THREE.PointLight>(new THREE.PointLight());
 
-  useHelper(directionalLightRef, THREE.DirectionalLightHelper, 5, "red");
-  useHelper(pointLightRef, THREE.PointLightHelper, 1, "blue");
+  // useHelper(directionalLightRef, THREE.DirectionalLightHelper, 5, "red");
+  // useHelper(pointLightRef, THREE.PointLightHelper, 1, "blue");
 
   return (
     <>
@@ -42,16 +43,20 @@ const Lights = () => {
 };
 
 const R3FCanvas = ({ spacerRefs }: Props) => {
+
+  const characterRef = useRef<THREE.Group>(null);
+
   return (
-    <Canvas className={styles.canvas} camera={{ position: [0, 5, 5] }} flat shadows>
+    <Canvas className={styles.canvas} camera={{ position: [0, 5, 5], fov: 60 }} flat shadows>
       <CameraController spacerRefs={spacerRefs} />
+      <CharacterController spacerRefs={spacerRefs} characterRef={characterRef} />
       <Lights />
       <Suspense fallback={<Loader />}>
-        <Character position={[10, 0.5, -5]} castShadow receiveShadow />
-        <Building position={[10, 0, -5]} scale={[2, 2, 2]} castShadow receiveShadow />
+        <Character ref={characterRef} castShadow receiveShadow />
+        <Building scale={[2, 2, 2]} castShadow receiveShadow />
       </Suspense>
       <Environment files="/images/sky.hdr" background />
-      <OrbitControls />
+      {/* <OrbitControls /> */}
     </Canvas>
   );
 };

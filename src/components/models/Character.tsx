@@ -32,12 +32,14 @@ type GLTFResult = GLTF & {
   // animations: GLTFAction[]
 }
 
-export default function Model(props: JSX.IntrinsicElements['group']) {
-  const { scene } = useGLTF('/models/character.glb')
-  const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene])
-  const { nodes, materials } = useGraph(clone) as GLTFResult
+// export default function Model(props: JSX.IntrinsicElements['group'], ref: React.ForwardedRef<THREE.Group>) {
+export default React.forwardRef<THREE.Group, JSX.IntrinsicElements["group"]>(function Model(props, ref) {
+  const { scene } = useGLTF('/models/character.glb');
+  const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
+  const { nodes, materials } = useGraph(clone) as GLTFResult;
+
   return (
-    <group {...props} dispose={null}>
+    <group {...props} ref={ref} dispose={null}>
       <group position={[0, 1.266, 0]}>
         <primitive object={nodes.Hips} />
         <mesh castShadow receiveShadow geometry={nodes.NURBSパス.geometry} material={materials.Material} position={[0, 2.208, 0.904]} rotation={[0, 0, Math.PI / 2]} />
@@ -53,7 +55,7 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
         <skinnedMesh geometry={nodes.球002.geometry} material={materials.Material} skeleton={nodes.球002.skeleton} />
       </group>
     </group>
-  )
-}
+  );
+});
 
 useGLTF.preload("/models/character.glb");
