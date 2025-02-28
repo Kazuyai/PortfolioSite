@@ -1,38 +1,67 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
+import { useSectionProgress } from "@/hooks/useSectionProgress";
 
-/**
- * 各セクションに対応するカメラの position, lookAt を定義
- */
-const cameraPositions = [
-  {
-    position: [18, 6, 13] as [number, number, number],
-    lookAt: [0, 8, 0] as [number, number, number],
-  },
-  {
-    position: [18, -5, 13] as [number, number, number],
-    lookAt: [0, -2, 0] as [number, number, number],
-  },
-];
+interface CameraPosition {
+  position: [number, number, number];
+  lookAt: [number, number, number];
+}
 
 interface CameraControllerProps {
   spacerRefs: React.MutableRefObject<HTMLDivElement[]>;
 }
 
-const CameraController: React.FC<CameraControllerProps> = ({ spacerRefs }) => {
-  const { camera } = useThree();
+const baseCameraPositions: CameraPosition[] = [
+  {
+    position: [21 - 10, 6, 13 + 5],
+    lookAt: [3 - 10, 8, 0 + 5],
+  },
+  {
+    position: [21 - 10, -6, 11 + 5],
+    lookAt: [7 - 10, -3, 0 + 5],
+  },
+];
 
-  const [scrollY, setScrollY] = useState(0);
+const CameraController: React.FC<CameraControllerProps> = ({ spacerRefs }) => {
+  const { camera, size } = useThree();
+  const { currentIndex, progress } = useSectionProgress(spacerRefs);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
+  const [cameraPositions, setCameraPositions] = useState(baseCameraPositions);
+
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    const updateCameraPosition = () => {
+      // const aspectRatio = size.width / size.height;
+      // const xOffset = aspectRatio < 1.5 ? -5 : 0;
+
+      // setCameraPositions([
+      //   {
+      //     position: [18 - xOffset, 6, 13],
+      //     lookAt: [0 - xOffset, 8, 0],
+      //   },
+      //   {
+      //     position: [18 - xOffset, -6, 11],
+      //     lookAt: [4 - xOffset, -3, 0],
+      //   },
+      // ]);
+      const isMobile = size.width < 768;
+      setCameraPositions([
+        {
+          position: [isMobile ? 18 : baseCameraPositions[0].position[0], baseCameraPositions[0].position[1], isMobile ? 18 : baseCameraPositions[0].position[2]],
+          lookAt: [isMobile ? 0 : baseCameraPositions[0].lookAt[0], baseCameraPositions[0].lookAt[1], isMobile ? 0 : baseCameraPositions[0].lookAt[2]],
+        },
+        {
+          position: [isMobile ? 18 : baseCameraPositions[1].position[0], baseCameraPositions[1].position[1], isMobile ? 18 : baseCameraPositions[1].position[2]],
+          lookAt: [isMobile ? 0 : baseCameraPositions[1].lookAt[0], baseCameraPositions[1].lookAt[1], isMobile ? 0 : baseCameraPositions[1].lookAt[2]],
+        },
+      ]);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+
+    updateCameraPosition();
+    window.addEventListener("resize", updateCameraPosition);
+    return () => window.removeEventListener("resize", updateCameraPosition);
+  }, [size.width]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -42,67 +71,24 @@ const CameraController: React.FC<CameraControllerProps> = ({ spacerRefs }) => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  const spacerPositions = useMemo(() => {
-    return spacerRefs.current.map((spacerEl) => {
-      const rect = spacerEl.getBoundingClientRect();
-      const startY = rect.top + window.scrollY;
-      const endY = startY + rect.height;
-      return { startY, endY };
-    });
-  }, [spacerRefs.current]);
-
   useFrame(() => {
-    let finalPosition: [number, number, number] | null = null;
-    let finalLookAt: [number, number, number] | null = null;
+    const startIndex = currentIndex;
+    const endIndex = currentIndex + 1 < cameraPositions.length ? currentIndex + 1 : currentIndex;
 
-    let foundSpacerIndex = -1;
-    for (let i = 0; i < spacerPositions.length; i++) {
-      const { startY, endY } = spacerPositions[i];
-      if (scrollY >= startY && scrollY <= endY) {
-        foundSpacerIndex = i;
-        break;
-      }
-    }
+    const startCam = cameraPositions[startIndex];
+    const endCam = cameraPositions[endIndex];
 
-    if (foundSpacerIndex >= 0) {
-      const startPos = cameraPositions[foundSpacerIndex].position;
-      const endPos =
-        cameraPositions[foundSpacerIndex + 1]?.position || startPos;
+    const finalPosition = [
+      startCam.position[0] + (endCam.position[0] - startCam.position[0]) * progress,
+      startCam.position[1] + (endCam.position[1] - startCam.position[1]) * progress,
+      startCam.position[2] + (endCam.position[2] - startCam.position[2]) * progress,
+    ] as [number, number, number];
 
-      const startLook = cameraPositions[foundSpacerIndex].lookAt;
-      const endLook =
-        cameraPositions[foundSpacerIndex + 1]?.lookAt || startLook;
-
-      const { startY, endY } = spacerPositions[foundSpacerIndex];
-      const progress = (scrollY - startY) / (endY - startY);
-
-      finalPosition = [
-        startPos[0] + (endPos[0] - startPos[0]) * progress,
-        startPos[1] + (endPos[1] - startPos[1]) * progress,
-        startPos[2] + (endPos[2] - startPos[2]) * progress,
-      ];
-
-      finalLookAt = [
-        startLook[0] + (endLook[0] - startLook[0]) * progress,
-        startLook[1] + (endLook[1] - startLook[1]) * progress,
-        startLook[2] + (endLook[2] - startLook[2]) * progress,
-      ];
-    } else {
-      if (spacerPositions.length === 0) {
-        finalPosition = cameraPositions[0].position;
-        finalLookAt = cameraPositions[0].lookAt;
-      } else {
-        if (scrollY < spacerPositions[0].startY) {
-          finalPosition = cameraPositions[0].position;
-          finalLookAt = cameraPositions[0].lookAt;
-        }
-        else if (scrollY > spacerPositions[spacerPositions.length - 1].endY) {
-          const lastIndex = cameraPositions.length - 1;
-          finalPosition = cameraPositions[lastIndex].position;
-          finalLookAt = cameraPositions[lastIndex].lookAt;
-        }
-      }
-    }
+    const finalLookAt = [
+      startCam.lookAt[0] + (endCam.lookAt[0] - startCam.lookAt[0]) * progress,
+      startCam.lookAt[1] + (endCam.lookAt[1] - startCam.lookAt[1]) * progress,
+      startCam.lookAt[2] + (endCam.lookAt[2] - startCam.lookAt[2]) * progress,
+    ] as [number, number, number];
 
     if (finalPosition && finalLookAt) {
       const halfW = window.innerWidth / 2;
@@ -110,7 +96,7 @@ const CameraController: React.FC<CameraControllerProps> = ({ spacerRefs }) => {
       const nx = (mouse.x - halfW) / halfW;
       const ny = (mouse.y - halfH) / halfH;
 
-      const offsetFactor = 0;  
+      const offsetFactor = 0.2;
 
       const offsetPos = new Vector3(
         finalPosition[0] + nx * offsetFactor,
@@ -119,7 +105,6 @@ const CameraController: React.FC<CameraControllerProps> = ({ spacerRefs }) => {
       );
 
       camera.position.lerp(offsetPos, 0.5);
-
       camera.lookAt(...finalLookAt);
     }
   });
