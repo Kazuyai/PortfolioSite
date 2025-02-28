@@ -8,12 +8,18 @@
 
 html {
   font-size: 10px;
+  @media screen and (max-width: 768px) {
+    font-size: calc(100vw / 360 * 10);
+  }
 }
 
 body {
   position: relative;
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 1.6rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1.4rem;
+  }
 }
 
 a {

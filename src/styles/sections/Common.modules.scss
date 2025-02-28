@@ -7,4 +7,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 0 50px 50px 0;
   background-color: var(--primaryColor);
+  @media screen and (max-width: 768px) {
+    margin-top: 155vh; // スマホの時に階層移動アニメーションが終わった状態を見せるため、margin-topを設定
+  }
 }
