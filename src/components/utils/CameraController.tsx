@@ -14,13 +14,17 @@ interface CameraControllerProps {
 
 const baseCameraPositions: CameraPosition[] = [
   {
-    position: [21 - 10, 6, 13 + 5],
-    lookAt: [3 - 10, 8, 0 + 5],
+    position: [11, 6, 18],
+    lookAt: [-7, 8, 5],
   },
   {
-    position: [21 - 10, -6, 11 + 5],
-    lookAt: [7 - 10, -3, 0 + 5],
+    position: [11, -6, 16],
+    lookAt: [-3, -3, 5],
   },
+  {
+    position: [11, -12, 16],
+    lookAt: [-3, -9, 5],
+  }
 ];
 
 const CameraController: React.FC<CameraControllerProps> = ({ spacerRefs }) => {
@@ -54,6 +58,10 @@ const CameraController: React.FC<CameraControllerProps> = ({ spacerRefs }) => {
         {
           position: [isMobile ? 18 : baseCameraPositions[1].position[0], baseCameraPositions[1].position[1], isMobile ? 18 : baseCameraPositions[1].position[2]],
           lookAt: [isMobile ? 0 : baseCameraPositions[1].lookAt[0], baseCameraPositions[1].lookAt[1], isMobile ? 0 : baseCameraPositions[1].lookAt[2]],
+        },
+        {
+          position: [isMobile ? 18 : baseCameraPositions[2].position[0], baseCameraPositions[2].position[1], isMobile ? 18 : baseCameraPositions[2].position[2]],
+          lookAt: [isMobile ? 0 : baseCameraPositions[2].lookAt[0], baseCameraPositions[2].lookAt[1], isMobile ? 0 : baseCameraPositions[2].lookAt[2]],
         },
       ]);
     };
