@@ -1,4 +1,4 @@
-@import "Common.modules.scss";
+@import "Common.module.scss";
 
 .top {
   @extend .section;
@@ -50,7 +50,7 @@
         margin-top: -1rem;
         animation-delay: 0.4s;
       }
-  
+
       @keyframes blinking {
         0% {
           opacity: 0;
