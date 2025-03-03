@@ -1,0 +1,6 @@
+@import "Common.modules.scss";
+
+.projects {
+  @extend .section;
+  --primaryColor: #d4df97;
+}
