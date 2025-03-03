@@ -34,19 +34,22 @@ export function useSectionProgress(
 
   for (let i = 0; i < spacerPositions.length; i++) {
     const { startY, endY } = spacerPositions[i];
+    const beforeSpacer = i === 0 ? null : spacerPositions[i - 1];
+    if(scrollY < spacerPositions[0].startY) {
+      currentIndex = 0;
+      break;
+    } else if(scrollY > spacerPositions[spacerPositions.length - 1].endY) {
+      currentIndex = spacerPositions.length;
+      break;
+    } else if(scrollY < endY && beforeSpacer && scrollY > beforeSpacer.endY) {
+      currentIndex = i;
+    } 
+
     if (scrollY >= startY && scrollY <= endY) {
-      const sectionIndex = i;
       const total = endY - startY;
       const distance = scrollY - startY;
       progress = distance / total;
-      currentIndex = sectionIndex;
       break;
-    } else if (scrollY < spacerPositions[0].startY) {
-      currentIndex = 0;
-      progress = 0;
-    } else if (scrollY > spacerPositions[spacerPositions.length-1].endY) {
-      currentIndex = spacerPositions.length;
-      progress = 1;
     }
   }
 
