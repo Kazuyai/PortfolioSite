@@ -1,0 +1,6 @@
+@import "Common.modules.scss";
+
+.gallery {
+  @extend .section;
+  --primaryColor: #eac59b;
+}
