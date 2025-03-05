@@ -4,6 +4,7 @@ import styles from "@/styles/Home.module.scss";
 import Top from "@/components/sections/Top";
 import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
+import Gallery from "@/components/sections/Gallery";
 import React, { use, useEffect, useRef } from "react";
 
 const R3FCanvas = dynamic(() => import("@/components/R3FCanvas"), { ssr: false });
@@ -13,6 +14,7 @@ const Home = () => {
     { id: "top", label: "Topセクション", component: Top },
     { id: "skills", label: "Skillsセクション", component: Skills },
     { id: "projects", label: "Projectsセクション", component: Projects },
+    { id: "gallery", label: "Galleryセクション", component: Gallery },
   ];
 
   const [isOpeningAnimationFinished, setIsOpeningAnimationFinished] = React.useState(false);

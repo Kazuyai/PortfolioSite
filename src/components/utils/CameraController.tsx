@@ -22,8 +22,12 @@ const baseCameraPositions: CameraPosition[] = [
     lookAt: [-3, -3, 5],
   },
   {
-    position: [11, -12, 16],
-    lookAt: [-3, -9, 5],
+    position: [11, -21, 16],
+    lookAt: [-3, -18, 5],
+  },
+  {
+    position: [11, -36, 16],
+    lookAt: [-3, -33, 5],
   }
 ];
 
@@ -52,8 +56,8 @@ const CameraController: React.FC<CameraControllerProps> = ({ spacerRefs }) => {
       const isMobile = size.width < 768;
       setCameraPositions([
         {
-          position: [isMobile ? 18 : baseCameraPositions[0].position[0], baseCameraPositions[0].position[1], isMobile ? 18 : baseCameraPositions[0].position[2]],
-          lookAt: [isMobile ? 0 : baseCameraPositions[0].lookAt[0], baseCameraPositions[0].lookAt[1], isMobile ? 0 : baseCameraPositions[0].lookAt[2]],
+          position: [isMobile ? 24 : baseCameraPositions[0].position[0], isMobile ? 12 : baseCameraPositions[0].position[1], isMobile ? 24 : baseCameraPositions[0].position[2]],
+          lookAt: [isMobile ? 0 : baseCameraPositions[0].lookAt[0], isMobile ? 12 : baseCameraPositions[0].lookAt[1], isMobile ? 0 : baseCameraPositions[0].lookAt[2]],
         },
         {
           position: [isMobile ? 18 : baseCameraPositions[1].position[0], baseCameraPositions[1].position[1], isMobile ? 18 : baseCameraPositions[1].position[2]],
@@ -63,6 +67,10 @@ const CameraController: React.FC<CameraControllerProps> = ({ spacerRefs }) => {
           position: [isMobile ? 18 : baseCameraPositions[2].position[0], baseCameraPositions[2].position[1], isMobile ? 18 : baseCameraPositions[2].position[2]],
           lookAt: [isMobile ? 0 : baseCameraPositions[2].lookAt[0], baseCameraPositions[2].lookAt[1], isMobile ? 0 : baseCameraPositions[2].lookAt[2]],
         },
+        {
+          position: [isMobile ? 18 : baseCameraPositions[3].position[0], baseCameraPositions[3].position[1], isMobile ? 18 : baseCameraPositions[3].position[2]],
+          lookAt: [isMobile ? 0 : baseCameraPositions[3].lookAt[0], baseCameraPositions[3].lookAt[1], isMobile ? 0 : baseCameraPositions[3].lookAt[2]],
+        }
       ]);
     };
 
