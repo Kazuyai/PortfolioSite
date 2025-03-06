@@ -8,7 +8,7 @@ import React from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 
-type ActionName = 'エレベータードア.LAction' | 'エレベータードア.RAction'
+type ActionName = 'エレベータードア.LAction.002' | 'エレベータードア.RAction.001' | '丸型エレベータードア.LAction' | '丸型エレベータードア.RAction'
 
 interface GLTFAction extends THREE.AnimationClip {
   name: ActionName
@@ -23,13 +23,16 @@ type GLTFResult = GLTF & {
     屋上床: THREE.Mesh
     屋上エレベーター乗り口: THREE.Mesh
     エレベータードアL: THREE.Mesh
-    エレベータードアR: THREE.Mesh
     屋上ライト: THREE.Mesh
     屋上ライト001: THREE.Mesh
     屋上ライト002: THREE.Mesh
     屋上ライト003: THREE.Mesh
     エレベーター箱: THREE.Mesh
     エレベーターボタン: THREE.Mesh
+    エレベータードアR: THREE.Mesh
+    円柱012: THREE.Mesh
+    丸型エレベータードアL: THREE.Mesh
+    丸型エレベータードアR: THREE.Mesh
   }
   materials: {
     ['Black.001']: THREE.MeshStandardMaterial
@@ -46,22 +49,25 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
   return (
     <group {...props} dispose={null}>
       <group name="Scene">
-        <group name="人" position={[-1.3, 0.2, 0.2]} scale={0.263}>
+        <group name="人" position={[-1.3, 0.2, 0.2]}>
           <mesh name="球006" castShadow receiveShadow geometry={nodes.球006.geometry} material={materials['Black.001']} />
           <mesh name="球006_1" castShadow receiveShadow geometry={nodes.球006_1.geometry} material={materials['マテリアル.001']} />
         </group>
-        <mesh name="建物" castShadow receiveShadow geometry={nodes.建物.geometry} material={nodes.建物.material} position={[0, -3.2, 0]} />
-        <mesh name="柵" castShadow receiveShadow geometry={nodes.柵.geometry} material={nodes.柵.material} position={[-2.9, 0.46, 2.9]} scale={0.2} />
-        <mesh name="屋上床" castShadow receiveShadow geometry={nodes.屋上床.geometry} material={nodes.屋上床.material} scale={0.2} />
-        <mesh name="屋上エレベーター乗り口" castShadow receiveShadow geometry={nodes.屋上エレベーター乗り口.geometry} material={nodes.屋上エレベーター乗り口.material} position={[-1.3, 1.2, -1.3]} />
-        <mesh name="エレベータードアL" castShadow receiveShadow geometry={nodes.エレベータードアL.geometry} material={nodes.エレベータードアL.material} position={[-1.3, 1.2, -1.5]} scale={0.2} />
-        <mesh name="エレベータードアR" castShadow receiveShadow geometry={nodes.エレベータードアR.geometry} material={nodes.エレベータードアR.material} position={[-1.3, 1.2, -1.5]} scale={0.2} />
-        <mesh name="屋上ライト" castShadow receiveShadow geometry={nodes.屋上ライト.geometry} material={materials.Light} position={[-2.6, 0.2, -2.6]} scale={0.2} />
-        <mesh name="屋上ライト001" castShadow receiveShadow geometry={nodes.屋上ライト001.geometry} material={materials.Light} position={[2.6, 0.2, 2.6]} rotation={[Math.PI, 0, Math.PI]} scale={0.2} />
-        <mesh name="屋上ライト002" castShadow receiveShadow geometry={nodes.屋上ライト002.geometry} material={materials.Light} position={[-2.6, 0.2, 2.6]} rotation={[0, Math.PI / 2, 0]} scale={0.2} />
-        <mesh name="屋上ライト003" castShadow receiveShadow geometry={nodes.屋上ライト003.geometry} material={materials.Light} position={[2.6, 0.2, -2.6]} rotation={[0, -1.571, 0]} scale={0.2} />
-        <mesh name="エレベーター箱" castShadow receiveShadow geometry={nodes.エレベーター箱.geometry} material={nodes.エレベーター箱.material} position={[-1.3, 1.01, -1.5]} />
-        <mesh name="エレベーターボタン" castShadow receiveShadow geometry={nodes.エレベーターボタン.geometry} material={nodes.エレベーターボタン.material} position={[-0.568, 1.118, -0.322]} scale={0.2} />
+        <mesh name="建物" castShadow receiveShadow geometry={nodes.建物.geometry} material={nodes.建物.material} position={[0, -5, 0]} />
+        <mesh name="柵" castShadow receiveShadow geometry={nodes.柵.geometry} material={nodes.柵.material} position={[-2.9, 0.46, 2.9]} />
+        <mesh name="屋上床" castShadow receiveShadow geometry={nodes.屋上床.geometry} material={nodes.屋上床.material} />
+        <mesh name="屋上エレベーター乗り口" castShadow receiveShadow geometry={nodes.屋上エレベーター乗り口.geometry} material={nodes.屋上エレベーター乗り口.material} position={[-1.7, 1.2, -1.9]} />
+        <mesh name="エレベータードアL" castShadow receiveShadow geometry={nodes.エレベータードアL.geometry} material={nodes.エレベータードアL.material} position={[-1.7, 1, -1.9]} />
+        <mesh name="屋上ライト" castShadow receiveShadow geometry={nodes.屋上ライト.geometry} material={materials.Light} position={[-2.6, 0.2, -2.6]} />
+        <mesh name="屋上ライト001" castShadow receiveShadow geometry={nodes.屋上ライト001.geometry} material={materials.Light} position={[2.6, 0.2, 2.6]} rotation={[Math.PI, 0, Math.PI]} />
+        <mesh name="屋上ライト002" castShadow receiveShadow geometry={nodes.屋上ライト002.geometry} material={materials.Light} position={[-2.6, 0.2, 2.6]} rotation={[0, Math.PI / 2, 0]} />
+        <mesh name="屋上ライト003" castShadow receiveShadow geometry={nodes.屋上ライト003.geometry} material={materials.Light} position={[2.6, 0.2, -2.6]} rotation={[0, -1.571, 0]} />
+        <mesh name="エレベーター箱" castShadow receiveShadow geometry={nodes.エレベーター箱.geometry} material={nodes.エレベーター箱.material} position={[-1.7, 1.01, -2]} />
+        <mesh name="エレベーターボタン" castShadow receiveShadow geometry={nodes.エレベーターボタン.geometry} material={nodes.エレベーターボタン.material} position={[-1.2, 0.85, -0.922]} />
+        <mesh name="エレベータードアR" castShadow receiveShadow geometry={nodes.エレベータードアR.geometry} material={nodes.エレベータードアR.material} position={[-1.7, 1, -1.9]} />
+        <mesh name="円柱012" castShadow receiveShadow geometry={nodes.円柱012.geometry} material={nodes.円柱012.material} position={[-1.689, -3.7, -1.7]} rotation={[0, Math.PI / 4, 0]} />
+        <mesh name="丸型エレベータードアL" castShadow receiveShadow geometry={nodes.丸型エレベータードアL.geometry} material={nodes.丸型エレベータードアL.material} position={[-1.689, -3.7, -1.7]} rotation={[0, Math.PI / 4, 0]} />
+        <mesh name="丸型エレベータードアR" castShadow receiveShadow geometry={nodes.丸型エレベータードアR.geometry} material={nodes.丸型エレベータードアR.material} position={[-1.689, -3.7, -1.7]} rotation={[0, Math.PI / 4, 0]} />
       </group>
     </group>
   )
