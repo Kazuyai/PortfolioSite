@@ -4,6 +4,8 @@ import { Suspense, useRef, useEffect } from "react";
 import * as THREE from "three";
 import CameraController from "@/components/utils/CameraController";
 import CharacterController from "@/components/utils/CharacterController";
+import CollisionBox from "@/components/models/CollisionBox";
+import EventTriggerBox from "@/components/models/EventTriggerBox";
 import Character from "@/components/models/Character";
 import Building from "@/components/models/Building";
 import Loader from "@/components/common/Loader";
@@ -12,6 +14,8 @@ import { render } from "sass";
 
 interface Props {
   spacerRefs: React.MutableRefObject<HTMLDivElement[]>;
+  hitBoxes: { [key: string]: { collisionData: { position: [number, number, number]; size: [number, number, number]; }[]; eventData: { id: string; position: [number, number, number]; size: [number, number, number]; }[]; } };
+  setActiveEvent: (id: string | null) => void;
 }
 
 const Lights = () => {
@@ -42,7 +46,7 @@ const Lights = () => {
   );
 };
 
-const R3FCanvas = ({ spacerRefs }: Props) => {
+const R3FCanvas = ({ spacerRefs, hitBoxes, setActiveEvent }: Props) => {
 
   const characterRef = useRef<THREE.Group>(null);
 
@@ -54,6 +58,17 @@ const R3FCanvas = ({ spacerRefs }: Props) => {
       <Suspense fallback={<Loader />}>
         <Character ref={characterRef} castShadow receiveShadow />
         <Building scale={[2, 2, 2]} castShadow receiveShadow />
+        {/* <CollisionBox position={[3, 0.5, 3]} size={[1, 1, 1]} debug /> */}
+        {Object.keys(hitBoxes).map((key) => (
+          hitBoxes[key].collisionData.map((data, index) => (
+            <CollisionBox key={index} position={data.position} size={data.size} debug />
+          ))
+        ))}
+        {Object.keys(hitBoxes).map((key) => (
+          hitBoxes[key].eventData.map((data, index) => (
+            <EventTriggerBox key={index} id={data.id} position={data.position} size={data.size} onEnter={setActiveEvent} onLeave={setActiveEvent} debug />
+          ))
+        ))}
       </Suspense>
       <Environment files="/images/sky.hdr" background />
       {/* <OrbitControls /> */}

@@ -1,6 +1,17 @@
 import React, { use, useEffect, useRef, useState } from "react";
 import styles from "@/styles/sections/Top.module.scss";
 
+export const collisionData: { position: [number, number, number]; size: [number, number, number]; }[] = [
+  { position: [6, 1, 0], size: [1, 2, 12] },
+  { position: [0, 1, 6], size: [12, 2, 1] },
+  { position: [-6, 1, 0], size: [1, 2, 12] },
+  { position: [0, 1, -6], size: [12, 2, 1] },
+];
+
+export const eventData: { id: string; position: [number, number, number]; size: [number, number, number]; }[] = [
+  { id: "top_event_1", position: [0, 1, 0], size: [2, 2, 2] },
+];
+
 function Top() {
   const topRef = useRef<HTMLDivElement>(null);
   const [windowHeight, setWindowHeight] = useState(0);

@@ -1,13 +1,18 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import styles from "@/styles/Home.module.scss";
-import Top from "@/components/sections/Top";
-import Skills from "@/components/sections/Skills";
+import Top, { collisionData as topCollision, eventData as topEvents } from "@/components/sections/Top";
+import Skills, { collisionData as skillsCollision, eventData as skillsEvents } from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
 import Gallery from "@/components/sections/Gallery";
-import React, { use, useEffect, useRef } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 
 const R3FCanvas = dynamic(() => import("@/components/R3FCanvas"), { ssr: false });
+
+const hitBoxes = {
+  top: { collisionData: topCollision, eventData: topEvents },
+  skills: { collisionData: skillsCollision, eventData: skillsEvents },
+};
 
 const Home = () => {
   const sections = [
@@ -16,6 +21,8 @@ const Home = () => {
     { id: "projects", label: "Projectsセクション", component: Projects },
     { id: "gallery", label: "Galleryセクション", component: Gallery },
   ];
+
+  const [activeEvent, setActiveEvent] = useState<string | null>(null);
 
   const [isOpeningAnimationFinished, setIsOpeningAnimationFinished] = React.useState(false);
   const spacerRefs = useRef<HTMLDivElement[]>([]);
@@ -48,6 +55,9 @@ const Home = () => {
       </Head>
       <R3FCanvas
         spacerRefs={spacerRefs}
+        hitBoxes={hitBoxes}
+        setActiveEvent={setActiveEvent}
+
       />
       <div className={styles.text__container}>
         {/* すべてのsectionを配置 */}
