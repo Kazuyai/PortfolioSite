@@ -27,7 +27,7 @@ export function useSectionProgress(
       const endY = startY + rect.height;
       return { startY, endY };
     });
-  }, [spacerRefs]);
+  }, [spacerRefs.current]);
 
   let currentIndex = 0;
   let progress = 0;
