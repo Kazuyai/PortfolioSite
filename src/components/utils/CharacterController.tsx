@@ -9,10 +9,10 @@ interface CharacterControllerProps {
 }
 
 const characterPositions = [
-  { position: [0, 0.5, 0] },
-  { position: [0, -11.5, 0] },
-  { position: [0, -26.5, 0] },
-  { position: [0, -41.5, 0] },
+  { position: [-3.5, 0.5, -3.5] },
+  { position: [-3.5, -11.5, -3.5] },
+  { position: [-3.5, -26.5, -3.5] },
+  { position: [-3.5, -41.5, -3.5] },
 ];
 
 const MOVE_SPEED = 0.5;
