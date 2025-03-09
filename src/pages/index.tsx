@@ -6,6 +6,7 @@ import Skills, { collisionData as skillsCollision, eventData as skillsEvents } f
 import Projects from "@/components/sections/Projects";
 import Gallery from "@/components/sections/Gallery";
 import React, { use, useEffect, useRef, useState } from "react";
+import { useSectionProgress } from "@/hooks/useSectionProgress";
 
 const R3FCanvas = dynamic(() => import("@/components/R3FCanvas"), { ssr: false });
 
@@ -26,7 +27,7 @@ const Home = () => {
 
   const [isOpeningAnimationFinished, setIsOpeningAnimationFinished] = React.useState(false);
   const spacerRefs = useRef<HTMLDivElement[]>([]);
-  spacerRefs.current = [];
+  const { currentIndex } = useSectionProgress(spacerRefs);
 
   useEffect(() => {
     const openingAnimation = () => {
@@ -55,9 +56,9 @@ const Home = () => {
       </Head>
       <R3FCanvas
         spacerRefs={spacerRefs}
+        currentSection={sections[currentIndex]?.id || "top"}
         hitBoxes={hitBoxes}
         setActiveEvent={setActiveEvent}
-
       />
       <div className={styles.text__container}>
         {/* すべてのsectionを配置 */}
@@ -71,8 +72,8 @@ const Home = () => {
               {idx < sections.length - 1 && (
                 <div
                   ref={(el) => {
-                    if (el) {
-                      spacerRefs.current[idx] = el;
+                    if (el && !spacerRefs.current.includes(el)) {
+                      spacerRefs.current.push(el);
                     }
                   }}
                   className={styles.spacer}

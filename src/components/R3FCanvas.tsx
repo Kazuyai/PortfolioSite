@@ -14,6 +14,7 @@ import { render } from "sass";
 
 interface Props {
   spacerRefs: React.MutableRefObject<HTMLDivElement[]>;
+  currentSection: string;
   hitBoxes: { [key: string]: { collisionData: { position: [number, number, number]; size: [number, number, number]; }[]; eventData: { id: string; position: [number, number, number]; size: [number, number, number]; }[]; } };
   setActiveEvent: (id: string | null) => void;
 }
@@ -46,28 +47,28 @@ const Lights = () => {
   );
 };
 
-const R3FCanvas = ({ spacerRefs, hitBoxes, setActiveEvent }: Props) => {
+const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, setActiveEvent }: Props) => {
 
   const characterRef = useRef<THREE.Group>(null);
+  const collisionData = hitBoxes[currentSection]?.collisionData || [];
+  const eventData = hitBoxes[currentSection]?.eventData || [];
 
   return (
     <Canvas className={styles.canvas} camera={{ position: [0, 5, 5], fov: 60 }} flat shadows>
       <CameraController spacerRefs={spacerRefs} />
-      <CharacterController spacerRefs={spacerRefs} characterRef={characterRef} />
+      <CharacterController 
+        spacerRefs={spacerRefs} 
+        characterRef={characterRef} 
+      />
       <Lights />
       <Suspense fallback={<Loader />}>
         <Character ref={characterRef} castShadow receiveShadow />
         <Building scale={[2, 2, 2]} castShadow receiveShadow />
-        {/* <CollisionBox position={[3, 0.5, 3]} size={[1, 1, 1]} debug /> */}
-        {Object.keys(hitBoxes).map((key) => (
-          hitBoxes[key].collisionData.map((data, index) => (
-            <CollisionBox key={index} position={data.position} size={data.size} debug />
-          ))
+        {collisionData.map((data, index) => (
+          <CollisionBox key={index} position={data.position} size={data.size} debug />
         ))}
-        {Object.keys(hitBoxes).map((key) => (
-          hitBoxes[key].eventData.map((data, index) => (
-            <EventTriggerBox key={index} id={data.id} position={data.position} size={data.size} onEnter={setActiveEvent} onLeave={setActiveEvent} debug />
-          ))
+        {eventData.map((data, index) => (
+          <EventTriggerBox key={index} id={data.id} position={data.position} size={data.size} onEnter={setActiveEvent} onLeave={setActiveEvent} debug />
         ))}
       </Suspense>
       <Environment files="/images/sky.hdr" background />
