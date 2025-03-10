@@ -9,7 +9,7 @@ interface CameraPosition {
 }
 
 interface CameraControllerProps {
-  spacerRefs: React.MutableRefObject<HTMLDivElement[]>;
+  spacerRefs: HTMLDivElement[];
 }
 
 const baseCameraPositions: CameraPosition[] = [

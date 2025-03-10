@@ -13,7 +13,7 @@ import styles from "@/styles/R3FCanvas.module.scss";
 import { render } from "sass";
 
 interface Props {
-  spacerRefs: React.MutableRefObject<HTMLDivElement[]>;
+  spacerRefs: HTMLDivElement[];
   currentSection: string;
   hitBoxes: { [key: string]: { collisionData: { position: [number, number, number]; size: [number, number, number]; }[]; eventData: { id: string; position: [number, number, number]; size: [number, number, number]; }[]; } };
   setActiveEvent: (id: string | null) => void;

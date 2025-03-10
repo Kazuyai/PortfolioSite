@@ -4,7 +4,7 @@ import { useSectionProgress } from "@/hooks/useSectionProgress";
 import { useFrame, useThree } from "@react-three/fiber";
 
 interface CharacterControllerProps {
-  spacerRefs: React.MutableRefObject<HTMLDivElement[]>;
+  spacerRefs: HTMLDivElement[];
   characterRef: React.RefObject<THREE.Object3D>;
   collisionData: { position: [number, number, number]; size: [number, number, number] }[];
   eventData: { id: string; position: [number, number, number]; size: [number, number, number] }[];

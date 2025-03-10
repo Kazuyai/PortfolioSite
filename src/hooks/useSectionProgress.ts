@@ -8,7 +8,7 @@ import { useState, useEffect, useMemo } from "react";
  * }
  */
 export function useSectionProgress(
-  spacerRefs: React.MutableRefObject<HTMLDivElement[]>
+  spacerRefs: HTMLDivElement[]
 ) {
   const [scrollY, setScrollY] = useState(0);
 
@@ -21,13 +21,13 @@ export function useSectionProgress(
   }, []);
 
   const spacerPositions = useMemo(() => {
-    return spacerRefs.current.map((spacerEl) => {
+    return spacerRefs.map((spacerEl) => {
       const rect = spacerEl.getBoundingClientRect();
       const startY = rect.top + window.scrollY;
       const endY = startY + rect.height;
       return { startY, endY };
     });
-  }, [spacerRefs.current]);
+  }, [spacerRefs]);
 
   let currentIndex = 0;
   let progress = 0;

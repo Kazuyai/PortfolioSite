@@ -26,7 +26,7 @@ const Home = () => {
   const [activeEvent, setActiveEvent] = useState<string | null>(null);
 
   const [isOpeningAnimationFinished, setIsOpeningAnimationFinished] = React.useState(false);
-  const spacerRefs = useRef<HTMLDivElement[]>([]);
+  const [spacerRefs, setSpacerRefs] = useState<HTMLDivElement[]>([]);
   const { currentIndex } = useSectionProgress(spacerRefs);
 
   useEffect(() => {
@@ -72,8 +72,13 @@ const Home = () => {
               {idx < sections.length - 1 && (
                 <div
                   ref={(el) => {
-                    if (el && !spacerRefs.current.includes(el)) {
-                      spacerRefs.current.push(el);
+                    if (el) {
+                      setSpacerRefs((prev) => {
+                        if (!prev.includes(el)) {
+                          return [...prev, el];
+                        }
+                        return prev;
+                      });
                     }
                   }}
                   className={styles.spacer}
