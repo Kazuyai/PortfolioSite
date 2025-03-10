@@ -59,6 +59,9 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, setActiveEvent }: Pro
       <CharacterController 
         spacerRefs={spacerRefs} 
         characterRef={characterRef} 
+        collisionData={collisionData}
+        eventData={eventData}
+        setActiveEvent={setActiveEvent}
       />
       <Lights />
       <Suspense fallback={<Loader />}>
