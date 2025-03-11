@@ -43,7 +43,7 @@ function Top({ activeEvent }: TopProps) {
       <div 
         className={styles.scroll}
         style={{ 
-          opacity: topEndY / windowHeight,
+          opacity: topEndY / windowHeight ? topEndY / windowHeight : 1,
           display: 0 >= topEndY ? "none" : "flex"
         }}
       >
