@@ -13,4 +13,14 @@
   @media screen and (max-width: 768px) {
     margin-top: 155vh; // スマホの時に階層移動アニメーションが終わった状態を見せるため、margin-topを設定
   }
+
+  .eventContent {
+    position: fixed;
+    top: 50%;
+    left: 4%;
+    transform: translateY(-50%);
+    width: 32%;
+    height: 80%;
+    background-color: white;
+  }
 }

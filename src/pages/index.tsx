@@ -66,7 +66,7 @@ const Home = () => {
           return (
             <React.Fragment key={id}>
               {/* section */}
-              <SectionComp />
+              <SectionComp activeEvent={activeEvent} />
 
               {/* section間にspacerを配置 */}
               {idx < sections.length - 1 && (

@@ -1,7 +1,11 @@
 import React from 'react'
 import styles from '@/styles/sections/Gallery.module.scss'
 
-function Gallery() {
+interface GalleryProps {
+  activeEvent: string | null;
+}
+
+function Gallery({ activeEvent }: GalleryProps) {
   return (
     <section className={styles.gallery}>
         <h1>Gallery</h1>

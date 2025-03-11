@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import * as THREE from "three";
 import { useSectionProgress } from "@/hooks/useSectionProgress";
 import { useFrame, useThree } from "@react-three/fiber";
@@ -20,7 +20,13 @@ const characterPositions = [
 
 const MOVE_SPEED = 0.3;
 
-const CharacterController: React.FC<CharacterControllerProps> = ({ spacerRefs, characterRef, collisionData, eventData, setActiveEvent }) => {
+const CharacterController: React.FC<CharacterControllerProps> = ({
+  spacerRefs,
+  characterRef,
+  collisionData,
+  eventData,
+  setActiveEvent,
+}) => {
   const { currentIndex, progress } = useSectionProgress(spacerRefs);
   const { camera } = useThree();
   const [canMove, setCanMove] = useState(false);
@@ -33,6 +39,29 @@ const CharacterController: React.FC<CharacterControllerProps> = ({ spacerRefs, c
     left: false,
     right: false,
   });
+
+  const collisionBoxes = useMemo(
+    () =>
+      collisionData.map(({ position, size }) => ({
+        box: new THREE.Box3().setFromCenterAndSize(
+          new THREE.Vector3(...position),
+          new THREE.Vector3(...size)
+        ),
+      })),
+    [collisionData]
+  );
+
+  const eventBoxes = useMemo(
+    () =>
+      eventData.map(({ id, position, size }) => ({
+        id,
+        box: new THREE.Box3().setFromCenterAndSize(
+          new THREE.Vector3(...position),
+          new THREE.Vector3(...size)
+        ),
+      })),
+    [eventData]
+  );
 
   useEffect(() => {
     setCanMove(false);
@@ -77,10 +106,7 @@ const CharacterController: React.FC<CharacterControllerProps> = ({ spacerRefs, c
         const floorPos = new THREE.Vector3(...characterPositions[prevIndex].position);
         charObj.position.lerp(floorPos, 0.1);
 
-        const dist = Math.sqrt(
-          (charObj.position.x - floorPos.x) ** 2 + (charObj.position.z - floorPos.z) ** 2
-        );
-        if (dist < 0.2) {
+        if (charObj.position.distanceTo(floorPos) < 0.2) {
           setReturningToBase(false);
         }
         return;
@@ -100,8 +126,7 @@ const CharacterController: React.FC<CharacterControllerProps> = ({ spacerRefs, c
 
         if (progress === 0) {
           const floorPos = new THREE.Vector3(...characterPositions[currentIndex].position);
-          const dist = charObj.position.distanceTo(floorPos);
-          if (dist < 0.2) {
+          if (charObj.position.distanceTo(floorPos) < 0.2) {
             setCanMove(true);
           }
         }
@@ -119,49 +144,26 @@ const CharacterController: React.FC<CharacterControllerProps> = ({ spacerRefs, c
 
     const right = forward.clone().cross(new THREE.Vector3(0, 1, 0)).normalize();
 
-    if(move.forward) {
-      newPosition.addScaledVector(forward, MOVE_SPEED);
-    }
-    if(move.backward) {
-      newPosition.addScaledVector(forward, -MOVE_SPEED);
-    }
-    if(move.left) {
-      newPosition.addScaledVector(right, -MOVE_SPEED);
-    }
-    if(move.right) {
-      newPosition.addScaledVector(right, MOVE_SPEED);
-    }
+    if (move.forward) newPosition.addScaledVector(forward, MOVE_SPEED);
+    if (move.backward) newPosition.addScaledVector(forward, -MOVE_SPEED);
+    if (move.left) newPosition.addScaledVector(right, -MOVE_SPEED);
+    if (move.right) newPosition.addScaledVector(right, MOVE_SPEED);
 
-    let canMoveToNewPosition = true;
-    collisionData.forEach(({ position, size }) => {
-      const box = new THREE.Box3().setFromCenterAndSize(
-        new THREE.Vector3(...position),
-        new THREE.Vector3(...size)
-      );
+    const isColliding = collisionBoxes.some(({ box }) =>
+      box.intersectsBox(new THREE.Box3().setFromCenterAndSize(newPosition, new THREE.Vector3(1, 2, 1)))
+    );
 
-      if (box.intersectsBox(new THREE.Box3().setFromCenterAndSize(newPosition, new THREE.Vector3(1, 2, 1)))) {
-        canMoveToNewPosition = false;
-      }
-    });
-
-    if (canMoveToNewPosition) {
+    if (!isColliding) {
       charObj.position.copy(newPosition);
     }
 
-    let eventTriggered = false;
-    eventData.forEach(({ id, position, size }) => {
-      const box = new THREE.Box3().setFromCenterAndSize(
-        new THREE.Vector3(...position),
-        new THREE.Vector3(...size)
-      );
+    const activeEvent = eventBoxes.find(({ box }) =>
+      box.intersectsBox(new THREE.Box3().setFromCenterAndSize(charObj.position, new THREE.Vector3(1, 2, 1)))
+    );
 
-      if (box.intersectsBox(new THREE.Box3().setFromCenterAndSize(charObj.position, new THREE.Vector3(1, 2, 1)))) {
-        setActiveEvent(id);
-        eventTriggered = true;
-      }
-    });
-
-    if (!eventTriggered) {
+    if (activeEvent) {
+      setActiveEvent(activeEvent.id);
+    } else {
       setActiveEvent(null);
     }
   });
