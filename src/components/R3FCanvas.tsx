@@ -1,5 +1,6 @@
 import { Canvas, useThree } from "@react-three/fiber";
 import { Environment, OrbitControls, useHelper } from "@react-three/drei";
+import { EffectComposer, Bloom, ChromaticAberration, Glitch, Noise, Vignette } from "@react-three/postprocessing";
 import { Suspense, useRef, useEffect } from "react";
 import * as THREE from "three";
 import CameraController from "@/components/utils/CameraController";
@@ -34,9 +35,9 @@ const Lights = () => {
         position={[7, 7, 7]}
         intensity={1}
         castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
-        shadow-camera-far={50}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+        shadow-camera-far={30}
         shadow-camera-left={-20}
         shadow-camera-right={20}
         shadow-camera-top={20}
@@ -54,7 +55,16 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, setActiveEvent }: Pro
   const eventData = hitBoxes[currentSection]?.eventData || [];
 
   return (
-    <Canvas className={styles.canvas} camera={{ position: [0, 5, 5], fov: 60 }} flat shadows>
+    <Canvas 
+      className={styles.canvas} 
+      camera={{ position: [0, 5, 5], fov: 60 }} 
+      flat 
+      gl={{
+        toneMapping: THREE.ACESFilmicToneMapping,
+        // outputEncoding: THREE.sRGBEncoding,
+      }}
+      shadows
+    >
       <CameraController spacerRefs={spacerRefs} />
       <CharacterController 
         spacerRefs={spacerRefs} 
@@ -74,6 +84,21 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, setActiveEvent }: Pro
           <EventTriggerBox key={index} id={data.id} position={data.position} size={data.size} onEnter={setActiveEvent} onLeave={setActiveEvent} debug />
         ))}
       </Suspense>
+
+      <EffectComposer>
+        {/* <ChromaticAberration offset={new THREE.Vector2(0.0005, 0.001)} /> */}
+        {/* <Glitch
+          delay={new THREE.Vector2(0.1, 0.3)}
+          duration={new THREE.Vector2(0.1, 0.3)}
+          strength={new THREE.Vector2(0.1, 0.2)}
+        /> */}
+        {/* <Noise opacity={0.7} />  */}
+        <Vignette
+          offset={0.1}
+          darkness={0.8}
+        />
+        <Bloom intensity={0.3} luminanceThreshold={0.2} luminanceSmoothing={0.2} height={200} />
+      </EffectComposer>
       <Environment files="/images/sky.hdr" background />
       {/* <OrbitControls /> */}
     </Canvas>
