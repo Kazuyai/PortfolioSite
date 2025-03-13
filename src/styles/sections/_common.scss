@@ -21,6 +21,21 @@
     transform: translateY(-50%);
     width: 32%;
     height: 80%;
+    padding: 3rem;
     background-color: white;
+    border-radius: 5rem;
+    box-shadow: 0 0 3rem rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.2s ease-in-out;
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        left: -96%;
+      }
+      to {
+        opacity: 1;
+        left: 4%;
+      }
+    }
   }
 }
