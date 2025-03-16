@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 interface useElementVisibilityProps {
-  threadhold?: number;
+  threshold?: number;
 }
 
 /*
@@ -10,7 +10,7 @@ interface useElementVisibilityProps {
  * @returns ref（対象の要素）、isVisible（可視状態）
  */
 const useElementVisibility = ( props?: useElementVisibilityProps) => {
-  const threadhold = props?.threadhold || 0.1;
+  const threshold = props?.threshold || 0.1;
   const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -24,13 +24,13 @@ const useElementVisibility = ( props?: useElementVisibilityProps) => {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: threadhold }
+      { threshold: threshold }
     );
 
     observer.observe(ref.current);
 
-    return observer.disconnect;
-  }, [threadhold]);
+    return () => observer.disconnect();
+  }, [threshold]);
 
   return { ref, isVisible };
 }
