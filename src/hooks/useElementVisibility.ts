@@ -9,7 +9,8 @@ interface useElementVisibilityProps {
  * @param threshold どの程度表示されたら可視とするか（デフォルト値：0.1）
  * @returns ref（対象の要素）、isVisible（可視状態）
  */
-const useElementVisibility = ({ threadhold = 0.1 }: useElementVisibilityProps) => {
+const useElementVisibility = ( props?: useElementVisibilityProps) => {
+  const threadhold = props?.threadhold || 0.1;
   const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
