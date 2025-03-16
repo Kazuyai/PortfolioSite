@@ -23,7 +23,7 @@ const eventContent: ({ [key: string]: JSX.Element }) = {
   )
 };
 
-function Skills({ activeEvent }: SkillsProps) {
+const Skills = ({ activeEvent }: SkillsProps) => {
   return (
     <section className={styles.skills}>
       <h1>SKills</h1>

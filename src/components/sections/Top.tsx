@@ -16,7 +16,7 @@ export const eventData: { id: string; position: [number, number, number]; size: 
   { id: "top_event_1", position: [0, 1, 0], size: [2, 2, 2] },
 ];
 
-function Top({ activeEvent }: TopProps) {
+const Top = ({ activeEvent }: TopProps) => {
   const topRef = useRef<HTMLDivElement>(null);
   const [windowHeight, setWindowHeight] = useState(0);
   const [topEndY, setTopEndY] = useState(0);

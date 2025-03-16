@@ -5,7 +5,7 @@ interface ProjectsProps {
   activeEvent: string | null;
 }
 
-function Projects({ activeEvent }: ProjectsProps) {
+const Projects = ({ activeEvent }: ProjectsProps) => {
   return (
     <section className={styles.projects}>
       <h1>projects</h1>

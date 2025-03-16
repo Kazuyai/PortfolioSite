@@ -5,7 +5,7 @@ interface GalleryProps {
   activeEvent: string | null;
 }
 
-function Gallery({ activeEvent }: GalleryProps) {
+const Gallery = ({ activeEvent }: GalleryProps) => {
   return (
     <section className={styles.gallery}>
         <h1>Gallery</h1>
