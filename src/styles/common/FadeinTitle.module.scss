@@ -1,0 +1,21 @@
+.fadeinTitle {
+  overflow: hidden;
+  span {
+    opacity: 0;
+  }
+  &.visible {
+    span {
+      animation: fadein 1.2s forwards;
+      @keyframes fadein {
+        from {
+          transform: translateY(1em);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

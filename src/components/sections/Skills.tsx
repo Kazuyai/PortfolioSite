@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "@/styles/sections/Skills.module.scss";
+import FadeinTitle from "../common/FadeinTitle";
+import useElementVisibility from "@/hooks/useElementVisibility";
 
 interface SkillsProps {
   activeEvent: string | null;
@@ -24,9 +26,11 @@ const eventContent: ({ [key: string]: JSX.Element }) = {
 };
 
 const Skills = ({ activeEvent }: SkillsProps) => {
+  const { ref, isVisible } = useElementVisibility({ threshold: 0.1 });
+
   return (
-    <section className={styles.skills}>
-      <h1>SKills</h1>
+    <section ref={ref} className={styles.skills}>
+      <FadeinTitle title="Skills" isVisible={isVisible} />
       <div className={styles.skillsBox}>
         <div className={styles.skillsBoxItem}>
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" />
