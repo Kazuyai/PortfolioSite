@@ -3,23 +3,35 @@
 .skills {
   @extend .section;
   --primaryColor: #E0E5EC;
+  &SubTitle {
+    margin-block: 8rem 3rem;
+    font-size: 2rem;
+  }
+
   &Box {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 2rem;
     &Item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      // width: 10rem;
-      min-width: 8rem;
+      width: 9.2rem;
+      // min-width: 8rem;
       padding: 1.8rem 1rem;
       background: #E0E5EC;
       border-radius: 1rem;
       // box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
       box-shadow: 0.9rem 0.9rem 1.6rem rgb(163,177,198,0.6), -9px -9px 16px  rgba(255,255,255, 0.5);
+      &:hover {
+        img {
+          transform: scale(1.2);
+        }
+      }
       img {
         width: 5rem;
+        transition: all 0.2s;
       }
       h2 {
         margin-top: 1.8rem;
