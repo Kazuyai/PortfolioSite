@@ -16,6 +16,7 @@ const characterPositions = [
   { position: [-3.5, -15, -3.5] },
   { position: [-3.5, -26.5, -3.5] },
   { position: [-3.5, -41.5, -3.5] },
+  { position: [-3.5, -53, -3.5] },
 ];
 
 const MOVE_SPEED = 0.3;

@@ -1,0 +1,6 @@
+@use "common";
+
+.about {
+  @extend .section;
+  --primaryColor: #a8b9ec;
+}

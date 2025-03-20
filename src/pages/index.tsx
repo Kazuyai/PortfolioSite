@@ -2,6 +2,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import styles from "@/styles/Home.module.scss";
 import Top, { collisionData as topCollision, eventData as topEvents } from "@/components/sections/Top";
+import About from "@/components/sections/About";
 import Skills, { collisionData as skillsCollision, eventData as skillsEvents } from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
 import Gallery from "@/components/sections/Gallery";
@@ -18,6 +19,7 @@ const hitBoxes = {
 const Home = () => {
   const sections = [
     { id: "top", label: "Topセクション", component: Top },
+    { id: "about", label: "Aboutセクション", component: About },
     { id: "skills", label: "Skillsセクション", component: Skills },
     { id: "projects", label: "Projectsセクション", component: Projects },
     { id: "gallery", label: "Galleryセクション", component: Gallery },

@@ -28,6 +28,10 @@ const baseCameraPositions: CameraPosition[] = [
   {
     position: [11, -36, 16],
     lookAt: [-3, -33, 5],
+  },
+  {
+    position: [11, -48, 16],
+    lookAt: [-3, -45, 5],
   }
 ];
 
@@ -70,6 +74,10 @@ const CameraController: React.FC<CameraControllerProps> = ({ spacerRefs }) => {
         {
           position: [isMobile ? 18 : baseCameraPositions[3].position[0], baseCameraPositions[3].position[1], isMobile ? 18 : baseCameraPositions[3].position[2]],
           lookAt: [isMobile ? 0 : baseCameraPositions[3].lookAt[0], baseCameraPositions[3].lookAt[1], isMobile ? 0 : baseCameraPositions[3].lookAt[2]],
+        },
+        {
+          position: [isMobile ? 18 : baseCameraPositions[4].position[0], baseCameraPositions[4].position[1], isMobile ? 18 : baseCameraPositions[4].position[2]],
+          lookAt: [isMobile ? 0 : baseCameraPositions[4].lookAt[0], baseCameraPositions[4].lookAt[1], isMobile ? 0 : baseCameraPositions[4].lookAt[2]],
         }
       ]);
     };
