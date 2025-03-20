@@ -155,6 +155,8 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
     );
 
     if (!isColliding) {
+      let moveVector = newPosition.clone().sub(charObj.position).normalize();
+      charObj.rotation.y = Math.atan2(moveVector.x, moveVector.z);
       charObj.position.copy(newPosition);
     }
 
