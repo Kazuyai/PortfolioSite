@@ -18,8 +18,8 @@ const baseCameraPositions: CameraPosition[] = [
     lookAt: [-7, 8, 5],
   },
   {
-    position: [11, -6, 16],
-    lookAt: [-3, -3, 5],
+    position: [11, -10, 16],
+    lookAt: [-3, -7, 5],
   },
   {
     position: [11, -21, 16],

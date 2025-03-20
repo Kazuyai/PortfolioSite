@@ -11,15 +11,15 @@ export const collisionData: {
   position: [number, number, number];
   size: [number, number, number];
 }[] = [
-  { position: [-5, -11, 0], size: [1, 2, 8] },
-  { position: [5, -11, 0], size: [1, 2, 8] },
+  { position: [-5, -14, 0], size: [1, 2, 8] },
+  { position: [5, -14, 0], size: [1, 2, 8] },
 ];
 
 export const eventData: {
   id: string;
   position: [number, number, number];
   size: [number, number, number];
-}[] = [{ id: "skills_event_1", position: [0, -11.5, 0], size: [1, 2, 1] }];
+}[] = [{ id: "skills_event_1", position: [0, -14, 0], size: [1, 2, 1] }];
 
 const eventContent: { [key: string]: JSX.Element } = {
   skills_event_1: (
