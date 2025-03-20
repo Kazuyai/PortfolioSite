@@ -6,10 +6,30 @@
   padding: 5rem 3rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   border-radius: 0 5rem 5rem 0;
+  opacity: 0;
   background-color: var(--primaryColor);
   &:last-of-type {
     margin-bottom: 5vh;
   }
+  &.visible {
+    animation: expand 1s ease-in-out forwards;
+    @keyframes expand {
+      0% {
+        opacity: 1;
+        clip-path: polygon(0 0, 0 0, 0 10rem, 0 10rem);
+        border-radius: 0;
+      }
+      30% {
+        opacity: 1;
+        clip-path: polygon(0 0, 100% 0, 100% 10rem, 0 10rem);
+      }
+      100% {
+        opacity: 1;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      }
+    }
+  }
+
   @media screen and (max-width: 768px) {
     margin-top: 155vh; // スマホの時に階層移動アニメーションが終わった状態を見せるため、margin-topを設定
   }

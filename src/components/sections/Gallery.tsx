@@ -10,7 +10,7 @@ interface GalleryProps {
 const Gallery = ({ activeEvent }: GalleryProps) => {
   const { ref, isVisible } = useElementVisibility({ threshold: 0.1 });
   return (
-    <section ref={ref} className={styles.gallery}>
+    <section ref={ref} className={`${styles.gallery} ${isVisible ? styles.visible : ""}`}>
       <FadeinTitle title="Gallery" isVisible={isVisible} />
       <p>These are my gallery</p>
     </section>
