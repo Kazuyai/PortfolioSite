@@ -13,6 +13,9 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2rem;
+    @media screen and (max-width: 768px) {
+      gap: 2rem 1rem;  
+    }
     &Item {
       display: flex;
       flex-direction: column;
