@@ -1,6 +1,7 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import styles from "@/styles/Home.module.scss";
+import Loading from "@/components/common/Loading";
 import Top, { collisionData as topCollision, eventData as topEvents } from "@/components/sections/Top";
 import About from "@/components/sections/About";
 import Skills, { collisionData as skillsCollision, eventData as skillsEvents } from "@/components/sections/Skills";
@@ -35,7 +36,7 @@ const Home = () => {
     const openingAnimation = () => {
       setTimeout(() => {
         setIsOpeningAnimationFinished(true);
-      }, 3000);
+      }, 5500);
     };
     openingAnimation();
   }, []);
@@ -90,6 +91,7 @@ const Home = () => {
           );
         })}
       </div>
+      {!isOpeningAnimationFinished && <Loading />}
     </>
   );
 };

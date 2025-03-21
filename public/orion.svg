@@ -1,0 +1,85 @@
+<svg width="300" height="300" viewBox="0 0 300 300"
+     xmlns="http://www.w3.org/2000/svg"
+     >
+
+  <!-- ▼ 星の配置 (一例) ▼ -->
+  <!-- 1. 左上 (ベテルギウス) -->
+  <circle id="star1" cx="50" cy="30" r="5" fill="white" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="0s" fill="freeze"/>
+  </circle>
+
+  <!-- 2. 右上 (ベラトリックス) -->
+  <circle id="star2" cx="200" cy="10" r="5" fill="white" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="0.25s" fill="freeze"/>
+  </circle>
+
+  <!-- 3. 中央左 (アルニタク) -->
+  <circle id="star3" cx="110" cy="110" r="5" fill="white" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="0.5s" fill="freeze"/>
+  </circle>
+
+  <!-- 4. 中央右 (ミンタカ) -->
+  <circle id="star4" cx="170" cy="90" r="5" fill="white" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="0.75s" fill="freeze"/>
+  </circle>
+
+  <!-- 5. 中央 (アルニラム) -->
+  <circle id="star5" cx="140" cy="100" r="5" fill="white" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="1.0s" fill="freeze"/>
+  </circle>
+
+  <!-- 6. 左下 (サイフ) -->
+  <circle id="star6" cx="80" cy="250" r="5" fill="white" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="1.25s" fill="freeze"/>
+  </circle>
+
+  <!-- 7. 右下 (リゲル) -->
+  <circle id="star7" cx="220" cy="230" r="5" fill="white" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.25s" begin="1.5s" fill="freeze"/>
+  </circle>
+
+  <!-- ▼ 線の描画 (指定の順番) ▼ -->
+
+  <!-- 1) 左上 → 右上 -->
+  <line x1="50" y1="30" x2="200" y2="10"
+        stroke="white" stroke-width="2"
+        stroke-dasharray="160" stroke-dashoffset="160">
+    <animate attributeName="stroke-dashoffset" from="160" to="0" dur="0.25s" begin="1.75s" fill="freeze"/>
+  </line>
+
+  <!-- 2) 右上 → 中央右 -->
+  <line x1="200" y1="10" x2="170" y2="90"
+        stroke="white" stroke-width="2"
+        stroke-dasharray="100" stroke-dashoffset="100">
+    <animate attributeName="stroke-dashoffset" from="100" to="0" dur="0.25s" begin="2s" fill="freeze"/>
+  </line>
+
+  <!-- 3) 中央右 → 右下 -->
+  <line x1="170" y1="90" x2="220" y2="230"
+        stroke="white" stroke-width="2"
+        stroke-dasharray="160" stroke-dashoffset="160">
+    <animate attributeName="stroke-dashoffset" from="160" to="0" dur="0.25s" begin="2.25s" fill="freeze"/>
+  </line>
+
+  <!-- 4) 右下 → 左下 -->
+  <line x1="220" y1="230" x2="80" y2="250"
+        stroke="white" stroke-width="2"
+        stroke-dasharray="140" stroke-dashoffset="140">
+    <animate attributeName="stroke-dashoffset" from="140" to="0" dur="0.25s" begin="2.5s" fill="freeze"/>
+  </line>
+
+  <!-- 5) 左下 → 中央左 -->
+  <line x1="80" y1="250" x2="110" y2="110"
+        stroke="white" stroke-width="2"
+        stroke-dasharray="160" stroke-dashoffset="160">
+    <animate attributeName="stroke-dashoffset" from="160" to="0" dur="0.25s" begin="2.75s" fill="freeze"/>
+  </line>
+
+  <!-- 6) 中央左 → 左上 -->
+  <line x1="110" y1="110" x2="50" y2="30"
+        stroke="white" stroke-width="2"
+        stroke-dasharray="120" stroke-dashoffset="120">
+    <animate attributeName="stroke-dashoffset" from="120" to="0" dur="0.25s" begin="3s" fill="freeze"/>
+  </line>
+
+</svg>
