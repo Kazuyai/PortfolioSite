@@ -1,5 +1,5 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import { Environment, OrbitControls, useHelper } from "@react-three/drei";
+import { Environment, OrbitControls, SoftShadows, useHelper } from "@react-three/drei";
 import { EffectComposer, Bloom, ChromaticAberration, Glitch, Noise, Vignette } from "@react-three/postprocessing";
 import { Suspense, useRef, useEffect } from "react";
 import * as THREE from "three";
@@ -29,7 +29,7 @@ const Lights = () => {
 
   return (
     <>
-      <ambientLight intensity={0.3} />
+      <ambientLight intensity={0.8} color={"#fff0e0"} />
       <directionalLight
         ref={directionalLightRef}
         position={[7, 7, 7]}
@@ -42,6 +42,7 @@ const Lights = () => {
         shadow-camera-right={20}
         shadow-camera-top={20}
         shadow-camera-bottom={-20}
+        color={"#fff0e0"}
       />
       {/* <pointLight ref={pointLightRef} position={[0, 5, 0]} intensity={10} /> */}
     </>
