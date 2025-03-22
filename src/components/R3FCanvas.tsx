@@ -9,7 +9,6 @@ import CollisionBox from "@/components/models/CollisionBox";
 import EventTriggerBox from "@/components/models/EventTriggerBox";
 import Character from "@/components/models/Character";
 import Building from "@/components/models/Building";
-import Loader from "@/components/common/Loader";
 import styles from "@/styles/R3FCanvas.module.scss";
 import { render } from "sass";
 
@@ -75,7 +74,7 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, setActiveEvent }: Pro
         setActiveEvent={setActiveEvent}
       />
       <Lights />
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={ null}>
         <Character ref={characterRef} castShadow receiveShadow />
         <Building scale={[2, 2, 2]} castShadow receiveShadow />
         {collisionData.map((data, index) => (
