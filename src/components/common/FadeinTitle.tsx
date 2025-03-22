@@ -11,7 +11,7 @@ const FadeinTitle = ({ title, isVisible }: FadeinTitleProps) => {
     <h1 className={`${styles.fadeinTitle} ${isVisible ? styles.visible : ""}`}>
       {title.split("").map((char, index) => {
         return (
-          <span key={index} style={{ animationDelay: `${index * 0.05}s` }}>
+          <span key={index} style={{ animationDelay: `${index * 0.05 + 0.6}s` }}>
             {char === " " ? "\u00A0" : char}
           </span>
         );
