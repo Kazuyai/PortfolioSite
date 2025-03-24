@@ -106,6 +106,11 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
       if (returningToBase) {
         const floorPos = new THREE.Vector3(...characterPositions[prevIndex].position);
         charObj.position.lerp(floorPos, 0.1);
+        // 進行方向を向かせる
+        const moveVector = floorPos.clone().sub(charObj.position).normalize();
+        if (moveVector.length() > 0) {
+          charObj.rotation.y = Math.atan2(moveVector.x, moveVector.z);
+        }
 
         if (charObj.position.distanceTo(floorPos) < 0.2) {
           setReturningToBase(false);
@@ -124,6 +129,16 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
         const finalZ = startPos[2] + (endPos[2] - startPos[2]) * progress;
 
         charObj.position.lerp(new THREE.Vector3(finalX, finalY, finalZ), 0.1);
+
+        // 正面を向かせる
+        const front = new THREE.Vector3();
+        camera.getWorldDirection(front);
+        front.y = 0;
+        front.normalize().negate();
+
+        if (front.length() > 0) {
+          charObj.rotation.y = Math.atan2(front.x, front.z);
+        }
 
         if (progress === 0) {
           const floorPos = new THREE.Vector3(...characterPositions[currentIndex].position);
