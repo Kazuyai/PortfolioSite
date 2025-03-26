@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
 import { useSectionProgress } from "@/hooks/useSectionProgress";
@@ -10,6 +10,7 @@ interface CameraPosition {
 
 interface CameraControllerProps {
   spacerRefs: HTMLDivElement[];
+  startFadeOut: boolean;
 }
 
 const baseCameraPositions: CameraPosition[] = [
@@ -35,12 +36,21 @@ const baseCameraPositions: CameraPosition[] = [
   }
 ];
 
-const CameraController: React.FC<CameraControllerProps> = ({ spacerRefs }) => {
+const CameraController: React.FC<CameraControllerProps> = ({ spacerRefs, startFadeOut }) => {
   const { camera, size } = useThree();
   const { currentIndex, progress } = useSectionProgress(spacerRefs);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
   const [cameraPositions, setCameraPositions] = useState(baseCameraPositions);
+
+  const TRANSITION_DURATION = 3;
+  const transitionStart = useRef<number>(0);
+
+  useEffect(() => {
+    if(startFadeOut) {
+      transitionStart.current = performance.now();
+    }
+  }, [startFadeOut]);
 
   useEffect(() => {
     const updateCameraPosition = () => {
@@ -96,6 +106,18 @@ const CameraController: React.FC<CameraControllerProps> = ({ spacerRefs }) => {
   }, []);
 
   useFrame(() => {
+    if (startFadeOut && performance.now() - transitionStart.current < TRANSITION_DURATION * 1000) {
+      const now = performance.now();
+      const elapsed = (now - transitionStart.current) / 1000;
+      const progress = Math.min(elapsed / TRANSITION_DURATION, 1);
+      const cam = cameraPositions[0];
+      camera.position.set(...cam.position);
+      const firstLookAt = new Vector3(...cam.lookAt).add(new Vector3(5, 10, 5));
+      const transitionLookAt = new Vector3(...cam.lookAt);
+      camera.lookAt(firstLookAt.lerp(transitionLookAt, progress));
+      // camera.lookAt(lookAt);
+      return;
+    }
     const startIndex = currentIndex;
     const endIndex = currentIndex + 1 < cameraPositions.length ? currentIndex + 1 : currentIndex;
 

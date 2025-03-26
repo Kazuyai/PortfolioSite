@@ -17,6 +17,7 @@ interface Props {
   currentSection: string;
   hitBoxes: { [key: string]: { collisionData: { position: [number, number, number]; size: [number, number, number]; }[]; eventData: { id: string; position: [number, number, number]; size: [number, number, number]; }[]; } };
   setActiveEvent: (id: string | null) => void;
+  startFadeOut: boolean;
 }
 
 const Lights = () => {
@@ -48,7 +49,7 @@ const Lights = () => {
   );
 };
 
-const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, setActiveEvent }: Props) => {
+const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, setActiveEvent, startFadeOut }: Props) => {
 
   const characterRef = useRef<THREE.Group>(null);
   const collisionData = hitBoxes[currentSection]?.collisionData || [];
@@ -65,7 +66,10 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, setActiveEvent }: Pro
       }}
       shadows
     >
-      <CameraController spacerRefs={spacerRefs} />
+      <CameraController
+        spacerRefs={spacerRefs}
+        startFadeOut={startFadeOut}
+      />
       <CharacterController 
         spacerRefs={spacerRefs} 
         characterRef={characterRef} 
@@ -85,7 +89,7 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, setActiveEvent }: Pro
         ))}
       </Suspense>
 
-      <EffectComposer enabled={false}>
+      <EffectComposer enabled={true}>
         {/* <ChromaticAberration offset={new THREE.Vector2(0.0005, 0.001)} /> */}
         {/* <Glitch
           delay={new THREE.Vector2(0.1, 0.3)}
@@ -97,7 +101,7 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, setActiveEvent }: Pro
           offset={0.1}
           darkness={0.8}
         />
-        <Bloom intensity={0.3} luminanceThreshold={0.2} luminanceSmoothing={0.2} height={200} />
+        {/* <Bloom intensity={0.3} luminanceThreshold={0.2} luminanceSmoothing={0.2} height={200} /> */}
       </EffectComposer>
       <Environment files="/images/sky.hdr" background />
       {/* <OrbitControls /> */}

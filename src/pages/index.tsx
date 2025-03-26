@@ -68,7 +68,7 @@ const Home = () => {
   useEffect(() => {
     if (isTimeElapsed && r3fLoaded) {
       setStartFadeOut(true);
-      const fadeTimer = setTimeout(() => setShowLoading(false), 2000);
+      const fadeTimer = setTimeout(() => setShowLoading(false), 4000);
       return () => clearTimeout(fadeTimer);
     }
   }, [isTimeElapsed, r3fLoaded]);
@@ -94,6 +94,7 @@ const Home = () => {
         currentSection={sections[currentIndex]?.id || "top"}
         hitBoxes={hitBoxes}
         setActiveEvent={setActiveEvent}
+        startFadeOut={startFadeOut}
       />
       <div className={styles.text__container}>
         {/* すべてのsectionを配置 */}
