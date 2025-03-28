@@ -30,6 +30,32 @@ const eventContent: { [key: string]: JSX.Element } = {
   ),
 };
 
+const skills = [
+  { name: "TypeScript", icon: "typescript/typescript-original.svg" },
+  { name: "JavaScript", icon: "javascript/javascript-original.svg" },
+  { name: "React", icon: "react/react-original.svg" },
+  { name: "Next.js", icon: "nextjs/nextjs-original.svg" },
+  { name: "Three.js", icon: "threejs/threejs-original.svg" },
+  { name: "HTML", icon: "html5/html5-original.svg" },
+  { name: "Sass", icon: "sass/sass-original.svg" },
+  { name: "CSS", icon: "css3/css3-original.svg" },
+  { name: "PHP", icon: "php/php-original.svg" },
+  { name: "Python", icon: "python/python-original.svg" },
+  { name: "C", icon: "c/c-original.svg" },
+  { name: "C++", icon: "cplusplus/cplusplus-original.svg" },
+  { name: "Java", icon: "java/java-original.svg" },
+];
+
+const tools = [
+  { name: "Git", icon: "git/git-original.svg" },
+  { name: "GitHub", icon: "github/github-original.svg" },
+  { name: "Blender", icon: "blender/blender-original.svg" },
+  { name: "Unity", icon: "unity/unity-original.svg" },
+  { name: "WordPress", icon: "wordpress/wordpress-plain.svg" },
+  { name: "Vercel", icon: "figma/figma-original.svg" },
+  { name: "Firebase", icon: "firebase/firebase-plain.svg" },
+];
+
 const Skills = ({ activeEvent }: SkillsProps) => {
   const { ref, isVisible } = useElementVisibility({ threshold: 0.1 });
 
@@ -38,7 +64,15 @@ const Skills = ({ activeEvent }: SkillsProps) => {
       <FadeinTitle title="Skills" isVisible={isVisible} />
       <h3 className={styles.skillsSubTitle}>Programming Languages & Frameworks</h3>
       <div className={styles.skillsBox}>
-        <div className={styles.skillsBoxItem}>
+        {
+          skills.map((skill, index) => (
+            <div key={index} className={styles.skillsBoxItem} style={{ animationDelay: `${index * 0.1}s` }}>
+              <img src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${skill.icon}`} />
+              <h2>{skill.name}</h2>
+            </div>
+          ))
+        }
+        {/* <div className={styles.skillsBoxItem}>
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" />
           <h2>TypeScript</h2>
         </div>
@@ -89,12 +123,20 @@ const Skills = ({ activeEvent }: SkillsProps) => {
         <div className={styles.skillsBoxItem}>
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" />
           <h2>Java</h2>
-        </div>
+        </div> */}
       </div>
 
       <h3 className={styles.skillsSubTitle}>Tools</h3>
-      <div className={styles.skillsBox}>
-        <div className={styles.skillsBoxItem}>
+      <div className={styles.skillsBox} >
+        {
+          tools.map((tool, index) => (
+            <div key={index} className={styles.skillsBoxItem} style={{ animationDelay: `${skills.length * 0.1 + index * 0.1}s` }}>
+              <img src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tool.icon}`} />
+              <h2>{tool.name}</h2>
+            </div>
+          ))
+        }
+        {/* <div className={styles.skillsBoxItem}>
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" />
           <h2>Git</h2>
         </div>
@@ -121,7 +163,7 @@ const Skills = ({ activeEvent }: SkillsProps) => {
         <div className={styles.skillsBoxItem}>
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg" />
           <h2>Firebase</h2>
-        </div>
+        </div> */}
       </div>
       {activeEvent && eventContent[activeEvent]}
     </section>

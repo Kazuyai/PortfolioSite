@@ -8,6 +8,20 @@
     font-size: 2rem;
   }
 
+  &.visible {
+    .skillsBoxItem {
+      animation: fadeIn 0.6s forwards;
+      @keyframes fadeIn {
+        0% {
+          transform: translateY(100%);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+
   &Box {
     display: flex;
     flex-direction: row;
