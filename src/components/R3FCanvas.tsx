@@ -89,7 +89,7 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, setActiveEvent, start
         ))}
       </Suspense>
 
-      <EffectComposer enabled={true}>
+      <EffectComposer enabled={false}>
         {/* <ChromaticAberration offset={new THREE.Vector2(0.0005, 0.001)} /> */}
         {/* <Glitch
           delay={new THREE.Vector2(0.1, 0.3)}

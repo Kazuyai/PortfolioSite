@@ -89,6 +89,7 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       {showLoading && <Loading progress={totalProgress} startFadeOut={startFadeOut} />}
+      <div className={styles.vignette}></div>
       <R3FCanvas
         spacerRefs={spacerRefs}
         currentSection={sections[currentIndex]?.id || "top"}
