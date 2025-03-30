@@ -1,5 +1,5 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import { Environment, OrbitControls, SoftShadows, useHelper } from "@react-three/drei";
+import { Environment, OrbitControls, SoftShadows, useHelper, Stats } from "@react-three/drei";
 import { EffectComposer, Bloom, ChromaticAberration, Glitch, Noise, Vignette } from "@react-three/postprocessing";
 import { Suspense, useRef, useEffect } from "react";
 import * as THREE from "three";
@@ -105,6 +105,7 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, setActiveEvent, start
       </EffectComposer>
       <Environment files="/images/sky.hdr" background />
       {/* <OrbitControls /> */}
+      <Stats />
     </Canvas>
   );
 };
