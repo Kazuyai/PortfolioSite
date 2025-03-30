@@ -10,6 +10,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   useEffect(() => {
     if (isTopPage) window.scrollTo(0, 0);
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
   }, []);
 
   return isTopPage ? (
