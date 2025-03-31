@@ -10,7 +10,7 @@ import Projects from "@/components/sections/Projects";
 import Gallery from "@/components/sections/Gallery";
 import React, { use, useEffect, useRef, useState } from "react";
 import { useSectionProgress } from "@/hooks/useSectionProgress";
-import { time } from "console";
+import { clear, time } from "console";
 
 const R3FCanvas = dynamic(() => import("@/components/R3FCanvas"), { ssr: false });
 
@@ -74,11 +74,16 @@ const Home = () => {
   }, [isTimeElapsed, r3fLoaded]);
 
   useEffect(() => {
+    let timer : ReturnType<typeof setTimeout>;
     if (startFadeOut) {
-      document.body.style.overflow = "auto";
+      timer = setTimeout(() => {
+        document.body.style.overflow = "auto";
+      }, 3000);
     } else {
       document.body.style.overflow = "hidden";
     }
+
+    return () => clearTimeout(timer);
   }, [startFadeOut]);
 
   return (
