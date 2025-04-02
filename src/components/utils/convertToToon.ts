@@ -22,12 +22,22 @@ export function convertToToonMaterial(oldMat: THREE.MeshStandardMaterial): THREE
   newMat.side = oldMat.side
   // newMat.skinning = oldMat.skinning
 
-  // 例: emissive系の値が必要なら適宜コピー
-  // newMat.emissive = oldMat.emissive.clone();
+  newMat.emissive = oldMat.emissive.clone();
 
   // metalness, roughness は ToonMaterial には存在しないので無視 or 独自実装
 
   return newMat
+}
+
+function enableShadowOnAllMeshes(root: THREE.Object3D) {
+  root.traverse(obj => {
+    if (obj instanceof THREE.Mesh) {
+      // 影を落とす
+      obj.castShadow = true
+      // 影を受け止める。セルフシャドウや他オブジェクトの影を受けるならtrue
+      obj.receiveShadow = true
+    }
+  })
 }
 
 /**
@@ -54,4 +64,6 @@ export function replaceMaterialsWithToon(root: THREE.Object3D) {
       }
     }
   })
+
+  enableShadowOnAllMeshes(root)
 }
