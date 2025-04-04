@@ -1,8 +1,10 @@
 @use "common";
 
+$primaryColor: #a8b9ec;
+
 .about {
-  @extend .section;
-  --primaryColor: #a8b9ec;
+  @include common.section($primaryColor);
+  
   p {
     margin-top: 5rem;
     font-size: 1.8rem;
@@ -26,9 +28,9 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 1rem;    
+          gap: 1rem;
           img {
-            width: 5rem;        
+            width: 5rem;
           }
         }
       }

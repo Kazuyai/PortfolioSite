@@ -1,8 +1,10 @@
-@use "_common";
+@use "common";
+
+$primaryColor: #0000;
 
 .top {
-  @extend .section;
-  --primaryColor: #0000;
+  @include common.section($primaryColor);
+  
   min-height: 100vh;
   margin-top: 0;
   padding: 40vh 0 0 10rem;

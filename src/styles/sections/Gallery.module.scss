@@ -1,6 +1,8 @@
-@use "_common";
+@use "common";
+
+$primaryColor: #eac59b;
 
 .gallery {
-  @extend .section;
-  --primaryColor: #eac59b;
+  @include common.section($primaryColor);
+  
 }

@@ -1,6 +1,7 @@
-@use "_common";
+@use "common";
+
+$primaryColor: #d4df97;
 
 .projects {
-  @extend .section;
-  --primaryColor: #d4df97;
+  @include common.section($primaryColor);
 }
