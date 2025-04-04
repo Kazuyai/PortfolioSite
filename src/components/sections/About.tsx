@@ -18,7 +18,7 @@ const About = ({ activeEvent }: AboutProps) => {
       <p>趣味でWeb技術を活かしたコンテンツ制作に励んでいます。</p>
       <div className={styles.links}>
         <div className={styles.link}>
-          <a href="https.//github.com/Kazuyai" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/Kazuyai" target="_blank" rel="noopener noreferrer">
             <figure>
               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub" />
             </figure>
