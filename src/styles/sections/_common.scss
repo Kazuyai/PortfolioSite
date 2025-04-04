@@ -1,3 +1,22 @@
+@mixin neu($bg: #e0e0e0) {
+  transition: box-shadow 0.2s ease-in-out;
+  background-color: $bg;
+  box-shadow: 
+  0.5rem 0.5rem 1.2rem darken($bg, 10%), 
+  -0.5rem -0.5rem 1.2rem lighten($bg, 10%),
+  inset 0.5rem 0.5rem 1.2rem transparent,
+  inset -0.5rem -0.5rem 1.2rem transparent;
+}
+
+@mixin neu-inset($bg: #e0e0e0) {
+  background-color: $bg;
+  box-shadow:
+    0.5rem 0.5rem 1.2rem transparent,
+    -0.5rem -0.5rem 1.2rem transparent, 
+    inset 0.5rem 0.5rem 1.2rem darken($bg, 10%),
+    inset -0.5rem -0.5rem 1.2rem lighten($bg, 10%);
+}
+
 @mixin section($primaryColor: #e0e0e0) {
   width: 100%;
   max-width: 1000px;

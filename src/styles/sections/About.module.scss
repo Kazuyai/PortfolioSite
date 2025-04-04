@@ -20,8 +20,13 @@ $primaryColor: #a8b9ec;
     flex-direction: row;
     justify-content: center;
     .link {
+      margin: 2rem;
       padding: 1rem;
       border-radius: 100rem;
+      @include common.neu($primaryColor);
+      &:hover {
+        @include common.neu-inset($primaryColor);
+      }
       a {
         display: block;
         figure {
