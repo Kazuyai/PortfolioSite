@@ -3,4 +3,35 @@
 .about {
   @extend .section;
   --primaryColor: #a8b9ec;
+  p {
+    margin-top: 5rem;
+    font-size: 1.8rem;
+    text-align: center;
+
+    &.name {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  }
+  .links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .link {
+      padding: 1rem;
+      border-radius: 100rem;
+      a {
+        display: block;
+        figure {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;    
+          img {
+            width: 5rem;        
+          }
+        }
+      }
+    }
+  }
 }
