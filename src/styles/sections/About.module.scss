@@ -19,9 +19,9 @@ $primaryColor: #a8b9ec;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-top: 5rem;
     .link {
       margin: 2rem;
-      padding: 1rem;
       border-radius: 100rem;
       @include common.neu($primaryColor);
       &:hover {
@@ -29,6 +29,7 @@ $primaryColor: #a8b9ec;
       }
       a {
         display: block;
+        padding: 1rem;
         figure {
           display: flex;
           flex-direction: column;
