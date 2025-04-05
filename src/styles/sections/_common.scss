@@ -51,6 +51,7 @@
 
   @media screen and (max-width: 768px) {
     margin-top: 155vh; // スマホの時に階層移動アニメーションが終わった状態を見せるため、margin-topを設定
+    border-radius: 3rem;
   }
 
   &:not(&.top) {
