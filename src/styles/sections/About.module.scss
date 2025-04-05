@@ -14,6 +14,10 @@ $primaryColor: #a8b9ec;
       font-size: 2rem;
       font-weight: bold;
     }
+
+    &.left {
+      text-align: left;
+    }
   }
   .links {
     display: flex;

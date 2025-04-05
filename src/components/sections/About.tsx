@@ -15,7 +15,7 @@ const About = ({ activeEvent }: AboutProps) => {
       {/* <h2>Name</h2> */}
       <p className={styles.name}>岡村 和哉 (Kazuya Okamura)</p>
       <p>東京都市大学大学院 環境情報学研究科 環境情報学専攻 修士1年</p>
-      <p>趣味でWeb技術を活かしたコンテンツ制作に励んでいます。</p>
+      <p className={styles.left}>趣味でWeb技術を活かしたコンテンツ制作に励んでいます。<br></br>このサイトでは、私のポートフォリオや、趣味で制作した作品を紹介しています。</p>
       <div className={styles.links}>
         <div className={styles.link}>
           <a href="https://github.com/Kazuyai" target="_blank" rel="noopener noreferrer">
