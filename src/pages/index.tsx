@@ -4,7 +4,7 @@ import { useProgress } from "@react-three/drei";
 import styles from "@/styles/Home.module.scss";
 import Loading from "@/components/common/Loading";
 import Top, { collisionData as topCollision, eventData as topEvents } from "@/components/sections/Top";
-import About from "@/components/sections/About";
+import About, { collisionData as aboutCollision, eventData as aboutEvents } from "@/components/sections/About";
 import Skills, { collisionData as skillsCollision, eventData as skillsEvents } from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
 import Gallery from "@/components/sections/Gallery";
@@ -16,6 +16,7 @@ const R3FCanvas = dynamic(() => import("@/components/R3FCanvas"), { ssr: false }
 
 const hitBoxes = {
   top: { collisionData: topCollision, eventData: topEvents },
+  about: { collisionData: aboutCollision, eventData: aboutEvents },
   skills: { collisionData: skillsCollision, eventData: skillsEvents },
 };
 
