@@ -60,7 +60,7 @@ const Skills = ({ activeEvent }: SkillsProps) => {
   const { ref, isVisible } = useElementVisibility({ threshold: 0.1 });
 
   return (
-    <section ref={ref} className={`${styles.skills} ${isVisible ? styles.visible : ""}`}>
+    <section ref={ref} id="skills" className={`${styles.skills} ${isVisible ? styles.visible : ""}`}>
       <FadeinTitle title="Skills" isVisible={isVisible} />
       <h3 className={styles.skillsSubTitle}>Programming Languages & Frameworks</h3>
       <div className={styles.skillsBox}>

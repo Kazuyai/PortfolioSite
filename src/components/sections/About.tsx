@@ -33,7 +33,7 @@ const eventContent: { [key: string]: JSX.Element } = {
 const About = ({ activeEvent }: AboutProps) => {
   const { ref, isVisible } = useElementVisibility({ threshold: 0.1 });
   return (
-    <section ref={ref} className={`${styles.about} ${isVisible ? styles.visible : ""}`}>
+    <section ref={ref} id="about" className={`${styles.about} ${isVisible ? styles.visible : ""}`}>
       <FadeinTitle title="About" isVisible={isVisible} />
       {/* <h2>Name</h2> */}
       <p className={styles.name}>岡村 和哉 (Kazuya Okamura)</p>

@@ -37,7 +37,7 @@ const Top = ({ activeEvent }: TopProps) => {
   }, [scrollY]);
 
   return (
-    <section ref={topRef} className={styles.top}>
+    <section ref={topRef} id="top" className={styles.top}>
       <h1>Hello!</h1>
       <p>Welcome to my portfolio site</p>
       <div 
