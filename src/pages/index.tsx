@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { useProgress } from "@react-three/drei";
 import styles from "@/styles/Home.module.scss";
 import Loading from "@/components/common/Loading";
+import ElevatorMenu from "@/components/common/ElevatorMenu";
 import Top, { collisionData as topCollision, eventData as topEvents } from "@/components/sections/Top";
 import About, { collisionData as aboutCollision, eventData as aboutEvents } from "@/components/sections/About";
 import Skills, { collisionData as skillsCollision, eventData as skillsEvents } from "@/components/sections/Skills";
@@ -22,11 +23,11 @@ const hitBoxes = {
 
 const Home = () => {
   const sections = [
-    { id: "top", label: "Topセクション", component: Top },
-    { id: "about", label: "Aboutセクション", component: About },
-    { id: "skills", label: "Skillsセクション", component: Skills },
-    { id: "projects", label: "Projectsセクション", component: Projects },
-    { id: "gallery", label: "Galleryセクション", component: Gallery },
+    { id: "top", label: "Top", component: Top },
+    { id: "about", label: "About", component: About },
+    { id: "skills", label: "Skills", component: Skills },
+    { id: "projects", label: "Projects", component: Projects },
+    { id: "gallery", label: "Gallery", component: Gallery },
   ];
 
   const [activeEvent, setActiveEvent] = useState<string | null>(null);
@@ -102,6 +103,9 @@ const Home = () => {
         hitBoxes={hitBoxes}
         setActiveEvent={setActiveEvent}
         startFadeOut={startFadeOut}
+      />
+      <ElevatorMenu
+        sections={sections}
       />
       <div className={styles.text__container}>
         {/* すべてのsectionを配置 */}

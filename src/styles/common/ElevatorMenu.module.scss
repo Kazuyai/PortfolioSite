@@ -1,0 +1,112 @@
+@use "../sections/common";
+
+.elevatorMenu {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  top: 0;
+  right: 0;
+  width: 30%;
+  height: 100dvh;
+  padding: 10rem 3rem;
+  background: #fff;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+  z-index: 99;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+
+  &__open_button {
+    position: absolute;
+    top: 1rem;
+    right: 100%;
+    width: 5rem;
+    height: 5rem;
+    cursor: pointer;
+    transition: right 0.3s ease-in-out;
+    span {
+      position: absolute;
+      width: 3rem;
+      height: 0.5rem;
+      background: #fff;
+      border-radius: 100rem;
+      transition: all 0.2s ease-in-out;
+      &:nth-of-type(1) {
+        top: 1.25rem;
+        left: 1rem;
+      }
+      &:nth-of-type(2) {
+        top: 2.25rem;
+        left: 1rem;
+      }
+      &:nth-of-type(3) {
+        top : 3.25rem;
+        left: 1rem;
+      }
+    }
+  }
+
+  .elevatorMenu__item {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    &:not(:last-of-type) .elevatorMenu__text::after {
+      content: "";
+      position: absolute;
+      bottom: -1.5rem;
+      left: 0;
+      width: 100%;
+      height: 0.1rem;
+      background: #666;
+      transform: translateY(50%);
+    }
+    .elevatorMenu__button {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 100rem;
+      @include common.neu(#f4f4f4);
+      &:hover {
+        @include common.neu-inset(#f4f4f4);
+      }
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        font-size: 3rem;
+      }
+    }
+    .elevatorMenu__text {
+      position: relative;
+      flex: 1;
+      padding-inline: 2rem;
+      p {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        font-size: 2.4rem;
+      }
+    }
+  }
+
+  &.open {
+    transform: translateX(0);
+    .elevatorMenu__open_button {
+      right: calc(100% - 6rem);
+      span {
+        background: #000;
+        &:nth-of-type(1) {
+          transform: translateY(1rem) rotate(45deg);
+        }
+        &:nth-of-type(2) {
+          opacity: 0;
+        }
+        &:nth-of-type(3) {
+          transform: translateY(-1rem) rotate(-45deg);
+        }
+      }
+    }
+  }
+}
