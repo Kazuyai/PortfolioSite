@@ -79,16 +79,21 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!canMove) return;
-      if (e.code === "KeyW") setMove((m) => ({ ...m, forward: true }));
-      if (e.code === "KeyS") setMove((m) => ({ ...m, backward: true }));
-      if (e.code === "KeyA") setMove((m) => ({ ...m, left: true }));
-      if (e.code === "KeyD") setMove((m) => ({ ...m, right: true }));
+      
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.code)) {
+        e.preventDefault();
+      }
+
+      if (e.code === "KeyW" || e.code === "ArrowUp") setMove((m) => ({ ...m, forward: true }));
+      if (e.code === "KeyS" || e.code === "ArrowDown") setMove((m) => ({ ...m, backward: true }));
+      if (e.code === "KeyA" || e.code === "ArrowLeft") setMove((m) => ({ ...m, left: true }));
+      if (e.code === "KeyD" || e.code === "ArrowRight") setMove((m) => ({ ...m, right: true }));
     };
     const handleKeyUp = (e: KeyboardEvent) => {
-      if (e.code === "KeyW") setMove((m) => ({ ...m, forward: false }));
-      if (e.code === "KeyS") setMove((m) => ({ ...m, backward: false }));
-      if (e.code === "KeyA") setMove((m) => ({ ...m, left: false }));
-      if (e.code === "KeyD") setMove((m) => ({ ...m, right: false }));
+      if (e.code === "KeyW" || e.code === "ArrowUp") setMove((m) => ({ ...m, forward: false }));
+      if (e.code === "KeyS" || e.code === "ArrowDown") setMove((m) => ({ ...m, backward: false }));
+      if (e.code === "KeyA" || e.code === "ArrowLeft") setMove((m) => ({ ...m, left: false }));
+      if (e.code === "KeyD" || e.code === "ArrowRight") setMove((m) => ({ ...m, right: false }));
     };
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
