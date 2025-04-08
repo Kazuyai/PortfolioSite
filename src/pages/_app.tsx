@@ -10,8 +10,8 @@ const App = ({ Component, pageProps }: AppProps) => {
   const [isTopPage, setIsTopPage] = useState<boolean | null>(null);
 
   useEffect(() => {
-    setIsTopPage(router.asPath === "/");
-    if (router.asPath == "/") window.scrollTo(0, 0);
+    setIsTopPage(router.pathname === "/");
+    if (router.pathname == "/") window.scrollTo(0, 0);
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual'
     }
