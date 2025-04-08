@@ -108,7 +108,7 @@
     .elevatorMenu__open_button {
       right: calc(100% - 6rem);
       span {
-        // background: #000;
+        background: #aaa;
         &:nth-of-type(1) {
           transform: translateY(1rem) rotate(45deg);
         }
