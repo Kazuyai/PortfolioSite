@@ -4,12 +4,12 @@ Command: npx gltfjsx@6.5.3 ./public/models/building.glb --types --shadows
 */
 
 import * as THREE from 'three'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useGraph } from '@react-three/fiber'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { GLTF, SkeletonUtils } from 'three-stdlib'
 
-type ActionName = '丸型エレベータードア.LAction.001' | '丸型エレベータードア.RAction.001' | '丸型エレベータードア.LAction' | '丸型エレベータードア.RAction' | '[保留アクション]' | '丸型エレベータードア.LAction.002' | '丸型エレベータードア.RAction.002'
+type ActionName = 'Event_About_01_Loop' | 'Event_About_01_Start' | 'Event_Skills_01_Loop' | 'Event_Skills_01_Start' | 'Event_Skills_02_Loop' | 'Event_Skills_02_Start' | 'Event_Skills_03_Loop' | 'Event_Skills_03_Start' | 'Event_Skills_04_Loop' | 'Event_Skills_04_Start' | '丸型エレベータードア.LAction.001' | '丸型エレベータードア.RAction.001' | '丸型エレベータードア.LAction' | '丸型エレベータードア.RAction' | '丸型エレベータードア.LAction.002' | '丸型エレベータードア.RAction.002' | 'wave_react' | 'wave_python' | 'Wave_blender' | 'wave_ts'
 
 interface GLTFAction extends THREE.AnimationClip {
   name: ActionName
@@ -17,8 +17,11 @@ interface GLTFAction extends THREE.AnimationClip {
 
 type GLTFResult = GLTF & {
   nodes: {
+    外枠003: THREE.SkinnedMesh
     外枠001: THREE.SkinnedMesh
-    外枠: THREE.SkinnedMesh
+    外枠004: THREE.SkinnedMesh
+    外枠006: THREE.SkinnedMesh
+    外枠002: THREE.SkinnedMesh
     柵: THREE.Mesh
     屋上床: THREE.Mesh
     屋上ライト: THREE.Mesh
@@ -29,10 +32,6 @@ type GLTFResult = GLTF & {
     丸型エレベータードアL001: THREE.Mesh
     丸型エレベータードアR001: THREE.Mesh
     エレベーター: THREE.Mesh
-    円柱012: THREE.Mesh
-    丸型エレベータードアL: THREE.Mesh
-    丸型エレベータードアR: THREE.Mesh
-    立方体025: THREE.Mesh
     円柱030: THREE.Mesh
     円柱030_1: THREE.Mesh
     Cube004: THREE.Mesh
@@ -64,12 +63,12 @@ type GLTFResult = GLTF & {
     立方体021: THREE.Mesh
     立方体022: THREE.Mesh
     立方体023: THREE.Mesh
-    立方体040: THREE.Mesh
     立方体040_1: THREE.Mesh
+    立方体040_2: THREE.Mesh
     本001: THREE.Mesh
     本棚001: THREE.Mesh
-    立方体044: THREE.Mesh
     立方体044_1: THREE.Mesh
+    立方体044_2: THREE.Mesh
     Floor: THREE.Mesh
     立方体045: THREE.Mesh
     立方体045_1: THREE.Mesh
@@ -79,32 +78,82 @@ type GLTFResult = GLTF & {
     立方体022_1: THREE.Mesh
     立方体022_2: THREE.Mesh
     立方体022_3: THREE.Mesh
-    円柱025: THREE.Mesh
     円柱025_1: THREE.Mesh
+    円柱025_2: THREE.Mesh
+    立方体025: THREE.Mesh
+    丸型エレベータードアL: THREE.Mesh
+    丸型エレベータードアR: THREE.Mesh
+    円柱012: THREE.Mesh
     建物001: THREE.Mesh
     平面_1: THREE.Mesh
     平面_2: THREE.Mesh
     丸型エレベータードアL002: THREE.Mesh
     丸型エレベータードアR002: THREE.Mesh
     円柱017: THREE.Mesh
+    立方体044: THREE.Mesh
+    円柱025: THREE.Mesh
+    円柱026: THREE.Mesh
+    円柱027: THREE.Mesh
     立方体029: THREE.Mesh
     立方体027: THREE.Mesh
-    ボーン: THREE.Bone
+    立方体036_1: THREE.Mesh
+    立方体036_2: THREE.Mesh
+    立方体036_3: THREE.Mesh
+    ['python-logo-only_1']: THREE.Mesh
+    ['python-logo-only_2']: THREE.Mesh
+    立方体037_1: THREE.Mesh
+    立方体037_2: THREE.Mesh
+    立方体037_3: THREE.Mesh
+    立方体037_4: THREE.Mesh
+    ['icons8-typescript-96']: THREE.Mesh
+    ['icons8-typescript-96_1']: THREE.Mesh
+    ['icons8-typescript-96_2']: THREE.Mesh
+    ['icons8-typescript-96_3']: THREE.Mesh
+    ['icons8-typescript-96_4']: THREE.Mesh
+    ['icons8-typescript-96_5']: THREE.Mesh
+    fire: THREE.Mesh
+    fire001: THREE.Mesh
+    fire002: THREE.Mesh
+    fire003: THREE.Mesh
+    立方体035: THREE.Mesh
+    立方体036: THREE.Mesh
+    立方体037: THREE.Mesh
+    立方体038: THREE.Mesh
+    立方体039: THREE.Mesh
+    立方体040: THREE.Mesh
+    立方体041: THREE.Mesh
+    立方体042: THREE.Mesh
+    立方体043: THREE.Mesh
+    円柱037: THREE.Mesh
+    円柱037_1: THREE.Mesh
+    円柱042: THREE.Mesh
+    円柱042_1: THREE.Mesh
+    円柱043: THREE.Mesh
+    円柱043_1: THREE.Mesh
+    円柱044: THREE.Mesh
+    円柱044_1: THREE.Mesh
     ボーン001: THREE.Bone
     ボーン002: THREE.Bone
-    neutral_bone: THREE.Bone
-    ボーン_1: THREE.Bone
+    ボーン003: THREE.Bone
     ボーン001_1: THREE.Bone
     ボーン002_1: THREE.Bone
-    neutral_bone_1: THREE.Bone
+    ボーン003_1: THREE.Bone
+    ボーン001_2: THREE.Bone
+    ボーン002_2: THREE.Bone
+    ボーン003_2: THREE.Bone
+    ボーン001_3: THREE.Bone
+    ボーン002_3: THREE.Bone
+    ボーン003_3: THREE.Bone
+    ボーン001_4: THREE.Bone
+    ボーン002_4: THREE.Bone
+    ボーン003_4: THREE.Bone
   }
   materials: {
-    ['マテリアル.006']: THREE.MeshStandardMaterial
+    ['マテリアル.005']: THREE.MeshStandardMaterial
     Elevator: THREE.MeshStandardMaterial
     Wall: THREE.MeshStandardMaterial
     Light: THREE.MeshStandardMaterial
     ['マテリアル.003']: THREE.MeshStandardMaterial
-    Gray: THREE.MeshStandardMaterial
     ['Material.001']: THREE.MeshStandardMaterial
     ['Material.003']: THREE.MeshStandardMaterial
     ['Material.004']: THREE.MeshStandardMaterial
@@ -125,41 +174,97 @@ type GLTFResult = GLTF & {
     Leaf: THREE.MeshStandardMaterial
     ['マテリアル.004']: THREE.MeshStandardMaterial
     Green: THREE.MeshStandardMaterial
-    Blue: THREE.MeshStandardMaterial
+    ['Blue.002']: THREE.MeshStandardMaterial
     Red: THREE.MeshStandardMaterial
     Floor: THREE.MeshStandardMaterial
     Glass: THREE.MeshStandardMaterial
     Chair: THREE.MeshStandardMaterial
     マテリアル: THREE.MeshStandardMaterial
+    Gray: THREE.MeshStandardMaterial
     Wall_Skills: THREE.MeshStandardMaterial
-    DarkBrawn: THREE.MeshStandardMaterial
-    ['マテリアル.005']: THREE.MeshStandardMaterial
+    Rock: THREE.MeshStandardMaterial
+    Blue: THREE.MeshStandardMaterial
+    ['SVGMat.010']: THREE.MeshStandardMaterial
+    ['python-logo-only']: THREE.MeshStandardMaterial
+    OldPaper: THREE.MeshStandardMaterial
+    BrawnWood: THREE.MeshStandardMaterial
+    ['マテリアル.008']: THREE.MeshStandardMaterial
+    ['SVGMat.008']: THREE.MeshStandardMaterial
+    ['SVGMat.007']: THREE.MeshStandardMaterial
+    ['icons8-typescript-96']: THREE.MeshStandardMaterial
+    Sheath: THREE.MeshStandardMaterial
+    PureWhite: THREE.MeshStandardMaterial
+    Gold: THREE.MeshStandardMaterial
+    Brown: THREE.MeshStandardMaterial
+    fire: THREE.MeshStandardMaterial
+    Rock2: THREE.MeshStandardMaterial
   }
   animations: GLTFAction[]
 }
 
 export default function Model(props: JSX.IntrinsicElements['group']) {
-  const group = React.useRef<THREE.Group>()
+  const group = React.useRef<THREE.Group>(null)
   const { scene, animations } = useGLTF('/models/building.glb')
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene])
   const { nodes, materials } = useGraph(clone) as GLTFResult
   const { actions } = useAnimations(animations, group)
+
+  useEffect(() => {
+    if (Object.keys(actions).length === 0) return;
+  
+    const waveReact = actions['wave_react'];
+    const wavePython = actions['wave_python'];
+    const waveBlender = actions['Wave_blender'];
+    const waveTs = actions['wave_ts'];
+    const eventAboutLoop = actions['Event_About_01_Loop'];
+  
+    if (waveReact && wavePython && waveBlender && waveTs && eventAboutLoop) {
+      waveReact.setLoop(THREE.LoopRepeat, Infinity);
+      wavePython.setLoop(THREE.LoopRepeat, Infinity);
+      waveBlender.setLoop(THREE.LoopRepeat, Infinity);
+      waveTs.setLoop(THREE.LoopRepeat, Infinity);
+      eventAboutLoop.setLoop(THREE.LoopRepeat, Infinity);
+      waveReact.play();
+      wavePython.play();
+      waveBlender.play();
+      waveTs.play();
+      eventAboutLoop.play();
+    }
+  }, [actions]);
+  
+
   return (
-    <group {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <group name="Scene">
-        <group name="アーマチュア001" position={[0.583, -7.459, -0.918]} rotation={[0, -Math.PI / 2, 0]} scale={0.043}>
-          <primitive object={nodes.ボーン} />
+        <group name="Event" position={[0.583, -7.451, -0.918]} scale={0.551}>
           <primitive object={nodes.ボーン001} />
           <primitive object={nodes.ボーン002} />
-          <primitive object={nodes.neutral_bone} />
-          <skinnedMesh name="外枠001" geometry={nodes.外枠001.geometry} material={materials['マテリアル.006']} skeleton={nodes.外枠001.skeleton} />
+          <primitive object={nodes.ボーン003} />
+          <skinnedMesh name="外枠003" geometry={nodes.外枠003.geometry} material={materials['マテリアル.005']} skeleton={nodes.外枠003.skeleton} />
         </group>
-        <group name="アーマチュア" position={[-0.952, -13.509, 1.918]} scale={0.043}>
-          <primitive object={nodes.ボーン_1} />
+        <group name="Event001" position={[2.316, -13.502, -0.915]} scale={0.551}>
           <primitive object={nodes.ボーン001_1} />
           <primitive object={nodes.ボーン002_1} />
-          <primitive object={nodes.neutral_bone_1} />
-          <skinnedMesh name="外枠" geometry={nodes.外枠.geometry} material={materials['マテリアル.006']} skeleton={nodes.外枠.skeleton} />
+          <primitive object={nodes.ボーン003_1} />
+          <skinnedMesh name="外枠001" geometry={nodes.外枠001.geometry} material={materials['マテリアル.005']} skeleton={nodes.外枠001.skeleton} />
+        </group>
+        <group name="Event002" position={[-0.952, -13.502, 2.357]} scale={0.551}>
+          <primitive object={nodes.ボーン001_2} />
+          <primitive object={nodes.ボーン002_2} />
+          <primitive object={nodes.ボーン003_2} />
+          <skinnedMesh name="外枠004" geometry={nodes.外枠004.geometry} material={materials['マテリアル.005']} skeleton={nodes.外枠004.skeleton} />
+        </group>
+        <group name="Event003" position={[-0.952, -13.502, 1.093]} scale={0.551}>
+          <primitive object={nodes.ボーン001_3} />
+          <primitive object={nodes.ボーン002_3} />
+          <primitive object={nodes.ボーン003_3} />
+          <skinnedMesh name="外枠006" geometry={nodes.外枠006.geometry} material={materials['マテリアル.005']} skeleton={nodes.外枠006.skeleton} />
+        </group>
+        <group name="Event004" position={[-0.952, -13.502, -0.069]} scale={0.551}>
+          <primitive object={nodes.ボーン001_4} />
+          <primitive object={nodes.ボーン002_4} />
+          <primitive object={nodes.ボーン003_4} />
+          <skinnedMesh name="外枠002" geometry={nodes.外枠002.geometry} material={materials['マテリアル.005']} skeleton={nodes.外枠002.skeleton} />
         </group>
         <mesh name="柵" castShadow receiveShadow geometry={nodes.柵.geometry} material={materials.Elevator} position={[-2.9, 0.46, 2.9]} scale={0.2} />
         <mesh name="屋上床" castShadow receiveShadow geometry={nodes.屋上床.geometry} material={materials.Wall} />
@@ -171,10 +276,6 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
         <mesh name="丸型エレベータードアL001" castShadow receiveShadow geometry={nodes.丸型エレベータードアL001.geometry} material={materials.Elevator} position={[-1.689, 4.009, -1.7]} rotation={[0, Math.PI / 4, 0]} />
         <mesh name="丸型エレベータードアR001" castShadow receiveShadow geometry={nodes.丸型エレベータードアR001.geometry} material={materials.Elevator} position={[-1.689, 4.009, -1.7]} rotation={[0, Math.PI / 4, 0]} />
         <mesh name="エレベーター" castShadow receiveShadow geometry={nodes.エレベーター.geometry} material={materials.Elevator} position={[-1.689, 4.009, -1.7]} rotation={[0, Math.PI / 4, 0]} />
-        <mesh name="円柱012" castShadow receiveShadow geometry={nodes.円柱012.geometry} material={materials.Elevator} position={[-1.689, -3.7, -1.7]} rotation={[0, Math.PI / 4, 0]} />
-        <mesh name="丸型エレベータードアL" castShadow receiveShadow geometry={nodes.丸型エレベータードアL.geometry} material={materials.Elevator} position={[-1.689, -3.7, -1.7]} rotation={[0, Math.PI / 4, 0]} scale={[0.99, 1, 0.99]} />
-        <mesh name="丸型エレベータードアR" castShadow receiveShadow geometry={nodes.丸型エレベータードアR.geometry} material={materials.Elevator} position={[-1.689, -3.7, -1.7]} rotation={[0, Math.PI / 4, 0]} scale={[0.99, 1, 0.99]} />
-        <mesh name="立方体025" castShadow receiveShadow geometry={nodes.立方体025.geometry} material={materials.Gray} position={[1.934, -6.99, -2.018]} rotation={[Math.PI, 0, Math.PI]} scale={[0.059, 0.007, 0.072]} />
         <group name="円柱016" position={[-0.598, 0.469, -1.878]} rotation={[0, 0.265, 0]}>
           <mesh name="円柱030" castShadow receiveShadow geometry={nodes.円柱030.geometry} material={materials.Elevator} />
           <mesh name="円柱030_1" castShadow receiveShadow geometry={nodes.円柱030_1.geometry} material={materials.Wall} />
@@ -217,19 +318,19 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
         <mesh name="立方体022" castShadow receiveShadow geometry={nodes.立方体022.geometry} material={materials.Leaf} position={[-2.019, -7.149, -0.017]} rotation={[-2.923, 0.644, 3.009]} scale={[0.073, 0.137, 0.097]} />
         <mesh name="立方体023" castShadow receiveShadow geometry={nodes.立方体023.geometry} material={materials.Leaf} position={[-2.008, -7.149, -0.101]} rotation={[-0.686, -1.293, -0.667]} scale={[0.073, 0.138, 0.098]} />
         <group name="立方体024" position={[-2.042, -7.025, 1.732]} rotation={[0, Math.PI / 2, 0]} scale={0.415}>
-          <mesh name="立方体040" castShadow receiveShadow geometry={nodes.立方体040.geometry} material={materials.Wood} />
-          <mesh name="立方体040_1" castShadow receiveShadow geometry={nodes.立方体040_1.geometry} material={materials['マテリアル.004']} />
+          <mesh name="立方体040_1" castShadow receiveShadow geometry={nodes.立方体040_1.geometry} material={materials.Wood} />
+          <mesh name="立方体040_2" castShadow receiveShadow geometry={nodes.立方体040_2.geometry} material={materials['マテリアル.004']} />
         </group>
         <mesh name="本001" castShadow receiveShadow geometry={nodes.本001.geometry} material={materials.Green} position={[1.541, -5.6, -2.038]} />
         <mesh name="本棚001" castShadow receiveShadow geometry={nodes.本棚001.geometry} material={materials.Wood} position={[2.14, -6.409, -2.161]} scale={0.179} />
         <group name="本002" position={[1.541, -6.014, -2.038]}>
-          <mesh name="立方体044" castShadow receiveShadow geometry={nodes.立方体044.geometry} material={materials.Blue} />
-          <mesh name="立方体044_1" castShadow receiveShadow geometry={nodes.立方体044_1.geometry} material={materials.Red} />
+          <mesh name="立方体044_1" castShadow receiveShadow geometry={nodes.立方体044_1.geometry} material={materials['Blue.002']} />
+          <mesh name="立方体044_2" castShadow receiveShadow geometry={nodes.立方体044_2.geometry} material={materials.Red} />
         </group>
         <mesh name="Floor" castShadow receiveShadow geometry={nodes.Floor.geometry} material={materials.Floor} position={[0.259, -7.5, 0.259]} rotation={[0, Math.PI / 2, 0]} />
         <group name="本003" position={[1.541, -6.436, -2.038]}>
           <mesh name="立方体045" castShadow receiveShadow geometry={nodes.立方体045.geometry} material={materials.Green} />
-          <mesh name="立方体045_1" castShadow receiveShadow geometry={nodes.立方体045_1.geometry} material={materials.Blue} />
+          <mesh name="立方体045_1" castShadow receiveShadow geometry={nodes.立方体045_1.geometry} material={materials['Blue.002']} />
         </group>
         <mesh name="本004" castShadow receiveShadow geometry={nodes.本004.geometry} material={materials.Green} position={[1.541, -6.855, -2.038]} />
         <mesh name="本005" castShadow receiveShadow geometry={nodes.本005.geometry} material={materials.Red} position={[2.277, -6.855, -2.038]} />
@@ -240,19 +341,79 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
           <mesh name="立方体022_3" castShadow receiveShadow geometry={nodes.立方体022_3.geometry} material={materials.Flame} />
         </group>
         <group name="円柱015" position={[0.59, -7.488, -1.664]} rotation={[0, -0.328, 0]} scale={1.115}>
-          <mesh name="円柱025" castShadow receiveShadow geometry={nodes.円柱025.geometry} material={materials.Chair} />
-          <mesh name="円柱025_1" castShadow receiveShadow geometry={nodes.円柱025_1.geometry} material={materials.マテリアル} />
+          <mesh name="円柱025_1" castShadow receiveShadow geometry={nodes.円柱025_1.geometry} material={materials.Chair} />
+          <mesh name="円柱025_2" castShadow receiveShadow geometry={nodes.円柱025_2.geometry} material={materials.マテリアル} />
         </group>
+        <mesh name="立方体025" castShadow receiveShadow geometry={nodes.立方体025.geometry} material={materials.Gray} position={[1.934, -6.99, -2.018]} rotation={[Math.PI, 0, Math.PI]} scale={[0.059, 0.007, 0.072]} />
+        <mesh name="丸型エレベータードアL" castShadow receiveShadow geometry={nodes.丸型エレベータードアL.geometry} material={materials.Elevator} position={[-1.689, -3.7, -1.7]} rotation={[0, Math.PI / 4, 0]} scale={[0.99, 1, 0.99]} />
+        <mesh name="丸型エレベータードアR" castShadow receiveShadow geometry={nodes.丸型エレベータードアR.geometry} material={materials.Elevator} position={[-1.689, -3.7, -1.7]} rotation={[0, Math.PI / 4, 0]} scale={[0.99, 1, 0.99]} />
+        <mesh name="円柱012" castShadow receiveShadow geometry={nodes.円柱012.geometry} material={materials.Elevator} position={[-1.689, -3.7, -1.7]} rotation={[0, Math.PI / 4, 0]} />
         <mesh name="建物001" castShadow receiveShadow geometry={nodes.建物001.geometry} material={materials.Wall_Skills} position={[0, -11, 0]} />
         <group name="平面" position={[0.258, -13.526, 0.22]}>
-          <mesh name="平面_1" castShadow receiveShadow geometry={nodes.平面_1.geometry} material={materials.DarkBrawn} />
-          <mesh name="平面_2" castShadow receiveShadow geometry={nodes.平面_2.geometry} material={materials['マテリアル.005']} />
+          <mesh name="平面_1" castShadow receiveShadow geometry={nodes.平面_1.geometry} material={materials.Wall_Skills} />
+          <mesh name="平面_2" castShadow receiveShadow geometry={nodes.平面_2.geometry} material={materials.Rock} />
         </group>
         <mesh name="丸型エレベータードアL002" castShadow receiveShadow geometry={nodes.丸型エレベータードアL002.geometry} material={materials.Elevator} position={[-1.689, -9.706, -1.7]} rotation={[0, Math.PI / 4, 0]} scale={[0.99, 1, 0.99]} />
         <mesh name="丸型エレベータードアR002" castShadow receiveShadow geometry={nodes.丸型エレベータードアR002.geometry} material={materials.Elevator} position={[-1.689, -9.706, -1.7]} rotation={[0, Math.PI / 4, 0]} scale={[0.99, 1, 0.99]} />
         <mesh name="円柱017" castShadow receiveShadow geometry={nodes.円柱017.geometry} material={materials.Elevator} position={[-1.689, -9.706, -1.7]} rotation={[0, Math.PI / 4, 0]} />
-        <mesh name="立方体029" castShadow receiveShadow geometry={nodes.立方体029.geometry} material={materials['マテリアル.005']} position={[-2.239, -12.911, -2.55]} />
-        <mesh name="立方体027" castShadow receiveShadow geometry={nodes.立方体027.geometry} material={materials['マテリアル.005']} position={[-2.545, -12.911, 2.685]} rotation={[0, Math.PI / 2, 0]} />
+        <mesh name="立方体044" castShadow receiveShadow geometry={nodes.立方体044.geometry} material={materials.Wood} position={[-2.429, -10.155, 1.181]} rotation={[0, Math.PI / 2, 0]} scale={[1, 0.07, 0.051]} />
+        <mesh name="円柱025" castShadow receiveShadow geometry={nodes.円柱025.geometry} material={materials.Silver} position={[-2.354, -10.162, 0.638]} rotation={[Math.PI / 2, 0, -Math.PI / 2]} scale={[0.02, 0.024, 0.02]} />
+        <mesh name="円柱026" castShadow receiveShadow geometry={nodes.円柱026.geometry} material={materials.Silver} position={[-2.354, -10.162, 1.11]} rotation={[Math.PI / 2, 0, -Math.PI / 2]} scale={[0.02, 0.024, 0.02]} />
+        <mesh name="円柱027" castShadow receiveShadow geometry={nodes.円柱027.geometry} material={materials.Silver} position={[-2.354, -10.162, 1.616]} rotation={[Math.PI / 2, 0, -Math.PI / 2]} scale={[0.02, 0.024, 0.02]} />
+        <mesh name="立方体029" castShadow receiveShadow geometry={nodes.立方体029.geometry} material={materials.Rock} position={[-2.239, -12.911, -2.55]} />
+        <mesh name="立方体027" castShadow receiveShadow geometry={nodes.立方体027.geometry} material={materials.Rock} position={[-2.545, -12.911, 2.685]} rotation={[0, Math.PI / 2, 0]} />
+        <group name="立方体028" position={[-1.994, -12.285, 1.048]} rotation={[-0.697, 0.86, 0.566]} scale={0.395}>
+          <mesh name="立方体036_1" castShadow receiveShadow geometry={nodes.立方体036_1.geometry} material={materials.Rock} />
+          <mesh name="立方体036_2" castShadow receiveShadow geometry={nodes.立方体036_2.geometry} material={materials.Blue} />
+          <mesh name="立方体036_3" castShadow receiveShadow geometry={nodes.立方体036_3.geometry} material={materials['SVGMat.010']} />
+        </group>
+        <group name="python-logo-only" position={[-1.809, -12.328, -0.052]} rotation={[1.389, 0.374, -1.105]} scale={0.546}>
+          <mesh name="python-logo-only_1" castShadow receiveShadow geometry={nodes['python-logo-only_1'].geometry} material={materials['python-logo-only']} />
+          <mesh name="python-logo-only_2" castShadow receiveShadow geometry={nodes['python-logo-only_2'].geometry} material={materials.OldPaper} />
+        </group>
+        <group name="立方体030" position={[2.279, -11.914, -2.11]} rotation={[-0.361, 0.505, 0.181]} scale={0.521}>
+          <mesh name="立方体037_1" castShadow receiveShadow geometry={nodes.立方体037_1.geometry} material={materials.BrawnWood} />
+          <mesh name="立方体037_2" castShadow receiveShadow geometry={nodes.立方体037_2.geometry} material={materials['マテリアル.008']} />
+          <mesh name="立方体037_3" castShadow receiveShadow geometry={nodes.立方体037_3.geometry} material={materials['SVGMat.008']} />
+          <mesh name="立方体037_4" castShadow receiveShadow geometry={nodes.立方体037_4.geometry} material={materials['SVGMat.007']} />
+        </group>
+        <group name="Sheath" position={[-1.943, -11.848, 2.526]} rotation={[1.911, 0.471, -1.129]} scale={0.253}>
+          <mesh name="icons8-typescript-96" castShadow receiveShadow geometry={nodes['icons8-typescript-96'].geometry} material={materials['icons8-typescript-96']} />
+          <mesh name="icons8-typescript-96_1" castShadow receiveShadow geometry={nodes['icons8-typescript-96_1'].geometry} material={materials.Sheath} />
+          <mesh name="icons8-typescript-96_2" castShadow receiveShadow geometry={nodes['icons8-typescript-96_2'].geometry} material={materials.PureWhite} />
+          <mesh name="icons8-typescript-96_3" castShadow receiveShadow geometry={nodes['icons8-typescript-96_3'].geometry} material={materials.Gold} />
+          <mesh name="icons8-typescript-96_4" castShadow receiveShadow geometry={nodes['icons8-typescript-96_4'].geometry} material={materials.Brown} />
+          <mesh name="icons8-typescript-96_5" castShadow receiveShadow geometry={nodes['icons8-typescript-96_5'].geometry} material={materials.Rock} />
+        </group>
+        <mesh name="fire" castShadow receiveShadow geometry={nodes.fire.geometry} material={materials.fire} position={[0.423, -12.67, -1.916]} rotation={[Math.PI / 2, 0, 0]} scale={0.625} />
+        <mesh name="fire001" castShadow receiveShadow geometry={nodes.fire001.geometry} material={materials.fire} position={[0.423, -12.67, -1.916]} rotation={[Math.PI / 2, 0, -Math.PI / 2]} scale={0.625} />
+        <mesh name="fire002" castShadow receiveShadow geometry={nodes.fire002.geometry} material={materials.fire} position={[0.423, -12.67, -1.916]} rotation={[Math.PI / 2, 0, -2.356]} scale={0.625} />
+        <mesh name="fire003" castShadow receiveShadow geometry={nodes.fire003.geometry} material={materials.fire} position={[0.423, -12.67, -1.916]} rotation={[Math.PI / 2, 0, 2.356]} scale={0.625} />
+        <mesh name="立方体035" castShadow receiveShadow geometry={nodes.立方体035.geometry} material={materials.Rock} position={[0.423, -12.326, -1.897]} scale={[1.186, 1.186, 1.539]} />
+        <mesh name="立方体036" castShadow receiveShadow geometry={nodes.立方体036.geometry} material={materials.Rock} position={[0.423, -13.104, -1.933]} scale={[2.869, 1.186, 1.041]} />
+        <mesh name="立方体037" castShadow receiveShadow geometry={nodes.立方体037.geometry} material={materials.Rock} position={[-0.142, -13.349, -1.933]} scale={[0.574, 1.186, 1.041]} />
+        <mesh name="立方体038" castShadow receiveShadow geometry={nodes.立方体038.geometry} material={materials.Rock} position={[0.987, -13.349, -1.933]} scale={[0.574, 1.186, 1.041]} />
+        <mesh name="立方体039" castShadow receiveShadow geometry={nodes.立方体039.geometry} material={materials.Rock} position={[0.273, -12.938, -2.113]} rotation={[0, -0.475, 0]} scale={[0.265, 0.414, 0.287]} />
+        <mesh name="立方体040" castShadow receiveShadow geometry={nodes.立方体040.geometry} material={materials.Rock} position={[0.472, -12.938, -1.811]} rotation={[0, -0.475, 0]} scale={[0.265, 0.414, 0.287]} />
+        <mesh name="立方体041" castShadow receiveShadow geometry={nodes.立方体041.geometry} material={materials.Rock} position={[0.241, -12.936, -1.857]} rotation={[Math.PI, -1.398, Math.PI]} scale={[0.265, 0.414, 0.287]} />
+        <mesh name="立方体042" castShadow receiveShadow geometry={nodes.立方体042.geometry} material={materials.Rock} position={[0.566, -12.931, -2.003]} rotation={[Math.PI, -0.384, Math.PI]} scale={[0.326, 0.508, 0.611]} />
+        <mesh name="立方体043" castShadow receiveShadow geometry={nodes.立方体043.geometry} material={materials.Rock} position={[0.306, -12.938, -1.782]} rotation={[Math.PI, -1.349, Math.PI]} scale={[0.265, 0.414, 0.287]} />
+        <group name="円柱020" position={[-1.97, -12.929, 2.349]}>
+          <mesh name="円柱037" castShadow receiveShadow geometry={nodes.円柱037.geometry} material={materials.Rock} />
+          <mesh name="円柱037_1" castShadow receiveShadow geometry={nodes.円柱037_1.geometry} material={materials.Rock2} />
+        </group>
+        <group name="円柱018" position={[-1.97, -12.929, 1.072]}>
+          <mesh name="円柱042" castShadow receiveShadow geometry={nodes.円柱042.geometry} material={materials.Rock} />
+          <mesh name="円柱042_1" castShadow receiveShadow geometry={nodes.円柱042_1.geometry} material={materials.Rock2} />
+        </group>
+        <group name="円柱019" position={[-1.97, -12.929, -0.099]}>
+          <mesh name="円柱043" castShadow receiveShadow geometry={nodes.円柱043.geometry} material={materials.Rock} />
+          <mesh name="円柱043_1" castShadow receiveShadow geometry={nodes.円柱043_1.geometry} material={materials.Rock2} />
+        </group>
+        <group name="円柱024" position={[2.331, -12.929, -1.971]}>
+          <mesh name="円柱044" castShadow receiveShadow geometry={nodes.円柱044.geometry} material={materials.Rock} />
+          <mesh name="円柱044_1" castShadow receiveShadow geometry={nodes.円柱044_1.geometry} material={materials.Rock2} />
+        </group>
       </group>
     </group>
   )
