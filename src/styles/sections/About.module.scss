@@ -4,6 +4,7 @@ $primaryColor: #a8b9ec;
 
 .about {
   @include common.section($primaryColor);
+  padding: 5rem 4.8rem;
   
   p {
     margin-top: 5rem;
