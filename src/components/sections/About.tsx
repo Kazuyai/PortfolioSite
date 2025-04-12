@@ -11,21 +11,25 @@ export const collisionData: {
   position: [number, number, number];
   size: [number, number, number];
 }[] = [
-  { position: [-5, -14, 0], size: [1, 2, 8] },
-  { position: [5, -14, 0], size: [1, 2, 8] },
+  { position: [-4, -14, 3], size: [1, 2, 8] },
+  { position: [3, -14, -3.5], size: [8, 2, 1] },
+  { position: [7, -14, 0], size: [1, 2, 14] },
+  { position: [1, -14, 7], size: [12, 2, 1] },  
 ];
 
 export const eventData: {
   id: string;
   position: [number, number, number];
   size: [number, number, number];
-}[] = [{ id: "about_event_1", position: [0, -14, 0], size: [1, 2, 1] }];
+}[] = [{ id: "Event_About_01", position: [1, -14, -2], size: [2, 2, 1] }];
 
 const eventContent: { [key: string]: JSX.Element } = {
-  about_event_1: (
+  Event_About_01: (
     <div className={styles.eventContent}>
-      <h2>TEST</h2>
-      <p>TEST TEST TEST</p>
+      <h2>このサイトのひみつ</h2>
+      <p>
+        この建物のどこかにひみつ
+      </p>
     </div>
   ),
 };
@@ -38,7 +42,17 @@ const About = ({ activeEvent }: AboutProps) => {
       {/* <h2>Name</h2> */}
       <p className={styles.name}>岡村 和哉 (Kazuya Okamura)</p>
       <p>東京都市大学大学院 環境情報学研究科 環境情報学専攻 修士1年</p>
-      <p className={styles.left}>趣味でWeb技術を活かしたコンテンツ制作に励んでいます。<br></br>このサイトでは、私のポートフォリオや、趣味で制作した作品を紹介しています。</p>
+      <p className={styles.left}>
+        見た人がワクワクするようなコンテンツを作ることを目指して、趣味でWebサイト制作や3Dモデリングをしています。
+        このサイトでは、私のポートフォリオや、趣味で制作した作品を紹介しています。
+      </p>
+      <p>
+        このサイトでは、キャラクターを操作して、3D空間を移動することができます。
+        <br />
+        キャラクターは、WASDキーで移動できます。
+        <br />
+        地面に「！」が表示されているところに近づくと
+      </p>
       <div className={styles.links}>
         <div className={styles.link}>
           <a href="https://github.com/Kazuyai" target="_blank" rel="noopener noreferrer">
