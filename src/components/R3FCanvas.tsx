@@ -16,6 +16,7 @@ interface Props {
   spacerRefs: HTMLDivElement[];
   currentSection: string;
   hitBoxes: { [key: string]: { collisionData: { position: [number, number, number]; size: [number, number, number]; }[]; eventData: { id: string; position: [number, number, number]; size: [number, number, number]; }[]; } };
+  activeEvent: string | null;
   setActiveEvent: (id: string | null) => void;
   startFadeOut: boolean;
 }
@@ -50,7 +51,7 @@ const Lights = () => {
   );
 };
 
-const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, setActiveEvent, startFadeOut }: Props) => {
+const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiveEvent, startFadeOut }: Props) => {
 
   const characterRef = useRef<THREE.Group>(null);
   const collisionData = hitBoxes[currentSection]?.collisionData || [];
@@ -81,7 +82,7 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, setActiveEvent, start
       <Lights />
       <Suspense fallback={ null}>
         <Character ref={characterRef} castShadow receiveShadow />
-        <Building scale={[2, 2, 2]} castShadow receiveShadow />
+        <Building activeEvent={activeEvent} scale={[2, 2, 2]} castShadow receiveShadow />
         {collisionData.map((data, index) => (
           <CollisionBox key={index} position={data.position} size={data.size} debug />
         ))}

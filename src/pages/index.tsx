@@ -101,6 +101,7 @@ const Home = () => {
         spacerRefs={spacerRefs}
         currentSection={sections[currentIndex]?.id || "top"}
         hitBoxes={hitBoxes}
+        activeEvent={activeEvent}
         setActiveEvent={setActiveEvent}
         startFadeOut={startFadeOut}
       />

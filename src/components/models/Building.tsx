@@ -4,12 +4,17 @@ Command: npx gltfjsx@6.5.3 ./public/models/building.glb --types --shadows
 */
 
 import * as THREE from 'three'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useGraph } from '@react-three/fiber'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { GLTF, SkeletonUtils } from 'three-stdlib'
+import { pre } from 'framer-motion/client'
 
 type ActionName = 'Event_About_01_Loop' | 'Event_About_01_Start' | 'Event_Skills_01_Loop' | 'Event_Skills_01_Start' | 'Event_Skills_02_Loop' | 'Event_Skills_02_Start' | 'Event_Skills_03_Loop' | 'Event_Skills_03_Start' | 'Event_Skills_04_Loop' | 'Event_Skills_04_Start' | '丸型エレベータードア.LAction.001' | '丸型エレベータードア.RAction.001' | '丸型エレベータードア.LAction' | '丸型エレベータードア.RAction' | '丸型エレベータードア.LAction.002' | '丸型エレベータードア.RAction.002' | 'wave_react' | 'wave_python' | 'Wave_blender' | 'wave_ts'
+
+interface BuildingProps {
+  activeEvent: string | null
+}
 
 interface GLTFAction extends THREE.AnimationClip {
   name: ActionName
@@ -202,36 +207,106 @@ type GLTFResult = GLTF & {
   animations: GLTFAction[]
 }
 
-export default function Model(props: JSX.IntrinsicElements['group']) {
+export default function Model({ activeEvent, ...props }: BuildingProps & JSX.IntrinsicElements['group']) {
   const group = React.useRef<THREE.Group>(null)
   const { scene, animations } = useGLTF('/models/building.glb')
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene])
   const { nodes, materials } = useGraph(clone) as GLTFResult
   const { actions } = useAnimations(animations, group)
 
+  const prevEventRef = useRef<string | null>(null)
+
   useEffect(() => {
-    if (Object.keys(actions).length === 0) return;
-  
+    if (!actions || Object.keys(actions).length === 0) return;
+
+    const currentEvent = activeEvent;
+    const prevEvent = prevEventRef.current;
+
+    let mixer: THREE.AnimationMixer | null = null;
+    let onFinished: ((e: any) => void | undefined) | null = null;
+
+    if(prevEvent && prevEvent !== currentEvent) {
+      const prevStart = actions[`${prevEvent}_Start`];
+      const prevLoop = actions[`${prevEvent}_Loop`];
+
+      if (prevLoop?.isRunning()) {
+        console.log('Stopping previous loop:', prevLoop.getClip().name);
+        prevLoop.stop();
+      }
+
+      if (prevStart) {
+        prevStart.reset();
+        prevStart.time = prevStart.getClip().duration
+        prevStart.timeScale = -2
+        prevStart.setLoop(THREE.LoopOnce, 1)
+        prevStart.clampWhenFinished = true
+        prevStart.play()
+      }
+    }
+
+    if (currentEvent) {
+      const start = actions[`${currentEvent}_Start`]
+      const loop = actions[`${currentEvent}_Loop`]
+
+      if (start) {
+        start.reset()
+        start.timeScale = 2
+        start.setLoop(THREE.LoopOnce, 1)
+        start.clampWhenFinished = true
+        start.play()
+
+        mixer = start.getMixer()
+        onFinished = (e: any) => {
+          if (e.action === start && loop) {
+            loop.reset()
+            loop.timeScale = 2
+            loop.setLoop(THREE.LoopRepeat, Infinity)
+            loop.play()
+          }
+        }
+        mixer.addEventListener("finished", onFinished)
+      } else if (loop) {
+        loop.reset()
+        loop.timeScale = 2
+        loop.setLoop(THREE.LoopRepeat, Infinity)
+        loop.play()
+      }
+    }
+    
+    prevEventRef.current = currentEvent;
+
+    return () => {
+      if (mixer && onFinished) {
+        mixer.removeEventListener("finished", onFinished)
+      }
+    }
+  }, [actions, activeEvent]);
+
+  useEffect(() => {
+    if (!actions || Object.keys(actions).length === 0) return;
+
     const waveReact = actions['wave_react'];
     const wavePython = actions['wave_python'];
     const waveBlender = actions['Wave_blender'];
     const waveTs = actions['wave_ts'];
-    const eventAboutLoop = actions['Event_About_01_Loop'];
   
-    if (waveReact && wavePython && waveBlender && waveTs && eventAboutLoop) {
+    if (waveReact && wavePython && waveBlender && waveTs) {
       waveReact.setLoop(THREE.LoopRepeat, Infinity);
       wavePython.setLoop(THREE.LoopRepeat, Infinity);
       waveBlender.setLoop(THREE.LoopRepeat, Infinity);
       waveTs.setLoop(THREE.LoopRepeat, Infinity);
-      eventAboutLoop.setLoop(THREE.LoopRepeat, Infinity);
       waveReact.play();
       wavePython.play();
       waveBlender.play();
       waveTs.play();
-      eventAboutLoop.play();
     }
+    return () => {
+      if (waveReact) waveReact.stop();
+      if (wavePython) wavePython.stop();
+      if (waveBlender) waveBlender.stop();
+      if (waveTs) waveTs.stop();
+    };
   }, [actions]);
-  
 
   return (
     <group ref={group} {...props} dispose={null}>
