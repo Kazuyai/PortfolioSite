@@ -11,8 +11,8 @@ $primaryColor: #e0e5ec;
 
   &.visible {
     .skillsBoxItem {
-      animation: fadeIn 0.6s forwards;
-      @keyframes fadeIn {
+      animation: fadeInItem 0.6s forwards;
+      @keyframes fadeInItem {
         0% {
           opacity: 0;
           transform: translateY(100%);
