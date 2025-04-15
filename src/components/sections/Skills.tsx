@@ -11,21 +11,75 @@ export const collisionData: {
   position: [number, number, number];
   size: [number, number, number];
 }[] = [
-  { position: [-5, -14, 0], size: [1, 2, 8] },
-  { position: [5, -14, 0], size: [1, 2, 8] },
+  { position: [-4, -26, 3], size: [1, 2, 8] },
+  { position: [3, -26, -3.5], size: [8, 2, 1] },
+  { position: [7, -26, 0], size: [1, 2, 14] },
+  { position: [1, -26, 7], size: [12, 2, 1] }, 
 ];
 
 export const eventData: {
   id: string;
   position: [number, number, number];
   size: [number, number, number];
-}[] = [{ id: "skills_event_1", position: [0, -14, 0], size: [1, 2, 1] }];
+}[] = [
+  { id: "Event_Skills_01", position: [5, -26, -1.5], size: [2, 2, 1] },
+  { id: "Event_Skills_02", position: [-2, -26, 4.8], size: [1, 2, 2] },
+  { id: "Event_Skills_03", position: [-2, -26, 2.6], size: [1, 2, 2] },
+  { id: "Event_Skills_04", position: [-2, -26, 0.4], size: [1, 2, 2] },
+];
 
 const eventContent: { [key: string]: JSX.Element } = {
-  skills_event_1: (
+  Event_Skills_01: (
     <div className={styles.eventContent}>
-      <h2>Frontend Development</h2>
-      <p>React, TypeScript, JavaScript, HTML, CSS, Sass, Next.js, PHP, WordPress</p>
+      <h2>Blenderを使った作品</h2>
+      <img src="/images/Gallery_01.png" alt="" />
+      <p>
+        Blenderを使った作品
+      </p>
+      <div className={styles.button}>
+        <a href="">
+          <span>詳細</span>
+        </a>
+      </div>
+    </div>
+  ),
+  Event_Skills_02: (
+    <div className={styles.eventContent}>
+      <h2>TypeScriptを使った作品</h2>
+      <p>
+        TypeScriptを使った作品
+      </p>
+      <div className={styles.button}>
+        <a href="">
+          <span>詳細</span>
+        </a>
+      </div>
+    </div>
+  ),
+  Event_Skills_03: (
+    <div className={styles.eventContent}>
+      <h2>Reactを使った作品</h2>
+      <p>
+        Reactを使った作品
+      </p>
+      <div className={styles.button}>
+        <a href="">
+          <span>詳細</span>
+        </a>
+      </div>
+    </div>
+  ),
+  Event_Skills_04: (
+    <div className={styles.eventContent}>
+      <h2>Pythonを使った作品</h2>
+      <p>
+        Pythonを使った作品
+      </p>
+      <div className={styles.button}>
+        <a href="">
+          <span>詳細</span>
+        </a>
+      </div>
     </div>
   ),
 };
