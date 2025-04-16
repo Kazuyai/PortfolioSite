@@ -19,19 +19,19 @@ const baseCameraPositions: CameraPosition[] = [
     lookAt: [-7, 8, 5],
   },
   {
-    position: [11, -10, 16],
-    lookAt: [-3, -7, 5],
+    position: [11, -11, 16],
+    lookAt: [-3, -9, 5],
   },
   {
-    position: [11, -21, 16],
-    lookAt: [-3, -18, 5],
+    position: [11, -23, 16],
+    lookAt: [-3, -21, 5],
   },
   {
-    position: [11, -36, 16],
+    position: [11, -35, 16],
     lookAt: [-3, -33, 5],
   },
   {
-    position: [11, -48, 16],
+    position: [11, -47, 16],
     lookAt: [-3, -45, 5],
   }
 ];
