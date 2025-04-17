@@ -7,6 +7,72 @@ interface ProjectsProps {
   activeEvent: string | null;
 }
 
+export const collisionData: {
+  position: [number, number, number];
+  size: [number, number, number];
+}[] = [
+  { position: [-4, -38, 0], size: [1, 2, 4] },
+  { position: [-4, -38, 6], size: [1, 2, 2] },
+  { position: [3, -38, -3.5], size: [8, 2, 1] },
+  { position: [7, -38, 0], size: [1, 2, 14] },
+  { position: [1, -38, 7], size: [12, 2, 1] }, 
+];
+
+export const eventData: {
+  id: string;
+  position: [number, number, number];
+  size: [number, number, number];
+}[] = [
+  { id: "Event_Projects_01", position: [2, -38, -1.5], size: [2, 2, 1] },
+  { id: "Event_Projects_02", position: [5, -38, -1.5], size: [2, 2, 1] },
+  { id: "Event_Projects_03", position: [-2, -38, 5.3], size: [1, 2, 2] },
+];
+
+const eventContent: { [key: string]: JSX.Element } = {
+  Event_Projects_01: (
+    <div className={styles.eventContent}>
+      <h2>ハノイの塔</h2>
+      <img src="" alt="" />
+      <p>
+        大谷研究室の夏合宿恒例の「ハノイの塔」を遊べる作品です。
+      </p>
+      <div className={styles.button}>
+        <a href="">
+          <span>詳細</span>
+        </a>
+      </div>
+    </div>
+  ),
+  Event_Projects_02: (
+    <div className={styles.eventContent}>
+      <h2>PicPick</h2>
+      <p>
+        2024年の大谷研究室の夏合宿ハッカソンでチームで作成した作品です。
+        <br />
+        気に入った写真を選んでいくだけで、旅行の計画を立てられるWebサービスです。
+      </p>
+      <div className={styles.button}>
+        <a href="">
+          <span>詳細</span>
+        </a>
+      </div>
+    </div>
+  ),
+  Event_Projects_03: (
+    <div className={styles.eventContent}>
+      <h2>ポートフォリオサイト</h2>
+      <p>
+        自分のポートフォリオサイトです。
+      </p>
+      <div className={styles.button}>
+        <a href="">
+          <span>詳細</span>
+        </a>
+      </div>
+    </div>
+  )
+};
+
 const Projects = ({ activeEvent }: ProjectsProps) => {
   const { ref, isVisible } = useElementVisibility({ threshold: 0.1 });
 
@@ -14,6 +80,8 @@ const Projects = ({ activeEvent }: ProjectsProps) => {
     <section ref={ref} id="projects" className={`${styles.projects} ${isVisible ? styles.visible : ""}`}>
       <FadeinTitle title="Projects" isVisible={isVisible} />
       <p>These are my projects</p>
+
+      {activeEvent && eventContent[activeEvent]}
     </section>
   );
 }
