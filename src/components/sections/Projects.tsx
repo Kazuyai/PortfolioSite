@@ -79,7 +79,44 @@ const Projects = ({ activeEvent }: ProjectsProps) => {
   return (
     <section ref={ref} id="projects" className={`${styles.projects} ${isVisible ? styles.visible : ""}`}>
       <FadeinTitle title="Projects" isVisible={isVisible} />
-      <p>These are my projects</p>
+      <div className={styles.projectsBox}>
+        <div className={styles.projectsBoxItem}>
+          <div className={styles.projectsBoxItemImage}>
+            <img src="/images/Gallery_01.png" alt="" />
+          </div>
+          <div className={styles.projectsBoxItemText}>
+            <h3>ポートフォリオサイト</h3>
+            <p>ここに短めの説明を入れる</p>
+          </div>
+        </div>
+        <div className={styles.projectsBoxItem}>
+          <div className={styles.projectsBoxItemImage}>
+            <img src="/images/Gallery_01.png" alt="" />
+          </div>
+          <div className={styles.projectsBoxItemText}>
+            <h3>ポートフォリオサイト</h3>
+            <p>ここに短めの説明を入れる</p>
+          </div>
+        </div>
+        <div className={styles.projectsBoxItem}>
+          <div className={styles.projectsBoxItemImage}>
+            <img src="/images/Gallery_01.png" alt="" />
+          </div>
+          <div className={styles.projectsBoxItemText}>
+            <h3>ポートフォリオサイト</h3>
+            <p>ここに短めの説明を入れるここに短めの説明を入れるここに短めの説明を入れるここに短めの説明を入れる</p>
+          </div>
+        </div>
+        <div className={styles.projectsBoxItem}>
+          <div className={styles.projectsBoxItemImage}>
+            <img src="/images/Gallery_01.png" alt="" />
+          </div>
+          <div className={styles.projectsBoxItemText}>
+            <h3>ポートフォリオサイト</h3>
+            <p>ここに短めの説明を入れる</p>
+          </div>
+        </div>
+      </div>
 
       {activeEvent && eventContent[activeEvent]}
     </section>

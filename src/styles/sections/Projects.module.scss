@@ -1,7 +1,68 @@
 @use "common";
 
-$primaryColor: #d4df97;
+$primaryColor: #e7ead4;
 
 .projects {
   @include common.section($primaryColor);
+
+  &Box {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 3.6rem 2.4rem;
+    &Item {
+      border-radius: 0.5rem;
+      padding-bottom: 1.8rem;
+      @include common.neu($primaryColor);
+      background: #fff;
+      transition: transform 0.15s ease-in-out;
+      &:hover {
+        transform: translateY(-0.5rem);
+      }
+
+      &Image {
+        position: relative;
+        width: 100%;
+        height: fit-content;
+        img {
+          display: block;
+          width: 100%;
+          height: auto;
+          border-radius: 0.5rem 0.5rem 0 0;
+          object-fit: cover;
+        }
+      }
+      &Text {
+        padding: 1.8rem 1rem 0;
+        h3 {
+          font-size: 1.4rem;
+          text-align: center;
+          &::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 0.2rem;
+            margin-top: 1rem;
+            background: linear-gradient(
+              to right,
+              #f5f7fa,
+              #c3cfe2,
+              #f5f7fa
+            );
+          }
+        }
+        p {
+          width: 100%;
+          margin-top: 1rem;
+          padding-inline: 1rem;
+          font-size: 1.2rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-text-overflow: ellipsis;
+          -o-text-overflow: ellipsis;
+          text-align: center;
+        }
+      }
+    }
+  }
 }
