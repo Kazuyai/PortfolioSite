@@ -117,6 +117,11 @@ const Projects = ({ activeEvent }: ProjectsProps) => {
           </div>
         </div>
       </div>
+      <div className={styles.pageLink}>
+        <a href="/projects">
+          VIEW MORE
+        </a>
+      </div>
 
       {activeEvent && eventContent[activeEvent]}
     </section>

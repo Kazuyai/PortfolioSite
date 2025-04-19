@@ -66,6 +66,37 @@
     }
   }
 
+  .pageLink {
+    margin-top: 5rem;
+    a {
+      position: relative;
+      display: block;
+      width: fit-content;
+      margin: 0 auto;
+      padding-inline: 0.3rem;
+      text-align: center;
+      text-decoration: none;
+      outline: none;
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -0.5rem;
+        left: 0;
+        width: 100%;
+        height: 0.16rem;
+        border-radius: 1rem;
+        background-color: #222;
+        transform: scale(0, 1);
+        transform-origin: right;
+        transition: transform 0.2s ease-in-out;
+      }
+      &:hover::after {
+        transform: scale(1, 1);
+        transform-origin: left;
+      }
+    }
+  }
+
   .eventContent {
     $bgColor: #eee;
     position: fixed;
@@ -83,6 +114,7 @@
     border-radius: 5rem;
     box-shadow: 0 0 3rem rgba(0, 0, 0, 0.2);
     animation: fadeIn 0.2s ease-in-out;
+    z-index: 2;
 
     @keyframes fadeIn {
       from {
