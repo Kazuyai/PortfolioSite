@@ -7,7 +7,7 @@ import ElevatorMenu from "@/components/common/ElevatorMenu";
 import Top, { collisionData as topCollision, eventData as topEvents } from "@/components/sections/Top";
 import About, { collisionData as aboutCollision, eventData as aboutEvents } from "@/components/sections/About";
 import Skills, { collisionData as skillsCollision, eventData as skillsEvents } from "@/components/sections/Skills";
-import Projects from "@/components/sections/Projects";
+import Projects, { collisionData as projectsCollision, eventData as projectsEvents } from "@/components/sections/Projects";
 import Gallery from "@/components/sections/Gallery";
 import React, { use, useEffect, useRef, useState } from "react";
 import { useSectionProgress } from "@/hooks/useSectionProgress";
@@ -19,6 +19,7 @@ const hitBoxes = {
   top: { collisionData: topCollision, eventData: topEvents },
   about: { collisionData: aboutCollision, eventData: aboutEvents },
   skills: { collisionData: skillsCollision, eventData: skillsEvents },
+  projects: { collisionData: projectsCollision, eventData: projectsEvents },
 };
 
 const Home = () => {
