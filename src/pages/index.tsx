@@ -8,7 +8,7 @@ import Top, { collisionData as topCollision, eventData as topEvents } from "@/co
 import About, { collisionData as aboutCollision, eventData as aboutEvents } from "@/components/sections/About";
 import Skills, { collisionData as skillsCollision, eventData as skillsEvents } from "@/components/sections/Skills";
 import Projects, { collisionData as projectsCollision, eventData as projectsEvents } from "@/components/sections/Projects";
-import Gallery from "@/components/sections/Gallery";
+import Gallery, { collisionData as galleryCollision, eventData as galleryEvents } from "@/components/sections/Gallery";
 import React, { use, useEffect, useRef, useState } from "react";
 import { useSectionProgress } from "@/hooks/useSectionProgress";
 import { clear, time } from "console";
@@ -20,6 +20,7 @@ const hitBoxes = {
   about: { collisionData: aboutCollision, eventData: aboutEvents },
   skills: { collisionData: skillsCollision, eventData: skillsEvents },
   projects: { collisionData: projectsCollision, eventData: projectsEvents },
+  gallery: { collisionData: galleryCollision, eventData: galleryEvents },
 };
 
 const Home = () => {
