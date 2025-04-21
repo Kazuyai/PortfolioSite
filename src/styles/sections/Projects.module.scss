@@ -11,11 +11,9 @@ $primaryColor: #e7ead4;
       @keyframes fadeInItem {
         0% {
           opacity: 0;
-          transform: translateY(50%);
         }
         100% {
           opacity: 1;
-          transform: translateY(0);
         }
       }
     }
@@ -33,7 +31,7 @@ $primaryColor: #e7ead4;
       opacity: 0;
       transition: transform 0.15s ease-in-out;
       &:hover {
-        transform: translateY(-0.5rem);
+        transform: translateY(-0.5rem) !important;
       }
 
       &Image {
