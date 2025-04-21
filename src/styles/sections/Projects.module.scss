@@ -5,6 +5,22 @@ $primaryColor: #e7ead4;
 .projects {
   @include common.section($primaryColor);
 
+  &.visible {
+    .projectsBoxItem {
+      animation: fadeInItem 0.6s forwards;
+      @keyframes fadeInItem {
+        0% {
+          opacity: 0;
+          transform: translateY(50%);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+
   &Box {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
@@ -14,6 +30,7 @@ $primaryColor: #e7ead4;
       padding-bottom: 1.8rem;
       @include common.neu($primaryColor);
       background: #fff;
+      opacity: 0;
       transition: transform 0.15s ease-in-out;
       &:hover {
         transform: translateY(-0.5rem);

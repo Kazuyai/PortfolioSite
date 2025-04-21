@@ -73,6 +73,13 @@ const eventContent: { [key: string]: JSX.Element } = {
   )
 };
 
+const projects = [
+  { name: "ポートフォリオサイト", description: "ここに短めの説明を入れる" },
+  { name: "ポートフォリオサイト", description: "ここに短めの説明を入れる" },
+  { name: "ポートフォリオサイト", description: "ここに短めの説明を入れる" },
+  { name: "ポートフォリオサイト", description: "ここに短めの説明を入れる" },
+];
+
 const Projects = ({ activeEvent }: ProjectsProps) => {
   const { ref, isVisible } = useElementVisibility({ threshold: 0.1 });
 
@@ -80,42 +87,19 @@ const Projects = ({ activeEvent }: ProjectsProps) => {
     <section ref={ref} id="projects" className={`${styles.projects} ${isVisible ? styles.visible : ""}`}>
       <FadeinTitle title="Projects" isVisible={isVisible} />
       <div className={styles.projectsBox}>
-        <div className={styles.projectsBoxItem}>
-          <div className={styles.projectsBoxItemImage}>
-            <img src="/images/Gallery_01.png" alt="" />
-          </div>
-          <div className={styles.projectsBoxItemText}>
-            <h3>ポートフォリオサイト</h3>
-            <p>ここに短めの説明を入れる</p>
-          </div>
-        </div>
-        <div className={styles.projectsBoxItem}>
-          <div className={styles.projectsBoxItemImage}>
-            <img src="/images/Gallery_01.png" alt="" />
-          </div>
-          <div className={styles.projectsBoxItemText}>
-            <h3>ポートフォリオサイト</h3>
-            <p>ここに短めの説明を入れる</p>
-          </div>
-        </div>
-        <div className={styles.projectsBoxItem}>
-          <div className={styles.projectsBoxItemImage}>
-            <img src="/images/Gallery_01.png" alt="" />
-          </div>
-          <div className={styles.projectsBoxItemText}>
-            <h3>ポートフォリオサイト</h3>
-            <p>ここに短めの説明を入れるここに短めの説明を入れるここに短めの説明を入れるここに短めの説明を入れる</p>
-          </div>
-        </div>
-        <div className={styles.projectsBoxItem}>
-          <div className={styles.projectsBoxItemImage}>
-            <img src="/images/Gallery_01.png" alt="" />
-          </div>
-          <div className={styles.projectsBoxItemText}>
-            <h3>ポートフォリオサイト</h3>
-            <p>ここに短めの説明を入れる</p>
-          </div>
-        </div>
+        {
+          projects.map((project, index) => (
+            <div key={index} className={styles.projectsBoxItem} style={{ animationDelay: `${1 + index * 0.2}s` }}>
+              <div className={styles.projectsBoxItemImage}>
+                <img src="/images/Gallery_01.png" alt="" />
+              </div>
+              <div className={styles.projectsBoxItemText}>
+                <h3>{project.name}</h3>
+                <p>{project.description}</p>
+              </div>
+            </div>
+          ))
+        }
       </div>
       <div className={styles.pageLink}>
         <a href="/projects">
