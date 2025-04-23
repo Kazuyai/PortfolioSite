@@ -76,19 +76,19 @@ const Loading = (
       <svg width="300" height="300" viewBox="0 0 300 300">
         {/* ▼ 7つ星 (順番に表示) */}
         {/* star1 => step0 */}
-        <circle cx="50" cy="30" r="5" fill="white" opacity={getStarOpacity(1)} />
+        <circle cx="50" cy="30" fill="white" className={styles.star} opacity={getStarOpacity(1)} />
         {/* star2 => step1 */}
-        <circle cx="200" cy="10" r="5" fill="white" opacity={getStarOpacity(2)} />
+        <circle cx="200" cy="10" fill="white" className={styles.star} opacity={getStarOpacity(2)} />
         {/* star3 => step2 */}
-        <circle cx="110" cy="110" r="5" fill="white" opacity={getStarOpacity(3)} />
+        <circle cx="110" cy="110" fill="white" className={styles.star} opacity={getStarOpacity(3)} />
         {/* star4 => step3 */}
-        <circle cx="170" cy="90" r="5" fill="white" opacity={getStarOpacity(4)} />
+        <circle cx="170" cy="90" fill="white" className={styles.star} opacity={getStarOpacity(4)} />
         {/* star5 => step4 */}
-        <circle cx="140" cy="100" r="5" fill="white" opacity={getStarOpacity(5)} />
+        <circle cx="140" cy="100" fill="white" className={styles.star} opacity={getStarOpacity(5)} />
         {/* star6 => step5 */}
-        <circle cx="80" cy="250" r="5" fill="white" opacity={getStarOpacity(6)} />
+        <circle cx="80" cy="250" fill="white" className={styles.star} opacity={getStarOpacity(6)} />
         {/* star7 => step6 */}
-        <circle cx="220" cy="230" r="5" fill="white" opacity={getStarOpacity(7)} />
+        <circle cx="220" cy="230" fill="white" className={styles.star} opacity={getStarOpacity(7)} />
 
         {/* ▼ 線 (line) 6本、順番に描画アニメ */}
         {/* line1 => step7 */}

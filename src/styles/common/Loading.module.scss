@@ -32,9 +32,36 @@
     background: linear-gradient(#0e1f53, #0e1f5300);
     z-index: -1;
   }
-  img {
-    width: 20rem;
+  svg {
+    animation: blink_svg 1.5s infinite;
+    @keyframes blink_svg {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.8;
+      }
+      100% {
+        opacity: 1;
+      }
+    };
+    .star {
+      animation: blink_star 1.5s infinite;
+      @keyframes blink_star {
+        0% {
+          r: 5;
+        }
+        50% {
+          r: 3;
+        }
+        100% {
+          r: 5;
+        }
+        
+      }
+    }
   }
+
   p {
     font-size: 3rem;
     color: #fff;
