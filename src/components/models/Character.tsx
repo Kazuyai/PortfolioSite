@@ -4,12 +4,18 @@ Command: npx gltfjsx@6.5.3 ./public/models/character.glb --types --shadows
 */
 
 import * as THREE from 'three'
-import React from 'react'
+import React, { useEffect, useImperativeHandle, useRef } from 'react'
 import { useGraph } from '@react-three/fiber'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { GLTF, SkeletonUtils } from 'three-stdlib'
+import { a } from 'framer-motion/client'
 
 type ActionName = '[保留アクション].002' | 'Idle.Save' | '[保留アクション].001' | 'Run.Save' | '[保留アクション]'
+
+interface CharacterProps {
+  characterRef: React.Ref<THREE.Group>,
+  isMoving: boolean
+}
 
 interface GLTFAction extends THREE.AnimationClip {
   name: ActionName
@@ -32,14 +38,55 @@ type GLTFResult = GLTF & {
   animations: GLTFAction[]
 }
 
-export default React.forwardRef<THREE.Group, JSX.IntrinsicElements["group"]>(function Model(props, ref) {
+export default function Model({ characterRef, isMoving, ...props }: CharacterProps & JSX.IntrinsicElements['group']) {
   const group = React.useRef<THREE.Group>(null)
   const { scene, animations } = useGLTF('/models/character.glb')
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene])
   const { nodes, materials } = useGraph(clone) as GLTFResult
-  const { actions } = useAnimations(animations, group)
+
+  const localRef = useRef<THREE.Group>(null);
+  useImperativeHandle(characterRef, () => localRef.current as THREE.Group, []);
+
+  const { actions } = useAnimations(animations, localRef)
+
+  
+
+  useEffect(() => {
+    if (!actions || Object.keys(actions).length === 0) return;
+
+    const idleAnimation = actions['Idle.Save'];
+
+    if (idleAnimation) {
+      idleAnimation.setLoop(THREE.LoopRepeat, Infinity);
+      idleAnimation.play();
+    }
+
+    return () => {
+      if (idleAnimation) {
+        idleAnimation.stop();
+      }
+    };
+  }, [actions])
+
+  useEffect(() => {
+    if (!actions) return
+    const idleAction = actions['Idle.Save']
+    const runAction = actions['Run.Save']
+
+    if(!idleAction || !runAction) return
+
+    if (isMoving) {
+      idleAction.stop()
+      runAction.timeScale = 2
+      runAction.play()
+    } else {
+      runAction.stop()
+      idleAction.play()
+    }
+  }, [isMoving, actions])
+
   return (
-    <group ref={ref} {...props} dispose={null}>
+    <group ref={localRef} {...props} dispose={null}>
       <group name="Scene">
         <group name="アーマチュア" scale={0.868}>
           <primitive object={nodes.Root} />
@@ -53,6 +100,6 @@ export default React.forwardRef<THREE.Group, JSX.IntrinsicElements["group"]>(fun
       </group>
     </group>
   )
-});
+}
 
 useGLTF.preload('/models/character.glb')

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useSectionProgress } from "@/hooks/useSectionProgress";
 import { useFrame, useThree } from "@react-three/fiber";
@@ -6,6 +6,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 interface CharacterControllerProps {
   spacerRefs: HTMLDivElement[];
   characterRef: React.RefObject<THREE.Object3D>;
+  setIsMoving: (isMoving: boolean) => void;
   collisionData: { position: [number, number, number]; size: [number, number, number] }[];
   eventData: { id: string; position: [number, number, number]; size: [number, number, number] }[];
   setActiveEvent: (id: string | null) => void;
@@ -19,11 +20,13 @@ const characterPositions = [
   { position: [-3.5, -51.2, -3.5] },
 ];
 
-const MOVE_SPEED = 0.3;
+const MOVE_SPEED = 0.2;
+const DIST_THRESHOLD = 0.01;
 
 const CharacterController: React.FC<CharacterControllerProps> = ({
   spacerRefs,
   characterRef,
+  setIsMoving,
   collisionData,
   eventData,
   setActiveEvent,
@@ -40,6 +43,9 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
     left: false,
     right: false,
   });
+
+  const lastPos = useRef(new THREE.Vector3());
+  const wasMoving = useRef(false);
 
   const collisionBoxes = useMemo(
     () =>
@@ -120,7 +126,6 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
         if (charObj.position.distanceTo(floorPos) < 0.2) {
           setReturningToBase(false);
         }
-        return;
       } else {
         const startIndex = currentIndex;
         const endIndex =
@@ -151,35 +156,34 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
             setCanMove(true);
           }
         }
-        return;
       }
-    }
+    } else {
+      // const charBoundingBox = new THREE.Box3().setFromObject(charObj);
+      let newPosition = charObj.position.clone();
 
-    // const charBoundingBox = new THREE.Box3().setFromObject(charObj);
-    let newPosition = charObj.position.clone();
+      const forward = new THREE.Vector3();
+      camera.getWorldDirection(forward);
+      forward.y = 0;
+      forward.normalize();
 
-    const forward = new THREE.Vector3();
-    camera.getWorldDirection(forward);
-    forward.y = 0;
-    forward.normalize();
+      const right = forward.clone().cross(new THREE.Vector3(0, 1, 0)).normalize();
 
-    const right = forward.clone().cross(new THREE.Vector3(0, 1, 0)).normalize();
+      if (move.forward) newPosition.addScaledVector(forward, MOVE_SPEED);
+      if (move.backward) newPosition.addScaledVector(forward, -MOVE_SPEED);
+      if (move.left) newPosition.addScaledVector(right, -MOVE_SPEED);
+      if (move.right) newPosition.addScaledVector(right, MOVE_SPEED);
 
-    if (move.forward) newPosition.addScaledVector(forward, MOVE_SPEED);
-    if (move.backward) newPosition.addScaledVector(forward, -MOVE_SPEED);
-    if (move.left) newPosition.addScaledVector(right, -MOVE_SPEED);
-    if (move.right) newPosition.addScaledVector(right, MOVE_SPEED);
+      const isColliding = collisionBoxes.some(({ box }) =>
+        box.intersectsBox(new THREE.Box3().setFromCenterAndSize(newPosition, new THREE.Vector3(1, 2, 1)))
+      );
 
-    const isColliding = collisionBoxes.some(({ box }) =>
-      box.intersectsBox(new THREE.Box3().setFromCenterAndSize(newPosition, new THREE.Vector3(1, 2, 1)))
-    );
-
-    if (!isColliding) {
-      let moveVector = newPosition.clone().sub(charObj.position).normalize();
-      if (moveVector.length() > 0) {
-        charObj.rotation.y = Math.atan2(moveVector.x, moveVector.z);
+      if (!isColliding) {
+        let moveVector = newPosition.clone().sub(charObj.position).normalize();
+        if (moveVector.length() > 0) {
+          charObj.rotation.y = Math.atan2(moveVector.x, moveVector.z);
+        }
+        charObj.position.copy(newPosition);
       }
-      charObj.position.copy(newPosition);
     }
 
     const activeEvent = eventBoxes.find(({ box }) =>
@@ -191,6 +195,18 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
     } else {
       setActiveEvent(null);
     }
+
+    const dist       = charObj.position.distanceTo(lastPos.current);
+    const hasInput   = move.forward || move.backward || move.left || move.right;
+    const shouldMove =
+      dist > DIST_THRESHOLD ||                  // 実際に動いた
+      (canMove ? hasInput : returningToBase);   // 入力中 or 帰還中
+
+    if (shouldMove !== wasMoving.current) {
+      wasMoving.current = shouldMove;
+      setIsMoving(shouldMove);
+    }
+    lastPos.current.copy(charObj.position);
   });
 
   return null;
