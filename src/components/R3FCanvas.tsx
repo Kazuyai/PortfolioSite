@@ -1,7 +1,7 @@
 import { Canvas, useThree } from "@react-three/fiber";
 import { Environment, OrbitControls, SoftShadows, useHelper, Stats } from "@react-three/drei";
 import { EffectComposer, Bloom, ChromaticAberration, Glitch, Noise, Vignette } from "@react-three/postprocessing";
-import { Suspense, useRef, useEffect } from "react";
+import { Suspense, useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import CameraController from "@/components/utils/CameraController";
 import CharacterController from "@/components/utils/CharacterController";
@@ -54,6 +54,7 @@ const Lights = () => {
 const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiveEvent, startFadeOut }: Props) => {
 
   const characterRef = useRef<THREE.Group>(null);
+  const [isMoving, setIsMoving] = useState(false);
   const collisionData = hitBoxes[currentSection]?.collisionData || [];
   const eventData = hitBoxes[currentSection]?.eventData || [];
 
@@ -75,13 +76,14 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
       <CharacterController 
         spacerRefs={spacerRefs} 
         characterRef={characterRef} 
+        setIsMoving={setIsMoving}
         collisionData={collisionData}
         eventData={eventData}
         setActiveEvent={setActiveEvent}
       />
       <Lights />
       <Suspense fallback={ null}>
-        <Character ref={characterRef} castShadow receiveShadow />
+        <Character characterRef={characterRef} isMoving={isMoving} castShadow receiveShadow />
         <Building activeEvent={activeEvent} scale={[2, 2, 2]} castShadow receiveShadow />
         {collisionData.map((data, index) => (
           <CollisionBox key={index} position={data.position} size={data.size} debug />
