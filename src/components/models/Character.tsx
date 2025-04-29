@@ -91,10 +91,10 @@ export default function Model({ characterRef, isMoving, ...props }: CharacterPro
         <group name="アーマチュア" scale={0.868}>
           <primitive object={nodes.Root} />
           <group name="球">
-            <skinnedMesh name="球_1" geometry={nodes.球_1.geometry} material={materials.Black} skeleton={nodes.球_1.skeleton} />
-            <skinnedMesh name="球_2" geometry={nodes.球_2.geometry} material={materials.マテリアル} skeleton={nodes.球_2.skeleton} />
-            <skinnedMesh name="球_3" geometry={nodes.球_3.geometry} material={materials.Material} skeleton={nodes.球_3.skeleton} />
-            <skinnedMesh name="球_4" geometry={nodes.球_4.geometry} material={materials.Cloth} skeleton={nodes.球_4.skeleton} />
+            <skinnedMesh name="球_1" receiveShadow castShadow geometry={nodes.球_1.geometry} material={materials.Black} skeleton={nodes.球_1.skeleton} />
+            <skinnedMesh name="球_2" receiveShadow castShadow geometry={nodes.球_2.geometry} material={materials.マテリアル} skeleton={nodes.球_2.skeleton} />
+            <skinnedMesh name="球_3" receiveShadow castShadow geometry={nodes.球_3.geometry} material={materials.Material} skeleton={nodes.球_3.skeleton} />
+            <skinnedMesh name="球_4" receiveShadow castShadow geometry={nodes.球_4.geometry} material={materials.Cloth} skeleton={nodes.球_4.skeleton} />
           </group>
         </group>
       </group>
