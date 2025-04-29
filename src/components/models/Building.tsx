@@ -162,6 +162,8 @@ type GLTFResult = GLTF & {
     ['icons8-typescript-96_3']: THREE.Mesh
     ['icons8-typescript-96_4']: THREE.Mesh
     ['icons8-typescript-96_5']: THREE.Mesh
+    立方体100: THREE.Mesh
+    立方体100_1: THREE.Mesh
     立方体035: THREE.Mesh
     立方体036: THREE.Mesh
     立方体037: THREE.Mesh
@@ -179,11 +181,14 @@ type GLTFResult = GLTF & {
     円柱043_1: THREE.Mesh
     円柱044: THREE.Mesh
     円柱044_1: THREE.Mesh
-    建物002: THREE.Mesh
+    立方体060: THREE.Mesh
+    立方体060_1: THREE.Mesh
+    立方体060_2: THREE.Mesh
     円柱028: THREE.Mesh
     平面001_1: THREE.Mesh
     平面001_2: THREE.Mesh
-    立方体045: THREE.Mesh
+    立方体064: THREE.Mesh
+    立方体064_1: THREE.Mesh
     ICO球: THREE.Mesh
     円柱030: THREE.Mesh
     円柱031: THREE.Mesh
@@ -333,7 +338,9 @@ type GLTFResult = GLTF & {
     PureWhite: THREE.MeshStandardMaterial
     Gold: THREE.MeshStandardMaterial
     Brown: THREE.MeshStandardMaterial
+    GrayWood: THREE.MeshStandardMaterial
     Rock2: THREE.MeshStandardMaterial
+    Desk: THREE.MeshStandardMaterial
     Wall_Projects: THREE.MeshStandardMaterial
     Floor_Projects: THREE.MeshStandardMaterial
     ['Red.002']: THREE.MeshStandardMaterial
@@ -441,16 +448,19 @@ export default function Model({ activeEvent, ...props }: BuildingProps & JSX.Int
     const wavePython = actions['wave_python'];
     const waveBlender = actions['Wave_blender'];
     const waveTs = actions['wave_ts'];
+    const fire = actions['Fire'];
   
-    if (waveReact && wavePython && waveBlender && waveTs) {
+    if (waveReact && wavePython && waveBlender && waveTs && fire) {
       waveReact.setLoop(THREE.LoopRepeat, Infinity);
       wavePython.setLoop(THREE.LoopRepeat, Infinity);
       waveBlender.setLoop(THREE.LoopRepeat, Infinity);
       waveTs.setLoop(THREE.LoopRepeat, Infinity);
+      fire.setLoop(THREE.LoopRepeat, Infinity);
       waveReact.play();
       wavePython.play();
       waveBlender.play();
       waveTs.play();
+      fire.play();
     }
     return () => {
       if (waveReact) waveReact.stop();
@@ -660,6 +670,10 @@ export default function Model({ activeEvent, ...props }: BuildingProps & JSX.Int
           <mesh name="icons8-typescript-96_4" castShadow receiveShadow geometry={nodes['icons8-typescript-96_4'].geometry} material={materials.Brown} />
           <mesh name="icons8-typescript-96_5" castShadow receiveShadow geometry={nodes['icons8-typescript-96_5'].geometry} material={materials.Rock} />
         </group>
+        <group name="立方体058" position={[-2.196, -19.159, -0.074]} rotation={[0, Math.PI / 2, 0]} scale={[1, 1.056, 1]}>
+          <mesh name="立方体100" castShadow receiveShadow geometry={nodes.立方体100.geometry} material={materials.GrayWood} />
+          <mesh name="立方体100_1" castShadow receiveShadow geometry={nodes.立方体100_1.geometry} material={materials.Silver} />
+        </group>
         <mesh name="立方体035" castShadow receiveShadow geometry={nodes.立方体035.geometry} material={materials.Rock} position={[0.423, -12.326, -1.897]} scale={[1.186, 1.186, 1.539]} />
         <mesh name="立方体036" castShadow receiveShadow geometry={nodes.立方体036.geometry} material={materials.Rock} position={[0.423, -13.104, -1.933]} scale={[2.869, 1.186, 1.041]} />
         <mesh name="立方体037" castShadow receiveShadow geometry={nodes.立方体037.geometry} material={materials.Rock} position={[-0.142, -13.349, -1.933]} scale={[0.574, 1.186, 1.041]} />
@@ -685,13 +699,20 @@ export default function Model({ activeEvent, ...props }: BuildingProps & JSX.Int
           <mesh name="円柱044" castShadow receiveShadow geometry={nodes.円柱044.geometry} material={materials.Rock} />
           <mesh name="円柱044_1" castShadow receiveShadow geometry={nodes.円柱044_1.geometry} material={materials.Rock2} />
         </group>
-        <mesh name="建物002" castShadow receiveShadow geometry={nodes.建物002.geometry} material={materials.Wall_Projects} position={[0, -17, 0]} />
+        <group name="建物002" position={[0, -17, 0]}>
+          <mesh name="立方体060" castShadow receiveShadow geometry={nodes.立方体060.geometry} material={materials.Wall} />
+          <mesh name="立方体060_1" castShadow receiveShadow geometry={nodes.立方体060_1.geometry} material={materials.Desk} />
+          <mesh name="立方体060_2" castShadow receiveShadow geometry={nodes.立方体060_2.geometry} material={materials.Wall_Projects} />
+        </group>
         <mesh name="円柱028" castShadow receiveShadow geometry={nodes.円柱028.geometry} material={materials.Elevator} position={[-1.689, -15.706, -1.7]} rotation={[0, Math.PI / 4, 0]} />
         <group name="平面001" position={[0.258, -19.526, 0.22]}>
           <mesh name="平面001_1" castShadow receiveShadow geometry={nodes.平面001_1.geometry} material={materials.Wall_Projects} />
           <mesh name="平面001_2" castShadow receiveShadow geometry={nodes.平面001_2.geometry} material={materials.Floor_Projects} />
         </group>
-        <mesh name="立方体045" castShadow receiveShadow geometry={nodes.立方体045.geometry} material={materials.Gray} position={[1.836, -19.446, -1.973]} scale={0.941} />
+        <group name="立方体045" position={[1.836, -19.446, -1.973]} scale={0.941}>
+          <mesh name="立方体064" castShadow receiveShadow geometry={nodes.立方体064.geometry} material={materials.Gray} />
+          <mesh name="立方体064_1" castShadow receiveShadow geometry={nodes.立方体064_1.geometry} material={materials['Light.001']} />
+        </group>
         <mesh name="ICO球" castShadow receiveShadow geometry={nodes.ICO球.geometry} material={materials['Red.002']} position={[-0.087, -18.488, -1.665]} scale={0.032} />
         <mesh name="円柱030" castShadow receiveShadow geometry={nodes.円柱030.geometry} material={materials['Red.002']} position={[0.192, -18.643, -1.665]} />
         <mesh name="円柱031" castShadow receiveShadow geometry={nodes.円柱031.geometry} material={materials.Black} position={[-0.087, -18.558, -1.665]} scale={[1, 0.722, 1]} />
@@ -708,19 +729,19 @@ export default function Model({ activeEvent, ...props }: BuildingProps & JSX.Int
         <mesh name="丸型エレベータードアL003" castShadow receiveShadow geometry={nodes.丸型エレベータードアL003.geometry} material={materials.Elevator} position={[-1.689, -15.706, -1.7]} rotation={[0, Math.PI / 4, 0]} scale={[0.99, 1, 0.99]} />
         <mesh name="丸型エレベータードアR003" castShadow receiveShadow geometry={nodes.丸型エレベータードアR003.geometry} material={materials.Elevator} position={[-1.689, -15.706, -1.7]} rotation={[0, Math.PI / 4, 0]} scale={[0.99, 1, 0.99]} />
         <mesh name="円柱029" castShadow receiveShadow geometry={nodes.円柱029.geometry} material={materials['Red.002']} position={[0.33, -18.643, -1.665]} />
-        <mesh name="本007" castShadow receiveShadow geometry={nodes.本007.geometry} material={materials.Book_Gray} position={[-2.01, -17.622, 1.406]} rotation={[0, Math.PI / 2, 0]} />
-        <group name="本008" position={[-2.01, -18.458, 0.53]} rotation={[0, Math.PI / 2, 0]}>
+        <mesh name="本007" castShadow receiveShadow geometry={nodes.本007.geometry} material={materials.Book_Gray} position={[-2.01, -16.9, 1.406]} rotation={[0, Math.PI / 2, 0]} />
+        <group name="本008" position={[-2.01, -17.736, 0.53]} rotation={[0, Math.PI / 2, 0]}>
           <mesh name="立方体084" castShadow receiveShadow geometry={nodes.立方体084.geometry} material={materials.Book_Gray} />
           <mesh name="立方体084_1" castShadow receiveShadow geometry={nodes.立方体084_1.geometry} material={materials.Book_Blue} />
         </group>
-        <mesh name="本棚002" castShadow receiveShadow geometry={nodes.本棚002.geometry} material={materials.Rock2} position={[-2.208, -18.431, -0.069]} rotation={[0, Math.PI / 2, 0]} scale={0.179} />
-        <group name="本009" position={[-2.01, -18.044, 1.396]} rotation={[0, Math.PI / 2, 0]}>
+        <mesh name="本棚002" castShadow receiveShadow geometry={nodes.本棚002.geometry} material={materials.GrayWood} position={[-2.208, -17.709, -0.069]} rotation={[0, Math.PI / 2, 0]} scale={0.179} />
+        <group name="本009" position={[-2.01, -17.322, 1.396]} rotation={[0, Math.PI / 2, 0]}>
           <mesh name="立方体086" castShadow receiveShadow geometry={nodes.立方体086.geometry} material={materials.Book_Gray} />
           <mesh name="立方体086_1" castShadow receiveShadow geometry={nodes.立方体086_1.geometry} material={materials.Book_Blue} />
         </group>
-        <mesh name="本010" castShadow receiveShadow geometry={nodes.本010.geometry} material={materials.Book_Gray} position={[-2.01, -18.047, 0.086]} rotation={[0, Math.PI / 2, 0]} />
-        <mesh name="本011" castShadow receiveShadow geometry={nodes.本011.geometry} material={materials.Book_Red} position={[-2.094, -18.878, -0.159]} rotation={[0, Math.PI / 2, 0]} />
-        <mesh name="本012" castShadow receiveShadow geometry={nodes.本012.geometry} material={materials.Book_Gray} position={[-2.01, -18.876, 0.52]} rotation={[0, Math.PI / 2, 0]} />
+        <mesh name="本010" castShadow receiveShadow geometry={nodes.本010.geometry} material={materials.Book_Gray} position={[-2.01, -17.325, 0.086]} rotation={[0, Math.PI / 2, 0]} />
+        <mesh name="本011" castShadow receiveShadow geometry={nodes.本011.geometry} material={materials.Book_Red} position={[-2.094, -18.156, -0.159]} rotation={[0, Math.PI / 2, 0]} />
+        <mesh name="本012" castShadow receiveShadow geometry={nodes.本012.geometry} material={materials.Book_Gray} position={[-2.01, -18.154, 0.52]} rotation={[0, Math.PI / 2, 0]} />
         <group name="立方体047" position={[-1.973, -18.559, 2.053]} rotation={[0, 0.284, 0]}>
           <mesh name="立方体068" castShadow receiveShadow geometry={nodes.立方体068.geometry} material={materials.Biilding_holo} />
           <mesh name="立方体068_1" castShadow receiveShadow geometry={nodes.立方体068_1.geometry} material={materials.Light} />
@@ -732,7 +753,7 @@ export default function Model({ activeEvent, ...props }: BuildingProps & JSX.Int
           <mesh name="立方体075" castShadow receiveShadow geometry={nodes.立方体075.geometry} material={materials.Silver} />
           <mesh name="立方体075_1" castShadow receiveShadow geometry={nodes.立方体075_1.geometry} material={materials['Light.001']} />
         </group>
-        <mesh name="立方体046" castShadow receiveShadow geometry={nodes.立方体046.geometry} material={materials['Black.002']} position={[-2.454, -18.906, 1.143]} scale={[0.056, 0.589, 0.464]} />
+        <mesh name="立方体046" castShadow receiveShadow geometry={nodes.立方体046.geometry} material={materials['Black.002']} position={[-2.454, -18.528, 1.143]} scale={[0.056, 0.972, 0.464]} />
         <mesh name="Floor001" castShadow receiveShadow geometry={nodes.Floor001.geometry} material={materials.Floor_Gallery} position={[0.259, -25.5, 0.259]} rotation={[0, Math.PI / 2, 0]} />
         <group name="建物003" position={[0, -23, 0]}>
           <mesh name="立方体092" castShadow receiveShadow geometry={nodes.立方体092.geometry} material={materials.Wall_Gallery} />
