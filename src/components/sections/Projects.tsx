@@ -24,9 +24,9 @@ export const eventData: {
   position: [number, number, number];
   size: [number, number, number];
 }[] = [
-  { id: "Event_Projects_01", position: [2, -38, -1.5], size: [2, 2, 1] },
-  { id: "Event_Projects_02", position: [5, -38, -1.5], size: [2, 2, 1] },
-  { id: "Event_Projects_03", position: [-2, -38, 5.3], size: [1, 2, 2] },
+  { id: "Event_Projects_01", position: [0, -38, -1.5], size: [2, 2, 1] },
+  { id: "Event_Projects_02", position: [4, -38, -1.5], size: [2, 2, 1] },
+  { id: "Event_Projects_03", position: [-2, -38, 4.3], size: [1, 2, 2] },
 ];
 
 const eventContent: { [key: string]: JSX.Element } = {

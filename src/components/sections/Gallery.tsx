@@ -24,10 +24,10 @@ export const eventData: {
   position: [number, number, number];
   size: [number, number, number];
 }[] = [
-  { id: "Event_Gallery_01", position: [5, -50, -1.5], size: [2, 2, 1] },
-  { id: "Event_Gallery_02", position: [-2, -50, 4.8], size: [1, 2, 2] },
-  { id: "Event_Gallery_03", position: [-2, -50, 2.6], size: [1, 2, 2] },
-  { id: "Event_Gallery_04", position: [-2, -50, 0.4], size: [1, 2, 2] },
+  { id: "Event_Gallery_01", position: [0, -50, -1.5], size: [2, 2, 1] },
+  { id: "Event_Gallery_02", position: [4, -50, -1.5], size: [2, 2, 1] },
+  { id: "Event_Gallery_03", position: [-2, -50, 1], size: [1, 2, 2] },
+  { id: "Event_Gallery_04", position: [-2, -50, 4.5], size: [1, 2, 2] },
 ];
 
 const eventContent: { [key: string]: JSX.Element } = {
