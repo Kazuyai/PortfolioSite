@@ -12,6 +12,7 @@ export const collisionData: {
   position: [number, number, number];
   size: [number, number, number];
 }[] = [
+  { position: [-3, -50, -3], size: [3, 2, 3] },
   { position: [-4, -50, 3], size: [1, 2, 8] },
   { position: [3, -50, -3.5], size: [8, 2, 1] },
   { position: [7, -50, 0], size: [1, 2, 14] },

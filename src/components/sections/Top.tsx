@@ -6,10 +6,12 @@ interface TopProps {
 }
 
 export const collisionData: { position: [number, number, number]; size: [number, number, number]; }[] = [
+  { position: [-3, 1, -3], size: [3, 2, 3] },
   { position: [6, 1, 0], size: [1, 2, 12] },
   { position: [0, 1, 6], size: [12, 2, 1] },
   { position: [-6, 1, 0], size: [1, 2, 12] },
   { position: [0, 1, -6], size: [12, 2, 1] },
+  { position: [3, 1, -4.5], size: [14, 2, 5] },
 ];
 
 export const eventData: { id: string; position: [number, number, number]; size: [number, number, number]; }[] = [

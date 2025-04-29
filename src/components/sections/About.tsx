@@ -11,6 +11,7 @@ export const collisionData: {
   position: [number, number, number];
   size: [number, number, number];
 }[] = [
+  { position: [-3, -14, -3], size: [3, 2, 3] },
   { position: [-4, -14, 3], size: [1, 2, 8] },
   { position: [3, -14, -3.5], size: [8, 2, 1] },
   { position: [7, -14, 0], size: [1, 2, 14] },
@@ -26,9 +27,9 @@ export const eventData: {
 const eventContent: { [key: string]: JSX.Element } = {
   Event_About_01: (
     <div className={styles.eventContent}>
-      <h2>このサイトのひみつ</h2>
+      <h2>ひみつのへや</h2>
       <p>
-        この建物のどこかにひみつ
+        この建物のどこかに"ひみつのへや"が...
       </p>
     </div>
   ),
@@ -46,7 +47,7 @@ const About = ({ activeEvent }: AboutProps) => {
         見た人がワクワクするようなコンテンツを作ることを目指して、趣味でWebサイト制作や3Dモデリングをしています。
         このサイトでは、私のポートフォリオや、趣味で制作した作品を紹介しています。
       </p>
-      <p>
+      <p className={styles.left}>
         このサイトでは、キャラクターを操作して、3D空間を移動することができます。
         <br />
         キャラクターは、WASDキーで移動できます。

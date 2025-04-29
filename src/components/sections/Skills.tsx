@@ -11,8 +11,9 @@ export const collisionData: {
   position: [number, number, number];
   size: [number, number, number];
 }[] = [
-  { position: [-4, -26, 3], size: [1, 2, 8] },
-  { position: [3, -26, -3.5], size: [8, 2, 1] },
+  { position: [-3, -26, -3], size: [3, 2, 3] },
+  { position: [-4, -26, 3], size: [1, 2, 12] },
+  { position: [3, -26, -3.5], size: [12, 2, 1] },
   { position: [7, -26, 0], size: [1, 2, 14] },
   { position: [1, -26, 7], size: [12, 2, 1] }, 
 ];
