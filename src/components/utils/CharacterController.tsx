@@ -36,6 +36,7 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
   const [canMove, setCanMove] = useState(false);
   const [prevIndex, setPrevIndex] = useState(0);
   const [returningToBase, setReturningToBase] = useState(false);
+  const [isArrived, setIsArrived] = useState(false);
 
   const [move, setMove] = useState({
     forward: false,
@@ -126,6 +127,24 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
         if (charObj.position.distanceTo(floorPos) < 0.2) {
           setReturningToBase(false);
         }
+      } else if(isArrived) {
+        const basePos = new THREE.Vector3(
+          // ...characterPositions[prevIndex].position
+          characterPositions[prevIndex].position[0] + 5,
+          characterPositions[prevIndex].position[1],
+          characterPositions[prevIndex].position[2] + 5,
+        );
+        charObj.position.lerp(basePos, 0.1);
+        // 進行方向を向かせる
+        const moveVector = basePos.clone().sub(charObj.position).normalize();
+        if (moveVector.length() > 0) {
+          charObj.rotation.y = Math.atan2(moveVector.x, moveVector.z);
+        }
+
+        if (charObj.position.distanceTo(basePos) < 0.2) {
+          setIsArrived(false);
+          setCanMove(true);
+        }
       } else {
         const startIndex = currentIndex;
         const endIndex =
@@ -153,7 +172,7 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
         if (progress === 0) {
           const floorPos = new THREE.Vector3(...characterPositions[currentIndex].position);
           if (charObj.position.distanceTo(floorPos) < 0.2) {
-            setCanMove(true);
+            setIsArrived(true);
           }
         }
       }
