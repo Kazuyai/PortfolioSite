@@ -6,12 +6,12 @@ interface EventTriggerBoxProps {
   id: string;
   position: [number, number, number];
   size: [number, number, number];
-  onEnter: (id: string) => void;
-  onLeave: (id: string) => void;
+  // onEnter: (id: string) => void;
+  // onLeave: (id: string) => void;
   debug?: boolean;
 }
 
-const EventTriggerBox: React.FC<EventTriggerBoxProps> = ({ id, position, size, onEnter, onLeave, debug = false }) => {
+const EventTriggerBox: React.FC<EventTriggerBoxProps> = ({ id, position, size, debug = false }) => {
   return (
     <Box args={size} position={position}>
       <meshStandardMaterial
