@@ -2,6 +2,7 @@ import React from "react";
 import styles from "@/styles/sections/Projects.module.scss";
 import FadeinTitle from "../common/FadeinTitle";
 import useElementVisibility from "@/hooks/useElementVisibility";
+import Link from "next/link";
 
 interface ProjectsProps {
   activeEvent: string | null;
@@ -27,6 +28,7 @@ export const eventData: {
   { id: "Event_Projects_01", position: [0, -38, -1.5], size: [2, 2, 1] },
   { id: "Event_Projects_02", position: [4, -38, -1.5], size: [2, 2, 1] },
   { id: "Event_Projects_03", position: [-2, -38, 4.3], size: [1, 2, 2] },
+  { id: "SECRET", position: [-2, -38, 2], size: [1, 2, 1] },
 ];
 
 const eventContent: { [key: string]: JSX.Element } = {
@@ -103,9 +105,9 @@ const Projects = ({ activeEvent }: ProjectsProps) => {
         }
       </div>
       <div className={styles.pageLink}>
-        <a href="/projects">
+        <Link href="/projects" scroll={false}>
           VIEW MORE
-        </a>
+        </Link>
       </div>
 
       {activeEvent && eventContent[activeEvent]}
