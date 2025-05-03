@@ -77,7 +77,7 @@ export default function Model({ characterRef, isMoving, ...props }: CharacterPro
 
     if (isMoving) {
       idleAction.stop()
-      runAction.timeScale = 2
+      runAction.timeScale = 2.5
       runAction.play()
     } else {
       runAction.stop()
