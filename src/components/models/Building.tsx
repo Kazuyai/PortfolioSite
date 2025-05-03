@@ -378,6 +378,8 @@ export default function Model({ activeEvent, ...props }: BuildingProps & JSX.Int
   useEffect(() => {
     if (!actions || Object.keys(actions).length === 0) return;
 
+    if(activeEvent === 'SECRET') return;
+
     const currentEvent = activeEvent;
     const prevEvent = prevEventRef.current;
 

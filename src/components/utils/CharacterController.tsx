@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useSectionProgress } from "@/hooks/useSectionProgress";
 import { useFrame, useThree } from "@react-three/fiber";
+import { useRouter } from "next/router";
 
 interface CharacterControllerProps {
   spacerRefs: HTMLDivElement[];
@@ -31,6 +32,7 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
   eventData,
   setActiveEvent,
 }) => {
+  const router = useRouter();
   const { currentIndex, progress } = useSectionProgress(spacerRefs);
   const { camera } = useThree();
   const [canMove, setCanMove] = useState(false);
@@ -210,7 +212,12 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
     );
 
     if (activeEvent) {
-      setActiveEvent(activeEvent.id);
+      if(activeEvent.id === "SECRET") {
+        // スクロールはしない
+        router.push("/secret", undefined, { scroll: false });
+      } else {
+        setActiveEvent(activeEvent.id);
+      }
     } else {
       setActiveEvent(null);
     }
