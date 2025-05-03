@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from '@/styles/common/Loading.module.scss'
 
 interface LoadingProps {
@@ -70,6 +70,9 @@ const Loading = (
     }
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className={`${styles.loading} ${startFadeOut ? styles.fadeOut : ""}`}>
       {/* <img src="orion.svg" alt="" /> */}
