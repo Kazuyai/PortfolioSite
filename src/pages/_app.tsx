@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import Layout from "@/components/Layout";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -17,14 +18,32 @@ const App = ({ Component, pageProps }: AppProps) => {
     }
   }, []);
 
+  useEffect(() => {
+    setIsTopPage(router.pathname === "/");
+  }, [router.pathname]);
+
   if (isTopPage === null) return null;
 
-  return isTopPage ? (
-    <Component {...pageProps} />
-  ) : (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+  return (
+    <AnimatePresence mode="wait">
+      { isTopPage ? (
+        <motion.div key={`page-${router.pathname}`}>
+          <Component {...pageProps} />
+          <motion.div
+            key={`overlay-${router.pathname}`}
+            className="irisOverlay"
+            initial={{ "--r": "110vw" }}
+            animate={{ "--r": "110vw" }}
+            exit={{ "--r": "0vw" }}
+            transition={{ duration: 2, ease: "easeInOut" }}
+          />
+        </motion.div>
+      ) : (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      )}
+    </AnimatePresence>
   );
 }
 
