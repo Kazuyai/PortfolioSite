@@ -18,6 +18,9 @@ export const collisionData: {
   { position: [3, -38, -3.5], size: [8, 2, 1] },
   { position: [7, -38, 0], size: [1, 2, 14] },
   { position: [1, -38, 7], size: [12, 2, 1] }, 
+  { position: [-7, -38, 2], size: [1, 2, 3] },
+  { position: [-6, -38, 0], size: [3, 2, 1] },
+  { position: [-6, -38, 4], size: [3, 2, 1] },
 ];
 
 export const eventData: {
@@ -28,7 +31,7 @@ export const eventData: {
   { id: "Event_Projects_01", position: [0, -38, -1.5], size: [2, 2, 1] },
   { id: "Event_Projects_02", position: [4, -38, -1.5], size: [2, 2, 1] },
   { id: "Event_Projects_03", position: [-2, -38, 4.3], size: [1, 2, 2] },
-  { id: "SECRET", position: [-2, -38, 2], size: [1, 2, 1] },
+  { id: "SECRET", position: [-5.5, -38, 2], size: [1, 2, 1] },
 ];
 
 const eventContent: { [key: string]: JSX.Element } = {
