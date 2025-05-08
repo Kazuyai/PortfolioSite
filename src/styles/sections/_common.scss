@@ -127,6 +127,12 @@
       }
     }
 
+    p {
+      &.secretText {
+        color: $bgColor;
+      }
+    }
+
     img {
       width: 80%;
       object-fit: cover;

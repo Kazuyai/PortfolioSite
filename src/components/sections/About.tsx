@@ -31,6 +31,10 @@ const eventContent: { [key: string]: JSX.Element } = {
       <p>
         この建物のどこかに"ひみつのへや"が...
       </p>
+      <br></br>
+      <p>↓ ↓ ↓</p>
+      <p className={styles.secretText}>Projects階に…？</p>
+      <p>↑ ↑ ↑</p>
     </div>
   ),
 };
