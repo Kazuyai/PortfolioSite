@@ -1,6 +1,13 @@
+import styles from "@/styles/Header.module.scss";
+import Link from "next/link";
+
 const Header = () => {
   return (
-    <header>
+    <header className={styles.header}>
+      <Link href="/" className={styles.icon}>
+        <img src="./icon.png" alt=""/>
+        <h1 className={styles.title}>Kazuya Okamura</h1>
+      </Link>
       <nav>
         <ul>
           <li>
@@ -10,7 +17,7 @@ const Header = () => {
             <a href="/projects">Projects</a>
           </li>
           <li>
-            <a href="/about">About</a>
+            <a href="/gallery">Gallery</a>
           </li>
         </ul>
       </nav>
