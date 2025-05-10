@@ -1,12 +1,19 @@
 import Header from "./Header";
 import Footer from "./Footer";
-import { ReactNode } from "react";
+import { ReactNode, useLayoutEffect } from "react";
+import { useRouter } from "next/router";
 
 type LayoutProps = {
   children: ReactNode;
 };
 
 const Layout = ({ children }: LayoutProps) => {
+  const { pathname } = useRouter();
+  
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
   return (
     <>
       <Header />
