@@ -39,9 +39,27 @@ const App = ({ Component, pageProps }: AppProps) => {
           />
         </motion.div>
       ) : (
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <motion.div key={`page-${router.pathname}`} className="page">
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+          <motion.div
+            key={`panel-top-${router.pathname}`}
+            className="panel top"
+            initial={{ "--pos": "0%" }}
+            animate={{ "--pos": "-100%" }}
+            exit={{ "--pos": "-100%" }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          />
+          <motion.div
+            key={`panel-bottom-${router.pathname}`}
+            className="panel bottom"
+            initial={{ "--pos": "0%" }}
+            animate={{ "--pos": "-100%" }}
+            exit={{ "--pos": "-100%" }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          />
+        </motion.div>
       )}
     </AnimatePresence>
   );

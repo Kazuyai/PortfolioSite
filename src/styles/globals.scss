@@ -48,3 +48,18 @@ ul {
     #000 calc(var(--r) + 0.1rem)
   );
 }
+
+.panel {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: #000;
+  z-index: 9999;
+  &.top {
+    top: var(--pos);
+  }
+  &.bottom {
+    bottom: var(--pos);
+  }
+}
