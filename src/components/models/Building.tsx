@@ -58,6 +58,12 @@ interface GLTFAction extends THREE.AnimationClip {
   name: ActionName
 }
 
+type AnimationFinishedEvent = {
+  type: 'finished'
+  action: THREE.AnimationAction
+  direction: number
+}
+
 type GLTFResult = GLTF & {
   nodes: {
     外枠003: THREE.SkinnedMesh
@@ -384,7 +390,7 @@ export default function Model({ activeEvent, ...props }: BuildingProps & JSX.Int
     const prevEvent = prevEventRef.current;
 
     let mixer: THREE.AnimationMixer | null = null;
-    let onFinished: ((e: any) => void | undefined) | null = null;
+    let onFinished: ((e: AnimationFinishedEvent) => void | undefined) | null = null;
 
     if(prevEvent && prevEvent !== currentEvent) {
       const prevStart = actions[`${prevEvent}_Start`];
@@ -417,7 +423,7 @@ export default function Model({ activeEvent, ...props }: BuildingProps & JSX.Int
         start.play()
 
         mixer = start.getMixer()
-        onFinished = (e: any) => {
+        onFinished = (e) => {
           if (e.action === start && loop) {
             loop.reset()
             loop.timeScale = 2
