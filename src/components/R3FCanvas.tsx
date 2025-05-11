@@ -1,7 +1,7 @@
-import { Canvas, useThree } from "@react-three/fiber";
-import { Environment, OrbitControls, SoftShadows, useHelper, Stats } from "@react-three/drei";
-import { EffectComposer, Bloom, ChromaticAberration, Glitch, Noise, Vignette } from "@react-three/postprocessing";
-import { Suspense, useRef, useEffect, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Environment, Stats } from "@react-three/drei";
+import { EffectComposer, Vignette } from "@react-three/postprocessing";
+import { Suspense, useRef, useState } from "react";
 import * as THREE from "three";
 import CameraController from "@/components/utils/CameraController";
 import CharacterController from "@/components/utils/CharacterController";
@@ -10,7 +10,6 @@ import EventTriggerBox from "@/components/models/EventTriggerBox";
 import Character from "@/components/models/Character";
 import Building from "@/components/models/Building";
 import styles from "@/styles/R3FCanvas.module.scss";
-import { render } from "sass";
 
 interface Props {
   spacerRefs: HTMLDivElement[];
@@ -23,7 +22,7 @@ interface Props {
 
 const Lights = () => {
   const directionalLightRef = useRef<THREE.DirectionalLight>(new THREE.DirectionalLight());
-  const pointLightRef = useRef<THREE.PointLight>(new THREE.PointLight());
+  // const pointLightRef = useRef<THREE.PointLight>(new THREE.PointLight());
 
   // useHelper(directionalLightRef, THREE.DirectionalLightHelper, 5, "red");
   // useHelper(pointLightRef, THREE.PointLightHelper, 1, "blue");
@@ -101,7 +100,7 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
           size={data.size}
           // onEnter={setActiveEvent}
           // onLeave={setActiveEvent}
-          // debug
+          debug
         />
         ))}
       </Suspense>

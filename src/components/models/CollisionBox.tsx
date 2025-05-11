@@ -1,6 +1,5 @@
 import React from "react";
 import { Box } from "@react-three/drei";
-import { MeshStandardMaterial } from "three";
 
 interface CollisionBoxProps {
   position: [number, number, number];

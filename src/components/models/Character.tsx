@@ -8,7 +8,6 @@ import React, { useEffect, useImperativeHandle, useRef } from 'react'
 import { useGraph } from '@react-three/fiber'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { GLTF, SkeletonUtils } from 'three-stdlib'
-import { a } from 'framer-motion/client'
 
 type ActionName = '[保留アクション].002' | 'Idle.Save' | '[保留アクション].001' | 'Run.Save' | '[保留アクション]'
 
@@ -39,7 +38,6 @@ type GLTFResult = GLTF & {
 }
 
 export default function Model({ characterRef, isMoving, ...props }: CharacterProps & JSX.IntrinsicElements['group']) {
-  const group = React.useRef<THREE.Group>(null)
   const { scene, animations } = useGLTF('/models/character.glb')
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene])
   const { nodes, materials } = useGraph(clone) as GLTFResult

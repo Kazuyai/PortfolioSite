@@ -180,7 +180,7 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
       }
     } else {
       // const charBoundingBox = new THREE.Box3().setFromObject(charObj);
-      let newPosition = charObj.position.clone();
+      const newPosition = charObj.position.clone();
 
       const forward = new THREE.Vector3();
       camera.getWorldDirection(forward);
@@ -199,7 +199,7 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
       );
 
       if (!isColliding) {
-        let moveVector = newPosition.clone().sub(charObj.position).normalize();
+        const moveVector = newPosition.clone().sub(charObj.position).normalize();
         if (moveVector.length() > 0) {
           charObj.rotation.y = Math.atan2(moveVector.x, moveVector.z);
         }

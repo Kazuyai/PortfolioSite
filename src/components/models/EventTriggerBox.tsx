@@ -1,6 +1,5 @@
 import React from "react";
 import { Box } from "@react-three/drei";
-import { MeshStandardMaterial } from "three";
 
 interface EventTriggerBoxProps {
   id: string;
@@ -11,7 +10,7 @@ interface EventTriggerBoxProps {
   debug?: boolean;
 }
 
-const EventTriggerBox: React.FC<EventTriggerBoxProps> = ({ id, position, size, debug = false }) => {
+const EventTriggerBox: React.FC<EventTriggerBoxProps> = ({ position, size, debug = false }) => {
   return (
     <Box args={size} position={position}>
       <meshStandardMaterial

@@ -9,9 +9,8 @@ import About, { collisionData as aboutCollision, eventData as aboutEvents } from
 import Skills, { collisionData as skillsCollision, eventData as skillsEvents } from "@/components/sections/Skills";
 import Projects, { collisionData as projectsCollision, eventData as projectsEvents } from "@/components/sections/Projects";
 import Gallery, { collisionData as galleryCollision, eventData as galleryEvents } from "@/components/sections/Gallery";
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSectionProgress } from "@/hooks/useSectionProgress";
-import { clear, time } from "console";
 
 const R3FCanvas = dynamic(() => import("@/components/R3FCanvas"), { ssr: false });
 
