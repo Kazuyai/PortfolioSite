@@ -2,7 +2,7 @@ import React from "react";
 import styles from "@/styles/sections/Gallery.module.scss";
 import FadeinTitle from "../common/FadeinTitle";
 import useElementVisibility from "@/hooks/useElementVisibility";
-import { a } from "framer-motion/client";
+import Link from "next/link";
 
 interface GalleryProps {
   activeEvent: string | null;
@@ -39,9 +39,9 @@ const eventContent: { [key: string]: JSX.Element } = {
         ----------
       </p>
       <div className={styles.button}>
-        <a href="">
+        <Link href="">
           <span>詳細</span>
-        </a>
+        </Link>
       </div>
     </div>
   ),
@@ -53,9 +53,9 @@ const eventContent: { [key: string]: JSX.Element } = {
         ----------
       </p>
       <div className={styles.button}>
-        <a href="">
+        <Link href="">
           <span>詳細</span>
-        </a>
+        </Link>
       </div>
     </div>
   ),
@@ -67,9 +67,9 @@ const eventContent: { [key: string]: JSX.Element } = {
         ----------
       </p>
       <div className={styles.button}>
-        <a href="">
+        <Link href="">
           <span>詳細</span>
-        </a>
+        </Link>
       </div>
     </div>
   ),
@@ -81,9 +81,9 @@ const eventContent: { [key: string]: JSX.Element } = {
         ----------
       </p>
       <div className={styles.button}>
-        <a href="">
+        <Link href="">
           <span>詳細</span>
-        </a>
+        </Link>
       </div>
     </div>
   ),

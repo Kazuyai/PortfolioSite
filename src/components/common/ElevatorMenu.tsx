@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styles from "@/styles/common/ElevatorMenu.module.scss"
+import Link from 'next/link';
 
 interface ElevatorMenuProps {
   sections: { id: string; label: string }[];
@@ -22,7 +23,7 @@ const ElevatorMenu = ({ sections }: ElevatorMenuProps) => {
       {sections.map((section, index) => (
         <div key={index} className={styles.elevatorMenu__item}>
           <div className={styles.elevatorMenu__button}>
-            <a href={`#${section.id}`}>{sections.length - index}</a>
+            <Link href={`#${section.id}`}>{sections.length - index}</Link>
           </div>
           <div className={styles.elevatorMenu__text}>
             <p>{section.label}</p>
@@ -31,7 +32,7 @@ const ElevatorMenu = ({ sections }: ElevatorMenuProps) => {
       ))}
       {/* <div className={styles.elevatorMenu__item}>
         <div className={styles.elevatorMenu__button}>
-          <a href="#top">5</a>
+          <Link href="#top">5</Link>
         </div>
         <div className={styles.elevatorMenu__text}>
           <p>Top</p>
@@ -39,7 +40,7 @@ const ElevatorMenu = ({ sections }: ElevatorMenuProps) => {
       </div>
       <div className={styles.elevatorMenu__item}>
         <div className={styles.elevatorMenu__button}>
-          <a href="#about">4</a>
+          <Link href="#about">4</Link>
         </div>
         <div className={styles.elevatorMenu__text}>
           <p>About</p>
@@ -47,7 +48,7 @@ const ElevatorMenu = ({ sections }: ElevatorMenuProps) => {
       </div>
       <div className={styles.elevatorMenu__item}>
         <div className={styles.elevatorMenu__button}>
-          <a href="#skills">3</a>
+          <Link href="#skills">3</Link>
         </div>
         <div className={styles.elevatorMenu__text}>
           <p>Skills</p>

@@ -43,9 +43,9 @@ const eventContent: { [key: string]: JSX.Element } = {
         大谷研究室の夏合宿恒例の「ハノイの塔」を遊べる作品です。
       </p>
       <div className={styles.button}>
-        <a href="">
+        <Link href="">
           <span>詳細</span>
-        </a>
+        </Link>
       </div>
     </div>
   ),
@@ -58,9 +58,9 @@ const eventContent: { [key: string]: JSX.Element } = {
         気に入った写真を選んでいくだけで、旅行の計画を立てられるWebサービスです。
       </p>
       <div className={styles.button}>
-        <a href="">
+        <Link href="">
           <span>詳細</span>
-        </a>
+        </Link>
       </div>
     </div>
   ),
@@ -71,9 +71,9 @@ const eventContent: { [key: string]: JSX.Element } = {
         自分のポートフォリオサイトです。
       </p>
       <div className={styles.button}>
-        <a href="">
+        <Link href="">
           <span>詳細</span>
-        </a>
+        </Link>
       </div>
     </div>
   )

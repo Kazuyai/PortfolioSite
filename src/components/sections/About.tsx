@@ -2,6 +2,7 @@ import React from "react";
 import styles from "@/styles/sections/About.module.scss";
 import FadeinTitle from "../common/FadeinTitle";
 import useElementVisibility from "@/hooks/useElementVisibility";
+import Link from "next/link";
 
 interface AboutProps {
   activeEvent: string | null;
@@ -28,9 +29,7 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_About_01: (
     <div className={styles.eventContent}>
       <h2>ひみつのへや</h2>
-      <p>
-        この建物のどこかに"ひみつのへや"が...
-      </p>
+      <p>この建物のどこかに&quot;ひみつのへや&quot;が...</p>
       <br></br>
       <p>↓ ↓ ↓</p>
       <p className={styles.secretText}>Projects階に…？</p>
@@ -60,11 +59,11 @@ const About = ({ activeEvent }: AboutProps) => {
       </p>
       <div className={styles.links}>
         <div className={styles.link}>
-          <a href="https://github.com/Kazuyai" target="_blank" rel="noopener noreferrer">
+          <Link href="https://github.com/Kazuyai" target="_blank" rel="noopener noreferrer">
             <figure>
               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub" />
             </figure>
-          </a>
+          </Link>
         </div>
       </div>
       {activeEvent && eventContent[activeEvent]}

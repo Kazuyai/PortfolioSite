@@ -2,6 +2,7 @@ import React from "react";
 import styles from "@/styles/sections/Skills.module.scss";
 import FadeinTitle from "../common/FadeinTitle";
 import useElementVisibility from "@/hooks/useElementVisibility";
+import Link from "next/link";
 
 interface SkillsProps {
   activeEvent: string | null;
@@ -38,9 +39,9 @@ const eventContent: { [key: string]: JSX.Element } = {
         Blenderを使った作品
       </p>
       <div className={styles.button}>
-        <a href="">
+        <Link href="">
           <span>詳細</span>
-        </a>
+        </Link>
       </div>
     </div>
   ),
@@ -51,9 +52,9 @@ const eventContent: { [key: string]: JSX.Element } = {
         TypeScriptを使った作品
       </p>
       <div className={styles.button}>
-        <a href="">
+        <Link href="">
           <span>詳細</span>
-        </a>
+        </Link>
       </div>
     </div>
   ),
@@ -64,9 +65,9 @@ const eventContent: { [key: string]: JSX.Element } = {
         Reactを使った作品
       </p>
       <div className={styles.button}>
-        <a href="">
+        <Link href="">
           <span>詳細</span>
-        </a>
+        </Link>
       </div>
     </div>
   ),
@@ -77,9 +78,9 @@ const eventContent: { [key: string]: JSX.Element } = {
         Pythonを使った作品
       </p>
       <div className={styles.button}>
-        <a href="">
+        <Link href="">
           <span>詳細</span>
-        </a>
+        </Link>
       </div>
     </div>
   ),
