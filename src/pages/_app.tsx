@@ -1,4 +1,10 @@
 import "@/styles/globals.scss";
+import "@/styles/Home.module.scss";
+import "@/styles/sections/About.module.scss";
+import "@/styles/sections/Gallery.module.scss";
+import "@/styles/sections/Skills.module.scss";
+import "@/styles/sections/Projects.module.scss";
+import "@/styles/sections/Top.module.scss";
 import type { AppProps } from "next/app";
 import Layout from "@/components/Layout";
 import { useRouter } from "next/router";
