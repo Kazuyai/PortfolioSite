@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Environment, Stats } from "@react-three/drei";
-import { EffectComposer, Vignette } from "@react-three/postprocessing";
+// import { EffectComposer, Vignette } from "@react-three/postprocessing";
 import { Suspense, useRef, useState } from "react";
 import * as THREE from "three";
 import CameraController from "@/components/utils/CameraController";
@@ -64,7 +64,6 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
       flat 
       gl={{
         toneMapping: THREE.ACESFilmicToneMapping,
-        // outputEncoding: THREE.sRGBEncoding,
       }}
       shadows
     >
@@ -105,7 +104,7 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
         ))}
       </Suspense>
 
-      <EffectComposer enabled={false}>
+      {/*<EffectComposer enabled={false}>*/}
         {/* <ChromaticAberration offset={new THREE.Vector2(0.0005, 0.001)} /> */}
         {/* <Glitch
           delay={new THREE.Vector2(0.1, 0.3)}
@@ -113,12 +112,12 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
           strength={new THREE.Vector2(0.1, 0.2)}
         /> */}
         {/* <Noise opacity={0.7} />  */}
-        <Vignette
+        {/* <Vignette
           offset={0.1}
           darkness={0.8}
-        />
+        /> */}
         {/* <Bloom intensity={0.3} luminanceThreshold={0.2} luminanceSmoothing={0.2} height={200} /> */}
-      </EffectComposer>
+      {/* </EffectComposer> */}
       <Environment files="/images/sky.hdr" background />
       {/* <OrbitControls /> */}
       <Stats />
