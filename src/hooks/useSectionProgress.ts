@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useLayoutEffect, useState } from "react";
 
 /**
  * spacerRefs: 各spacer(div要素)への参照
@@ -7,51 +7,44 @@ import { useState, useEffect, useMemo } from "react";
  *   progress: number;     // セクション間のスクロール進捗 [0, 1]
  * }
  */
-export function useSectionProgress(
-  spacerRefs: HTMLDivElement[]
-) {
-  const [scrollY, setScrollY] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+export function useSectionProgress(spacerRefs: HTMLDivElement[]) {
+  const [{ index, progress }, setState] = useState({ index: 0, progress: 0 });
+
+  useLayoutEffect(() => {
+    const onScroll = () => {
+      const scrollY = window.scrollY;
+
+      const positions = spacerRefs.map((el) => {
+        const { top, height } = el.getBoundingClientRect();
+        const start = top + scrollY;
+        return { start, end: start + height };
+      });
+
+      let curr = 0;
+      let prog = 0;
+      for (let i = 0; i < positions.length; i++) {
+        const { start, end } = positions[i];
+        if (scrollY < positions[0].start) break;
+        if (scrollY > positions[positions.length - 1].end) {
+          curr = positions.length;
+          break;
+        }
+        const prev = positions[i - 1];
+        if (scrollY < end && prev && scrollY > prev.end) curr = i;
+        if (scrollY >= start && scrollY <= end) {
+          prog = (scrollY - start) / (end - start);
+          break;
+        }
+      }
+
+      setState({ index: curr, progress: prog });
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
-  const spacerPositions = useMemo(() => {
-    return spacerRefs.map((spacerEl) => {
-      const rect = spacerEl.getBoundingClientRect();
-      const startY = rect.top + window.scrollY;
-      const endY = startY + rect.height;
-      return { startY, endY };
-    });
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, [spacerRefs]);
 
-  let currentIndex = 0;
-  let progress = 0;
-
-  for (let i = 0; i < spacerPositions.length; i++) {
-    const { startY, endY } = spacerPositions[i];
-    const beforeSpacer = i === 0 ? null : spacerPositions[i - 1];
-    if(scrollY < spacerPositions[0].startY) {
-      currentIndex = 0;
-      break;
-    } else if(scrollY > spacerPositions[spacerPositions.length - 1].endY) {
-      currentIndex = spacerPositions.length;
-      break;
-    } else if(scrollY < endY && beforeSpacer && scrollY > beforeSpacer.endY) {
-      currentIndex = i;
-    } 
-
-    if (scrollY >= startY && scrollY <= endY) {
-      const total = endY - startY;
-      const distance = scrollY - startY;
-      progress = distance / total;
-      break;
-    }
-  }
-
-  return { currentIndex, progress };
+  return { currentIndex: index, progress };
 }
