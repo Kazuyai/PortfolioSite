@@ -81,14 +81,14 @@ const Lights = () => {
         position={[7, 7, 7]}
         intensity={1}
         castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
+        shadow-mapSize-width={512}
+        shadow-mapSize-height={512}
         shadow-camera-far={100}
         shadow-camera-left={-50}
         shadow-camera-right={50}
         shadow-camera-top={50}
         shadow-camera-bottom={-50}
-        shadow-bias={-0.003}
+        shadow-bias={-0.005}
         color={"#fff0e0"}
       />
       {spotLights.map((config, i) => (
@@ -101,14 +101,14 @@ const Lights = () => {
             intensity={80}
             color={"#fff0e0"}
             castShadow
-            shadow-mapSize-width={1024}
-            shadow-mapSize-height={1024}
+            shadow-mapSize-width={512}
+            shadow-mapSize-height={512}
             shadow-camera-far={50}
             shadow-camera-left={-10}
             shadow-camera-right={10}
             shadow-camera-top={10}
             shadow-camera-bottom={-10}
-            shadow-bias={-0.003}
+            shadow-bias={-0.005}
           />
           <object3D ref={spotLightRefs[i].targetRef} position={config.target} />
         </Fragment>
@@ -133,6 +133,7 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
       gl={{
         toneMapping: THREE.ACESFilmicToneMapping,
       }}
+      dpr={[1, 1.5]}
       shadows
     >
       <CameraController
