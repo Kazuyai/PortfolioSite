@@ -1,7 +1,7 @@
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { Environment, Stats } from "@react-three/drei";
 // import { EffectComposer, Vignette } from "@react-three/postprocessing";
-import { Suspense, useRef, useState } from "react";
+import { Fragment, Suspense, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import CameraController from "@/components/utils/CameraController";
 import CharacterController from "@/components/utils/CharacterController";
@@ -27,6 +27,41 @@ const Lights = () => {
   // useHelper(directionalLightRef, THREE.DirectionalLightHelper, 5, "red");
   // useHelper(pointLightRef, THREE.PointLightHelper, 1, "blue");
 
+  const { scene } = useThree();
+
+  // 各スポットライトの位置とターゲットの位置を定義
+  const spotLights:{
+    position: [number, number, number];
+    target: [number, number, number];
+  }[] = [
+    { position: [0.3, -45.5, -3], target: [0.3, -46.3, -3.7] },
+    { position: [4, -45.5, -3], target: [4, -46.3, -3.7] },
+    { position: [-2.9, -45.5, 1], target: [-3.6, -46.3, 1.] },
+    // { position: [0.3, -45.5, -3], target: [0.3, -46.3, -3.7] },
+  ];
+
+  const spotLightRefs = spotLights.map(() => useRef<THREE.SpotLight>(new THREE.SpotLight()));
+  const targetRefs = spotLights.map(() => useRef<THREE.Object3D>(new THREE.Object3D()));
+  
+  // useHelper(spotLightRefs[0], THREE.SpotLightHelper, "cyan");
+  // useHelper(spotLightRefs[1], THREE.SpotLightHelper, "cyan");
+  // useHelper(spotLightRefs[2], THREE.SpotLightHelper, "cyan");
+  // useHelper(spotLightRefs[3], THREE.SpotLightHelper, "cyan");
+
+  useEffect(() => {
+    for (let i = 0; i < spotLightRefs.length; i++) {
+      const spot = spotLightRefs[i].current;
+      const target = targetRefs[i].current;
+      if (spot && target) {
+        spot.target = target;
+        scene.add(target);
+      }
+    }
+  }, [scene]);
+
+  // useHelper(spotLightRef, THREE.SpotLightHelper, "cyan");
+
+
   return (
     <>
       <ambientLight intensity={1} color={"#fff0e0"} />
@@ -45,6 +80,28 @@ const Lights = () => {
         shadow-bias={-0.003}
         color={"#fff0e0"}
       />
+      {spotLights.map((config, i) => (
+        <Fragment key={i}>
+          <spotLight
+            ref={spotLightRefs[i]}
+            position={config.position}
+            angle={Math.PI / 6}
+            penumbra={1}
+            intensity={80}
+            color={"#fff0e0"}
+            castShadow
+            shadow-mapSize-width={1024}
+            shadow-mapSize-height={1024}
+            shadow-camera-far={50}
+            shadow-camera-left={-10}
+            shadow-camera-right={10}
+            shadow-camera-top={10}
+            shadow-camera-bottom={-10}
+            shadow-bias={-0.003}
+          />
+          <object3D ref={targetRefs[i]} position={config.target} />
+        </Fragment>
+      ))}
       {/* <pointLight ref={pointLightRef} position={[0, 5, 0]} intensity={10} /> */}
     </>
   );
