@@ -37,12 +37,23 @@ const Lights = () => {
     { position: [0.3, -45.5, -3], target: [0.3, -46.3, -3.7] },
     { position: [4, -45.5, -3], target: [4, -46.3, -3.7] },
     { position: [-2.9, -45.5, 1], target: [-3.6, -46.3, 1.] },
-    // { position: [0.3, -45.5, -3], target: [0.3, -46.3, -3.7] },
   ];
 
-  const spotLightRefs = spotLights.map(() => useRef<THREE.SpotLight>(new THREE.SpotLight()));
-  const targetRefs = spotLights.map(() => useRef<THREE.Object3D>(new THREE.Object3D()));
+  // 各スポットライトに関するrefを作成（useRefはトップレベルで作成する必要があるので個別に作成）
+  const spotLightRef1 = useRef<THREE.SpotLight>(new THREE.SpotLight());
+  const spotLightRef2 = useRef<THREE.SpotLight>(new THREE.SpotLight());
+  const spotLightRef3 = useRef<THREE.SpotLight>(new THREE.SpotLight());
+
+  const targetRef1 = useRef<THREE.Object3D>(new THREE.Object3D());
+  const targetRef2 = useRef<THREE.Object3D>(new THREE.Object3D());
+  const targetRef3 = useRef<THREE.Object3D>(new THREE.Object3D());
   
+  const spotLightRefs = [
+    { lightRef: spotLightRef1, targetRef: targetRef1 },
+    { lightRef: spotLightRef2, targetRef: targetRef2 },
+    { lightRef: spotLightRef3, targetRef: targetRef3 },
+  ];
+
   // useHelper(spotLightRefs[0], THREE.SpotLightHelper, "cyan");
   // useHelper(spotLightRefs[1], THREE.SpotLightHelper, "cyan");
   // useHelper(spotLightRefs[2], THREE.SpotLightHelper, "cyan");
@@ -50,8 +61,8 @@ const Lights = () => {
 
   useEffect(() => {
     for (let i = 0; i < spotLightRefs.length; i++) {
-      const spot = spotLightRefs[i].current;
-      const target = targetRefs[i].current;
+      const spot = spotLightRefs[i].lightRef.current;
+      const target = spotLightRefs[i].targetRef.current;
       if (spot && target) {
         spot.target = target;
         scene.add(target);
@@ -83,7 +94,7 @@ const Lights = () => {
       {spotLights.map((config, i) => (
         <Fragment key={i}>
           <spotLight
-            ref={spotLightRefs[i]}
+            ref={spotLightRefs[i].lightRef}
             position={config.position}
             angle={Math.PI / 6}
             penumbra={1}
@@ -99,7 +110,7 @@ const Lights = () => {
             shadow-camera-bottom={-10}
             shadow-bias={-0.003}
           />
-          <object3D ref={targetRefs[i]} position={config.target} />
+          <object3D ref={spotLightRefs[i].targetRef} position={config.target} />
         </Fragment>
       ))}
       {/* <pointLight ref={pointLightRef} position={[0, 5, 0]} intensity={10} /> */}
