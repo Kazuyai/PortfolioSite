@@ -1,3 +1,5 @@
+@use "@/styles/pages/Detail.scss";
+
 .header {
   position: fixed;
   display: flex;
@@ -6,18 +8,18 @@
   padding: 1vh 10rem 1vh 7rem;
   width: 100%;
   height: 12vh;
-  background-color: #fff;
+  background-color: Detail.$primaryColor;
   z-index: 10;
   transition: background-color 0.25s ease-in-out;
   &.isTop {
     background-color: transparent;
     .icon {
       h1 {
-        color: #fff;
+        color: Detail.$primaryColor;
       }
     }
     a {
-      color: #fff;
+      color: Detail.$primaryColor;
     }
   }
   .icon {
