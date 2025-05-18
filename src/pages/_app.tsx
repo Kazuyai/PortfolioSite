@@ -55,7 +55,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             initial={{ "--pos": "0%" }}
             animate={{ "--pos": "-100%" }}
             exit={{ "--pos": "-100%" }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            transition={{ delay: 0.6, duration: 0.8, ease: "easeInOut" }}
           />
           <motion.div
             key={`panel-bottom-${router.pathname}`}
@@ -63,7 +63,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             initial={{ "--pos": "0%" }}
             animate={{ "--pos": "-100%" }}
             exit={{ "--pos": "-100%" }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            transition={{ delay: 0.6, duration: 0.8, ease: "easeInOut" }}
           />
         </motion.div>
       )}
