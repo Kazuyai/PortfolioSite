@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from '@/styles/pages/projects.module.scss'
 
-const index = () => {
+const Index = () => {
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null)
 
   return (
@@ -118,4 +118,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Index
