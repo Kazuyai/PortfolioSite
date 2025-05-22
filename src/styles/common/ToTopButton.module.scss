@@ -1,0 +1,25 @@
+.toTopButton {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 5rem;
+  height: 5rem;
+  padding: 1rem;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 100rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &:hover {
+    background-color: darken(#0070f3, 10%);
+  }
+}

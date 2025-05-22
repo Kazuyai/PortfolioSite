@@ -7,6 +7,7 @@ import "@/styles/sections/Projects.module.scss";
 import "@/styles/sections/Top.module.scss";
 import type { AppProps } from "next/app";
 import Layout from "@/components/Layout";
+import ToTopButton from "@/components/common/ToTopButton";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -48,6 +49,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <motion.div key={`page-${router.pathname}`} className="page">
           <Layout>
             <Component {...pageProps} />
+            <ToTopButton />
           </Layout>
           <motion.div
             key={`panel-top-${router.pathname}`}
