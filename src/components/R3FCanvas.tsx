@@ -124,6 +124,8 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
   const [isMoving, setIsMoving] = useState(false);
   const collisionData = hitBoxes[currentSection]?.collisionData || [];
   const eventData = hitBoxes[currentSection]?.eventData || [];
+  
+  console.log(window.devicePixelRatio);
 
   return (
     <Canvas 
@@ -133,7 +135,7 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
       gl={{
         toneMapping: THREE.ACESFilmicToneMapping,
       }}
-      dpr={[1, 1.5]}
+      dpr={[1, 1]}
       shadows
     >
       <CameraController
