@@ -152,15 +152,15 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
       <Suspense fallback={ null}>
         <Character characterRef={characterRef} isMoving={isMoving} castShadow receiveShadow />
         <Building activeEvent={activeEvent} scale={[2, 2, 2]} castShadow receiveShadow />
-        {collisionData.map((data, index) => (
+        {/* {collisionData.map((data, index) => (
           <CollisionBox
           key={index}
           position={data.position}
           size={data.size}
           // debug
         />
-        ))}
-        {eventData.map((data, index) => (
+        ))} */}
+        {/* {eventData.map((data, index) => (
           <EventTriggerBox
           key={index}
           id={data.id}
@@ -170,7 +170,7 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
           // onLeave={setActiveEvent}
           debug
         />
-        ))}
+        ))} */}
       </Suspense>
 
       {/*<EffectComposer enabled={false}>*/}
