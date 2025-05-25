@@ -1,9 +1,15 @@
-import React, { useState } from 'react'
-import styles from '@/styles/pages/projects.module.scss'
-import Link from 'next/link'
+import { GetStaticProps } from "next";
+import React, { useState } from "react";
+import styles from "@/styles/pages/projects.module.scss";
+import Link from "next/link";
+import { getProjects, Project } from "@/lib/api/getProjects";
 
-const Index = () => {
-  const [selectedCardId, setSelectedCardId] = useState<number | null>(null)
+type Props = {
+  projects: Project[];
+};
+
+const Index = ({ projects }: Props) => {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
     <div className={styles.container}>
@@ -11,117 +17,100 @@ const Index = () => {
         <img src="./images/Gallery_01.png" alt="" />
         <h2>Projects</h2>
       </div>
+
       <div className={styles.cards}>
-        <div className={styles.card} onClick={() => setSelectedCardId(1)}>
-          <div className={styles.cardHeader}>
-            <img src="./images/Gallery_01.png" alt="" />
-          </div>
-          <div className={styles.cardContent}>
-            <h3>タイトル</h3>
-            <p>説明文</p>
-            <div className={styles.tech}>
-              <span>TypeScript</span>
-              <span>React</span>
-              <span>Next.js</span>
+        {projects.map((project) => (
+          <div
+            key={project.id}
+            className={styles.card}
+            onClick={() => setSelectedProject(project)}
+          >
+            <div className={styles.cardHeader}>
+              <img src={project.thumbnail.url} alt={project.title} />
+            </div>
+            <div className={styles.cardContent}>
+              <h3>{project.title}</h3>
+              <p>{project.summary}</p>
+              <div className={styles.tech}>
+                {project.tech?.map((tech) => (
+                  <span key={tech}>{tech}</span>
+                ))}
+              </div>
+            </div>
+            <div className={styles.cardFooter}>
+              <div className={styles.category}>{project.category}</div>
+              <div className={styles.date}>
+                {new Date(project.date).toLocaleDateString()}
+              </div>
             </div>
           </div>
-          <div className={styles.cardFooter}>
-            <div className={styles.category}>Web</div>
-            <div className={styles.date}>2025.05.15</div>
-          </div>
-        </div>
-        <div className={styles.card} onClick={() => setSelectedCardId(2)}>
-          <div className={styles.cardHeader}>
-            <img src="./images/Gallery_01.png" alt="" />
-          </div>
-          <div className={styles.cardContent}>
-            <h3>タイトル</h3>
-            <p>説明文</p>
-            <div className={styles.tech}>
-              <span>TypeScript</span>
-              <span>React</span>
-              <span>Next.js</span>
-            </div>
-          </div>
-          <div className={styles.cardFooter}>
-            <div className={styles.category}>Web</div>
-            <div className={styles.date}>2025.05.15</div>
-          </div>
-        </div>
-        <div className={styles.card} onClick={() => setSelectedCardId(3)}>
-          <div className={styles.cardHeader}>
-            <img src="./images/Gallery_01.png" alt="" />
-          </div>
-          <div className={styles.cardContent}>
-            <h3>タイトル</h3>
-            <p>説明文</p>
-            <div className={styles.tech}>
-              <span>TypeScript</span>
-              <span>React</span>
-              <span>Next.js</span>
-            </div>
-          </div>
-          <div className={styles.cardFooter}>
-            <div className={styles.category}>Web</div>
-            <div className={styles.date}>2025.05.15</div>
-          </div>
-        </div>
-        <div className={styles.card} onClick={() => setSelectedCardId(4)}>
-          <div className={styles.cardHeader}>
-            <img src="./images/Gallery_01.png" alt="" />
-          </div>
-          <div className={styles.cardContent}>
-            <h3>タイトル</h3>
-            <p>説明文</p>
-            <div className={styles.tech}>
-              <span>TypeScript</span>
-              <span>React</span>
-              <span>Next.js</span>
-            </div>
-          </div>
-          <div className={styles.cardFooter}>
-            <div className={styles.category}>Web</div>
-            <div className={styles.date}>2025.05.15</div>
-          </div>
-        </div>
+        ))}
       </div>
-      {selectedCardId !== null && (
-        <div className={styles.popup} onClick={() => setSelectedCardId(null)}>
-          <div className={styles.popupExplain} onClick={(e) => e.stopPropagation()}>
+
+      {selectedProject && (
+        <div className={styles.popup} onClick={() => setSelectedProject(null)}>
+          <div
+            className={styles.popupExplain}
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className={styles.popupExplainInner}>
               <div className={styles.popupExplainHeader}>
-                <h3 className={styles.title}>タイトルがここに入る</h3>
+                <h3 className={styles.title}>{selectedProject.title}</h3>
                 <div className={styles.category}>
-                  <span>Web</span>
+                  <span>{selectedProject.category}</span>
                 </div>
                 <div className={styles.tech}>
-                  <span>TypeScript</span>
-                  <span>React</span>
-                  <span>Next.js</span>
+                  {selectedProject.tech?.map((tech) => (
+                    <span key={tech}>{tech}</span>
+                  ))}
                 </div>
-                <div className={styles.link}>
-                  <Link href="#">link</Link>
-                </div>
+                {selectedProject.url && (
+                  <div className={styles.link}>
+                    <Link
+                      href={selectedProject.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      公開ページへ
+                    </Link>
+                  </div>
+                )}
                 <div className={styles.date}>
-                  <span>2025.05.15</span>
+                  {new Date(selectedProject.date).toLocaleDateString()}
                 </div>
                 <div className={styles.imgContainer}>
-                  <img src="./images/Gallery_01.png" alt="" />
+                  <img
+                    src={selectedProject.thumbnail.url}
+                    alt={selectedProject.title}
+                  />
                 </div>
               </div>
-              <div className={styles.popupExplainBody}>
-                <p>説明文がここに入る説明文がここに入る説明文がここに入る説明文がここに入る説明文がここに入る</p>
-              </div>
+              <div
+                className={styles.popupExplainBody}
+                dangerouslySetInnerHTML={{
+                  __html: selectedProject.content || "No description available",
+                }}
+              />
             </div>
           </div>
-          <div className={styles.popupClose} onClick={() => setSelectedCardId(null)}>
+          <div
+            className={styles.popupClose}
+            onClick={() => setSelectedProject(null)}
+          >
             <span></span>
             <span></span>
           </div>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Index
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const projects = await getProjects();
+  return {
+    props: { projects },
+  };
+};
+
+export default Index;
