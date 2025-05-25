@@ -17,6 +17,7 @@
     "@react-three/postprocessing": "^2.6.2",
     "gltfjsx": "^6.5.3",
     "gsap": "^3.12.7",
+    "microcms-js-sdk": "^3.2.0",
     "motion": "^12.9.4",
     "next": "15.1.7",
     "postprocessing": "^6.37.1",
