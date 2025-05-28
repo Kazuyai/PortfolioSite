@@ -75,7 +75,7 @@ const Lights = () => {
 
   return (
     <>
-      <ambientLight intensity={1} color={"#fff0e0"} />
+      <ambientLight intensity={1} color={"#f0f0ff"} />
       <directionalLight
         ref={directionalLightRef}
         position={[7, 7, 7]}
@@ -89,7 +89,8 @@ const Lights = () => {
         shadow-camera-top={50}
         shadow-camera-bottom={-50}
         shadow-bias={-0.005}
-        color={"#fff0e0"}
+        // color={"#fff0e0"}
+        color={"0000ff"}
       />
       {spotLights.map((config, i) => (
         <Fragment key={i}>
@@ -189,7 +190,7 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
         /> */}
         {/* <Bloom intensity={0.3} luminanceThreshold={0.2} luminanceSmoothing={0.2} height={200} /> */}
       {/* </EffectComposer> */}
-      <Environment files="/images/sky.hdr" background />
+      <Environment files="/images/lake.hdr" background />
       {/* <OrbitControls /> */}
       <Stats />
     </Canvas>
