@@ -31,7 +31,7 @@ const ToTopButton = () => {
       onClick={handleOnClick}
       className={`${styles.toTopButton} ${isVisible ? styles.visible : ''}`}
     >
-      ↑
+      <img src="/images/star.svg" alt="" />
     </button>
   )
 }
