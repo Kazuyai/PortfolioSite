@@ -9,6 +9,9 @@
   padding-inline: 10rem;
 
   .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border-radius: 0.5rem;
     padding-bottom: 1.8rem;
     cursor: pointer;
@@ -21,45 +24,48 @@
       }
     }
     &Header {
-      border-radius: 3rem 3rem 0 0;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+      &Img {
         border-radius: 3rem 3rem 0 0;
-        transition: transform 0.2s ease-in-out;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 3rem 3rem 0 0;
+          transition: transform 0.2s ease-in-out;
+        }
       }
-    }
-    &Content {
-      margin: 1rem 2rem 2rem;
-      h3 {
-        width: 100%;
-        text-align: center;
-        font-size: 2.4rem;
-      }
-      p {
-        margin-top: 2rem;
-      }
-      .tech {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-top: 2rem;
-        span {
-          width: fit-content;
-          padding: 0.5rem 1rem;
-          border-radius: 100rem;
-          background: #86a4ff;
-          color: Detail.$primaryColor;
-          &::before {
-            content: "#";
+      &Content {
+        margin: 1rem 2rem 2rem;
+        h3 {
+          width: 100%;
+          text-align: center;
+          font-size: 2.4rem;
+        }
+        p {
+          margin-top: 2rem;
+        }
+        .tech {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1rem;
+          margin-top: 2rem;
+          span {
+            width: fit-content;
+            padding: 0.5rem 1rem;
+            border-radius: 100rem;
+            background: #86a4ff;
+            color: Detail.$primaryColor;
+            &::before {
+              content: "#";
+            }
           }
         }
       }
     }
+  
     &Footer {
       position: relative;
       display: flex;

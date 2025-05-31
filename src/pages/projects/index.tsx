@@ -26,15 +26,17 @@ const Index = ({ projects }: Props) => {
             onClick={() => setSelectedProject(project)}
           >
             <div className={styles.cardHeader}>
-              <img src={project.thumbnail.url} alt={project.title} />
-            </div>
-            <div className={styles.cardContent}>
-              <h3>{project.title}</h3>
-              <p>{project.summary}</p>
-              <div className={styles.tech}>
-                {project.tech?.map((tech) => (
-                  <span key={tech}>{tech}</span>
-                ))}
+              <div className={styles.cardHeaderImg}>
+                <img src={project.thumbnail.url} alt={project.title} />
+              </div>
+              <div className={styles.cardHeaderContent}>
+                <h3>{project.title}</h3>
+                <p>{project.summary}</p>
+                <div className={styles.tech}>
+                  {project.tech?.map((tech) => (
+                    <span key={tech}>{tech}</span>
+                  ))}
+                </div>
               </div>
             </div>
             <div className={styles.cardFooter}>
