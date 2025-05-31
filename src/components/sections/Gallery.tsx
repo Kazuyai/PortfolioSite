@@ -33,13 +33,10 @@ export const eventData: {
 const eventContent: { [key: string]: JSX.Element } = {
   Event_Gallery_01: (
     <div className={styles.eventContent}>
-      <h2>テスト</h2>
-      <img src="/images/Gallery_01.png" alt="" />
-      <p>
-        ----------
-      </p>
+      <h2>天体観測</h2>
+      <img src="/images/gallery/AstronomicalObservation.png" alt="" />
       <div className={styles.button}>
-        <Link href="">
+        <Link href="/gallery" scroll={false}>
           <span>詳細</span>
         </Link>
       </div>
@@ -47,13 +44,10 @@ const eventContent: { [key: string]: JSX.Element } = {
   ),
   Event_Gallery_02: (
     <div className={styles.eventContent}>
-      <h2>テスト</h2>
-      <img src="/images/Gallery_01.png" alt="" />
-      <p>
-        ----------
-      </p>
+      <h2>クジラ雲</h2>
+      <img src="/images/gallery/CloudWhale.png" alt="" />
       <div className={styles.button}>
-        <Link href="">
+        <Link href="/gallery" scroll={false}>
           <span>詳細</span>
         </Link>
       </div>
@@ -61,13 +55,10 @@ const eventContent: { [key: string]: JSX.Element } = {
   ),
   Event_Gallery_03: (
     <div className={styles.eventContent}>
-      <h2>テスト</h2>
-      <img src="/images/Gallery_01.png" alt="" />
-      <p>
-        ----------
-      </p>
+      <h2>街灯</h2>
+      <img src="/images/gallery/StreetLamp.png" alt="" />
       <div className={styles.button}>
-        <Link href="">
+        <Link href="/gallery" scroll={false}>
           <span>詳細</span>
         </Link>
       </div>
@@ -75,19 +66,25 @@ const eventContent: { [key: string]: JSX.Element } = {
   ),
   Event_Gallery_04: (
     <div className={styles.eventContent}>
-      <h2>テスト</h2>
-      <img src="/images/Gallery_01.png" alt="" />
-      <p>
-        ----------
-      </p>
+      <h2>キャラクター</h2>
+      <img src="/images/gallery/Character.png" alt="" />
       <div className={styles.button}>
-        <Link href="">
+        <Link href="/gallery" scroll={false}>
           <span>詳細</span>
         </Link>
       </div>
     </div>
   ),
 };
+
+const photos = [
+  { name: "クジラ雲", img: "/images/gallery/CloudWhale.png" },
+  { name: "天体観測", img: "/images/gallery/AstronomicalObservation.png" },
+  { name: "街灯", img: "/images/gallery/StreetLamp.png" },
+  { name: "ハロウィン", img: "/images/gallery/Halloween.png" },
+  { name: "温泉", img: "/images/gallery/Onsen.png" },
+  { name: "ヤクモ", img: "/images/gallery/Yakumo.png" },
+];
 
 const Gallery = ({ activeEvent }: GalleryProps) => {
   const { ref, isVisible } = useElementVisibility({ threshold: 0.1 });
@@ -98,7 +95,20 @@ const Gallery = ({ activeEvent }: GalleryProps) => {
       className={`${styles.gallery} ${isVisible ? styles.visible : ""}`}
     >
       <FadeinTitle title="Gallery" isVisible={isVisible} />
-      <p>These are my gallery</p>
+      <div className={styles.galleryBox}>
+        {photos.map((photo, index) => (
+          <div key={index} className={styles.galleryBoxItem}>
+            <div className={styles.galleryBoxItemImage}>
+              <img src={photo.img} alt={photo.name} />
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className={styles.pageLink}>
+        <Link href="/gallery" scroll={false}>
+          VIEW MORE
+        </Link>
+      </div>
       
       {activeEvent && eventContent[activeEvent]}
     </section>
