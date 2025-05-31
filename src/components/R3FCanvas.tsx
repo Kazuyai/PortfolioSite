@@ -126,8 +126,6 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
   const collisionData = hitBoxes[currentSection]?.collisionData || [];
   const eventData = hitBoxes[currentSection]?.eventData || [];
   
-  console.log(window.devicePixelRatio);
-
   return (
     <Canvas 
       className={styles.canvas} 
