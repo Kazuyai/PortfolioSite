@@ -1,5 +1,5 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import { Environment, Stats } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 // import { EffectComposer, Vignette } from "@react-three/postprocessing";
 import { Fragment, Suspense, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
@@ -190,7 +190,7 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
       {/* </EffectComposer> */}
       <Environment files="/images/lake.hdr" background />
       {/* <OrbitControls /> */}
-      <Stats />
+      {/* <Stats /> */}
     </Canvas>
   );
 };
