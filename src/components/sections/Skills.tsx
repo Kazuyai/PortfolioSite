@@ -34,12 +34,12 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Skills_01: (
     <div className={styles.eventContent}>
       <h2>Blenderを使った作品</h2>
-      <img src="/images/Gallery_01.png" alt="" />
+      <img src="/images/gallery/CloudWhale.png" alt="" />
       <p>
-        Blenderを使った作品
+        クジラ雲
       </p>
       <div className={styles.button}>
-        <Link href="">
+        <Link href="/gallery" scroll={false}>
           <span>詳細</span>
         </Link>
       </div>
@@ -48,11 +48,12 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Skills_02: (
     <div className={styles.eventContent}>
       <h2>TypeScriptを使った作品</h2>
+      <img src="/images/projects/thumbnail.png" alt="" />
       <p>
-        TypeScriptを使った作品
+        ポートフォリオサイト
       </p>
       <div className={styles.button}>
-        <Link href="">
+        <Link href="/projects" scroll={false}>
           <span>詳細</span>
         </Link>
       </div>
@@ -61,11 +62,12 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Skills_03: (
     <div className={styles.eventContent}>
       <h2>Reactを使った作品</h2>
+      <img src="/images/projects/picpick.png" alt="" />
       <p>
-        Reactを使った作品
+        PicPick
       </p>
       <div className={styles.button}>
-        <Link href="">
+        <Link href="/projects" scroll={false}>
           <span>詳細</span>
         </Link>
       </div>
@@ -74,11 +76,12 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Skills_04: (
     <div className={styles.eventContent}>
       <h2>Pythonを使った作品</h2>
+      <img src="/images/lyrics_wordcloud.png" alt="" />
       <p>
-        Pythonを使った作品
+        歌詞ワードクラウド
       </p>
       <div className={styles.button}>
-        <Link href="">
+        <Link href="/projects" scroll={false}>
           <span>詳細</span>
         </Link>
       </div>
