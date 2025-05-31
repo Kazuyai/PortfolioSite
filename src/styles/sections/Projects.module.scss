@@ -41,6 +41,8 @@ $primaryColor: #e7ead4;
         height: fit-content;
         img {
           display: block;
+          aspect-ratio: 16 / 9;
+          overflow: hidden;
           width: 100%;
           height: auto;
           border-radius: 0.5rem 0.5rem 0 0;

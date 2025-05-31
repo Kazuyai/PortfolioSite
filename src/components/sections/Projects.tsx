@@ -38,12 +38,12 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Projects_01: (
     <div className={styles.eventContent}>
       <h2>ハノイの塔</h2>
-      <img src="" alt="" />
+      <img src="/images/projects/hanoi.png" alt="" />
       <p>
         大谷研究室の夏合宿恒例の「ハノイの塔」を遊べる作品です。
       </p>
       <div className={styles.button}>
-        <Link href="">
+        <Link href="/projects" scroll={false}>
           <span>詳細</span>
         </Link>
       </div>
@@ -52,13 +52,14 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Projects_02: (
     <div className={styles.eventContent}>
       <h2>PicPick</h2>
+      <img src="/images/projects/picpick.png" alt="" />
       <p>
         2024年の大谷研究室の夏合宿ハッカソンでチームで作成した作品です。
         <br />
         気に入った写真を選んでいくだけで、旅行の計画を立てられるWebサービスです。
       </p>
       <div className={styles.button}>
-        <Link href="">
+        <Link href="/projects" scroll={false}>
           <span>詳細</span>
         </Link>
       </div>
@@ -67,11 +68,12 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Projects_03: (
     <div className={styles.eventContent}>
       <h2>ポートフォリオサイト</h2>
+      <img src="/images/projects/thumbnail.png" alt="" />
       <p>
         自分のポートフォリオサイトです。
       </p>
       <div className={styles.button}>
-        <Link href="">
+        <Link href="/projects" scroll={false}>
           <span>詳細</span>
         </Link>
       </div>
@@ -80,10 +82,10 @@ const eventContent: { [key: string]: JSX.Element } = {
 };
 
 const projects = [
-  { name: "ポートフォリオサイト", description: "ここに短めの説明を入れる" },
-  { name: "ポートフォリオサイト", description: "ここに短めの説明を入れる" },
-  { name: "ポートフォリオサイト", description: "ここに短めの説明を入れる" },
-  { name: "ポートフォリオサイト", description: "ここに短めの説明を入れる" },
+  { name: "ポートフォリオサイト", img: "/images/projects/thumbnail.png", description: "私のポートフォリオサイトです。" },
+  { name: "PicPick", img: "/images/projects/picpick.png", description: "気に入った写真を選んでいくだけで、旅行の計画を立てられるWebサービスです。" },
+  { name: "ハノイの塔", img: "/images/projects/hanoi.png", description: "大谷研究室の夏合宿恒例の「ハノイの塔」を遊べる作品です。" },
+  { name: "歌詞ワードクラウド", img: "/images/projects/lyrics_wordcloud.png", description: "特定のアーティストの歌詞をもとに、どんな単語がよく使われているかを可視化するプログラムです。" },
 ];
 
 const Projects = ({ activeEvent }: ProjectsProps) => {
@@ -97,7 +99,7 @@ const Projects = ({ activeEvent }: ProjectsProps) => {
           projects.map((project, index) => (
             <div key={index} className={styles.projectsBoxItem} style={{ animationDelay: `${1 + index * 0.2}s` }}>
               <div className={styles.projectsBoxItemImage}>
-                <img src="/images/Gallery_01.png" alt="" />
+                <img src={project.img} alt={project.name} />
               </div>
               <div className={styles.projectsBoxItemText}>
                 <h3>{project.name}</h3>
