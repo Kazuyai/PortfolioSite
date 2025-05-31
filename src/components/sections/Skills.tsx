@@ -76,7 +76,7 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Skills_04: (
     <div className={styles.eventContent}>
       <h2>Pythonを使った作品</h2>
-      <img src="/images/lyrics_wordcloud.png" alt="" />
+      <img src="/images/projects/lyrics_wordcloud.png" alt="" />
       <p>
         歌詞ワードクラウド
       </p>
