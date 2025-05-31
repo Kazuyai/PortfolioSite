@@ -14,7 +14,7 @@ const Index = ({ projects }: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.mainVisual}>
-        <img src="./images/Gallery_01.png" alt="" />
+        <img src="./images/PC.png" alt="" />
         <h2>Projects</h2>
       </div>
 
