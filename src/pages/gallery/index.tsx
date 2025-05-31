@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 // import styles from '@/styles/pages/gallery.module.scss'
 // import Link from 'next/link'
 import WIP from '@/components/common/WIP'
