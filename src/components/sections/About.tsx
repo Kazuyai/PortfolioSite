@@ -48,14 +48,15 @@ const About = ({ activeEvent }: AboutProps) => {
       <p>東京都市大学大学院 環境情報学研究科 環境情報学専攻 修士1年</p>
       <p className={styles.left}>
         見た人がワクワクするようなコンテンツを作ることを目指して、趣味でWebサイト制作や3Dモデリングをしています。
+        <br />
         このサイトでは、私のポートフォリオや、趣味で制作した作品を紹介しています。
       </p>
       <p className={styles.left}>
         このサイトでは、キャラクターを操作して、3D空間を移動することができます。
         <br />
-        キャラクターは、WASDキーで移動できます。
+        キャラクターは、WASDまたは矢印キーで操作できます。
         <br />
-        地面に「！」が表示されているところに近づくと
+        地面に「！」が表示されているところに近づくと様々な情報が見られます。
       </p>
       <div className={styles.links}>
         <div className={styles.link}>
