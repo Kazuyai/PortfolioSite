@@ -1,10 +1,12 @@
 import React from 'react'
+import WIP from '@/components/common/WIP'
 
 const Index = () => {
   return (
     <div>
-        <h1>SECRETページ</h1>
-        <p>ここはひみつのページ</p>
+        <WIP/>
+        {/* <h1>SECRETページ</h1> */}
+        {/* <p>ここはひみつのページ</p> */}
     </div>
   )
 }
