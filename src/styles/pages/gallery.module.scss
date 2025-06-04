@@ -1,81 +1,54 @@
 @use "Detail.scss";
 @use "@/styles/sections/_common.scss";
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(36rem, 1fr));
-  gap: 5rem;
+$gap: 2rem;
+
+.items {
+  column-count: 3;
+  column-gap: $gap;
   margin: 16rem 0;
   padding-inline: 10rem;
 
-  .card {
-    border-radius: 0.5rem;
-    padding-bottom: 1.8rem;
+  .item {
+    break-inside: avoid;
+    margin-bottom: $gap;
+    padding: 1rem;
     cursor: pointer;
     background: Detail.$primaryColor;
-    border-radius: 3rem;
     @include common.neu(Detail.$primaryColor);
-    &:hover {
-      img {
-        transform: scale(1.05);
-      }
+
+    @keyframes shine {
+      0%   { transform: scale(0)  rotate(45deg); opacity: 0;   }
+      40%  { transform: scale(0)  rotate(45deg); opacity: .5;  }
+      41%  { transform: scale(4)  rotate(45deg); opacity: 1;   }
+      100% { transform: scale(60) rotate(45deg); opacity: 0;   }
     }
-    &Header {
-      border-radius: 3rem 3rem 0 0;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 3rem 3rem 0 0;
-        transition: transform 0.2s ease-in-out;
-      }
+
+    &:hover .itemImage::before {
+      animation: shine 0.5s ease-out forwards;
     }
-    &Content {
-      margin: 1rem 2rem 2rem;
-      h3 {
-        width: 100%;
-        text-align: center;
-        font-size: 2.4rem;
-      }
-      p {
-        margin-top: 2rem;
-      }
-      .tech {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-top: 2rem;
-        span {
-          width: fit-content;
-          padding: 0.5rem 1rem;
-          border-radius: 100rem;
-          background: #86a4ff;
-          color: Detail.$primaryColor;
-          &::before {
-            content: "#";
-          }
-        }
-      }
-    }
-    &Footer {
+
+    &Image {
       position: relative;
-      display: flex;
-      justify-content: space-between;
-      margin: 0 2rem;
-      padding-top: 2rem;
+      overflow: hidden;
+      
       &::before {
-        content: "";
+        content: '';
         position: absolute;
-        display: block;
         top: 0;
-        left: 0;
+        left: -150%;
+        width: 3rem;
+        height: 100%;
+        background: rgba(#fff, .9);
+        transform: scale(0) rotate(45deg);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      img {
+        display: block;
         width: 100%;
-        height: 0.2rem;
-        border-radius: 100rem;
-        background: #ddd;
+        height: auto;
       }
     }
   }
