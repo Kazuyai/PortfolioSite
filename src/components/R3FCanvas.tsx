@@ -123,6 +123,9 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
 
   const characterRef = useRef<THREE.Group>(null);
   const [isMoving, setIsMoving] = useState(false);
+  const [isArrived, setIsArrived] = useState(false);
+  const [returningToBase, setReturningToBase] = useState(false);
+  const [prevIndex, setPrevIndex] = useState(0);
   const collisionData = hitBoxes[currentSection]?.collisionData || [];
   const eventData = hitBoxes[currentSection]?.eventData || [];
   
@@ -145,6 +148,12 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
         spacerRefs={spacerRefs} 
         characterRef={characterRef} 
         setIsMoving={setIsMoving}
+        isArrived={isArrived}
+        setIsArrived={setIsArrived}
+        returningToBase={returningToBase}
+        setReturningToBase={setReturningToBase}
+        prevIndex={prevIndex}
+        setPrevIndex={setPrevIndex}
         collisionData={collisionData}
         eventData={eventData}
         setActiveEvent={setActiveEvent}
@@ -152,7 +161,15 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
       <Lights />
       <Suspense fallback={ null}>
         <Character characterRef={characterRef} isMoving={isMoving} castShadow receiveShadow />
-        <Building activeEvent={activeEvent} scale={[2, 2, 2]} castShadow receiveShadow />
+        <Building
+          activeEvent={activeEvent}
+          isArrived={isArrived}
+          returningToBase={returningToBase}
+          prevIndex={prevIndex}
+          scale={[2, 2, 2]}
+          castShadow
+          receiveShadow
+        />
         {/* {collisionData.map((data, index) => (
           <CollisionBox
           key={index}

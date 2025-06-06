@@ -8,6 +8,12 @@ interface CharacterControllerProps {
   spacerRefs: HTMLDivElement[];
   characterRef: React.RefObject<THREE.Object3D>;
   setIsMoving: (isMoving: boolean) => void;
+  isArrived: boolean;
+  setIsArrived: (isArrived: boolean) => void;
+  returningToBase: boolean;
+  setReturningToBase: (returning: boolean) => void;
+  prevIndex: number;
+  setPrevIndex: (index: number) => void;
   collisionData: { position: [number, number, number]; size: [number, number, number] }[];
   eventData: { id: string; position: [number, number, number]; size: [number, number, number] }[];
   setActiveEvent: (id: string | null) => void;
@@ -28,6 +34,12 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
   spacerRefs,
   characterRef,
   setIsMoving,
+  isArrived,
+  setIsArrived,
+  returningToBase,
+  setReturningToBase,
+  prevIndex,
+  setPrevIndex,
   collisionData,
   eventData,
   setActiveEvent,
@@ -36,9 +48,6 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
   const { currentIndex, progress } = useSectionProgress(spacerRefs);
   const { camera } = useThree();
   const [canMove, setCanMove] = useState(false);
-  const [prevIndex, setPrevIndex] = useState(0);
-  const [returningToBase, setReturningToBase] = useState(false);
-  const [isArrived, setIsArrived] = useState(false);
 
   const [move, setMove] = useState({
     forward: false,
@@ -155,9 +164,9 @@ const CharacterController: React.FC<CharacterControllerProps> = ({
         const startPos = characterPositions[startIndex].position;
         const endPos = characterPositions[endIndex].position;
 
-        const finalX = startPos[0] + (endPos[0] - startPos[0]) * progress;
-        const finalY = startPos[1] + (endPos[1] - startPos[1]) * progress;
-        const finalZ = startPos[2] + (endPos[2] - startPos[2]) * progress;
+        const finalX = startPos[0] + (endPos[0] - startPos[0]) * (progress > 0.5 ? 1 : 0);
+        const finalY = startPos[1] + (endPos[1] - startPos[1]) * (progress > 0.5 ? 1 : 0);
+        const finalZ = startPos[2] + (endPos[2] - startPos[2]) * (progress > 0.5 ? 1 : 0);
 
         charObj.position.lerp(new THREE.Vector3(finalX, finalY, finalZ), 0.1);
 
