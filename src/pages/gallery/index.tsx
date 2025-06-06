@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
-import styles from '@/styles/pages/gallery.module.scss'
-import Link from 'next/link'
+import { GetStaticProps } from "next";
+import React, { useState } from "react";
+import styles from "@/styles/pages/gallery.module.scss";
+import { getImages, Image } from "@/lib/api/getImages";
 
-const Index = () => {
-  const [selectedCardId, setSelectedCardId] = useState<number | null>(null)
+type Props = {
+  images: Image[];
+};
+
+const Index = ({ images }: Props) => {
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
   return (
     <div className={styles.container}>
@@ -12,74 +17,56 @@ const Index = () => {
         <h2>Gallery</h2>
       </div>
       <div className={styles.items}>
-        <div className={styles.item} onClick={() => setSelectedCardId(1)}>
-          <div className={styles.itemImage}>
-            <img src="./images/gallery/CloudWhale.png" alt="" />
+        {images.map((image) => (
+          <div
+            key={image.id}
+            className={styles.item}
+            onClick={() => setSelectedImage(image)}
+          >
+            <div className={styles.itemImage}>
+              <img src={image.image.url} alt="" />
+            </div>
           </div>
-        </div>
-        <div className={styles.item} onClick={() => setSelectedCardId(2)}>
-          <div className={styles.itemImage}>
-            <img src="./images/gallery/AstronomicalObservation.png" alt="" />
-          </div>
-        </div>
-        <div className={styles.item} onClick={() => setSelectedCardId(3)}>
-          <div className={styles.itemImage}>
-            <img src="./images/gallery/Halloween_Square.png" alt="" />
-          </div>
-        </div>
-        <div className={styles.item} onClick={() => setSelectedCardId(4)}>
-          <div className={styles.itemImage}>
-            <img src="./images/gallery/CloudWhale.png" alt="" />
-          </div>
-        </div>
-        <div className={styles.item} onClick={() => setSelectedCardId(5)}>
-          <div className={styles.itemImage}>
-            <img src="./images/gallery/CloudWhale.png" alt="" />
-          </div>
-        </div>
-        <div className={styles.item} onClick={() => setSelectedCardId(6)}>
-          <div className={styles.itemImage}>
-            <img src="./images/gallery/Yakumo.png" alt="" />
-          </div>
-        </div>
+        ))}
       </div>
-      {selectedCardId !== null && (
-        <div className={styles.popup} onClick={() => setSelectedCardId(null)}>
+      {selectedImage !== null && (
+        <div className={styles.popup} onClick={() => setSelectedImage(null)}>
           <div className={styles.popupExplain} onClick={(e) => e.stopPropagation()}>
             <div className={styles.popupExplainInner}>
               <div className={styles.popupExplainHeader}>
-                <h3 className={styles.title}>タイトルがここに入る</h3>
-                <div className={styles.category}>
-                  <span>Web</span>
-                </div>
-                <div className={styles.tech}>
-                  <span>TypeScript</span>
-                  <span>React</span>
-                  {/* <span>Next.js</span> */}
-                </div>
-                <div className={styles.link}>
-                  <Link href="#">link</Link>
-                </div>
-                <div className={styles.date}>
-                  <span>2025.05.15</span>
-                </div>
                 <div className={styles.imgContainer}>
-                  <img src="./images/Gallery_01.png" alt="" />
+                  <img src={selectedImage.image.url} alt="" />
                 </div>
               </div>
               <div className={styles.popupExplainBody}>
-                <p>説明文がここに入る説明文がここに入る説明文がここに入る説明文がここに入る説明文がここに入る</p>
+                <p>
+                  {selectedImage.summary}
+                </p>
               </div>
             </div>
           </div>
-          <div className={styles.popupClose} onClick={() => setSelectedCardId(null)}>
+          <div className={styles.popupClose} onClick={() => setSelectedImage(null)}>
             <span></span>
             <span></span>
           </div>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Index
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  try {
+    const images = await getImages();
+    return {
+      props: { images }
+    };
+  } catch (error) {
+    console.error("Failed to fetch images:", error);
+    return {
+      props: { images: [] }
+    };
+  }
+};
+
+export default Index;
