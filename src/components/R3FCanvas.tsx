@@ -161,7 +161,15 @@ const R3FCanvas = ({ spacerRefs, currentSection, hitBoxes, activeEvent, setActiv
       <Lights />
       <Suspense fallback={ null}>
         <Character characterRef={characterRef} isMoving={isMoving} castShadow receiveShadow />
-        <Building activeEvent={activeEvent} scale={[2, 2, 2]} castShadow receiveShadow />
+        <Building
+          activeEvent={activeEvent}
+          isArrived={isArrived}
+          returningToBase={returningToBase}
+          prevIndex={prevIndex}
+          scale={[2, 2, 2]}
+          castShadow
+          receiveShadow
+        />
         {/* {collisionData.map((data, index) => (
           <CollisionBox
           key={index}

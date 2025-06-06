@@ -52,6 +52,9 @@ type ActionName =
 
 interface BuildingProps {
   activeEvent: string | null
+  isArrived?: boolean
+  returningToBase?: boolean
+  prevIndex: number
 }
 
 interface GLTFAction extends THREE.AnimationClip {
@@ -372,7 +375,7 @@ type GLTFResult = GLTF & {
   animations: GLTFAction[]
 }
 
-export default function Model({ activeEvent, ...props }: BuildingProps & JSX.IntrinsicElements['group']) {
+export default function Model({ activeEvent, isArrived, returningToBase, prevIndex, ...props }: BuildingProps & JSX.IntrinsicElements['group']) {
   const group = React.useRef<THREE.Group>(null)
   const { scene, animations } = useGLTF('/models/building.glb')
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene])
@@ -380,6 +383,61 @@ export default function Model({ activeEvent, ...props }: BuildingProps & JSX.Int
   const { actions } = useAnimations(animations, group)
 
   const prevEventRef = useRef<string | null>(null)
+
+  const doorPairs = React.useMemo(
+    () => [
+      ['丸型エレベータードア.LAction.001',        '丸型エレベータードア.RAction.001'],
+      ['丸型エレベータードア.LAction',    '丸型エレベータードア.RAction'],
+      ['丸型エレベータードア.LAction.002',    '丸型エレベータードア.RAction.002'],
+      ['丸型エレベータードア.LAction.003',    '丸型エレベータードア.RAction.003'],
+      ['丸型エレベータードア.LAction.004',    '丸型エレベータードア.RAction.004'],
+    ],
+    []
+  );
+
+  useEffect(() => {
+    if (!actions) return;
+
+    const left  = actions[doorPairs[prevIndex][0]];
+    const right = actions[doorPairs[prevIndex][1]];
+
+    if (!left || !right) return;
+
+    if(isArrived) {
+      // ---------- OPEN ----------
+      [left, right].forEach((a) => {
+        a.reset();
+        a.timeScale = 3;
+        a.setLoop(THREE.LoopOnce, 1);
+        a.clampWhenFinished = true;
+        a.play();
+      });
+    }
+
+  }, [isArrived]);
+
+  useEffect(() => {
+    if (!actions) return;
+
+    const left  = actions[doorPairs[prevIndex][0]];
+    const right = actions[doorPairs[prevIndex][1]];
+
+    if (!left || !right) return;
+
+    if(!returningToBase) {
+      // ---------- CLOSE ----------
+      [left, right].forEach((a) => {
+        a.paused = false;
+        a.timeScale = -3;
+        a.setLoop(THREE.LoopOnce, 1);
+        a.clampWhenFinished = true;
+        a.play();
+      });
+    }
+
+  }, [returningToBase]);
+
+
   
   useEffect(() => {
     if (!actions || Object.keys(actions).length === 0) return;
