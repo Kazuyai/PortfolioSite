@@ -4,19 +4,19 @@ import styles from "@/styles/Footer.module.scss";
 const Footer = () => {
   return (
     <footer className={`${styles.footer}`}>
-      <Link href="/" className={styles.icon}>
+      <Link href="/" className={styles.icon} scroll={false}>
         <img src="./icon.png" alt=""/>
       </Link>
       <nav>
         <ul>
           <li>
-            <Link href="/">Home</Link>
+            <Link href="/" scroll={false}>Home</Link>
           </li>
           <li>
-            <Link href="/projects">Projects</Link>
+            <Link href="/projects" scroll={false}>Projects</Link>
           </li>
           <li>
-            <Link href="/gallery">Gallery</Link>
+            <Link href="/gallery" scroll={false}>Gallery</Link>
           </li>
         </ul>
       </nav>
