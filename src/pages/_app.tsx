@@ -18,6 +18,7 @@ import ToTopButton from "@/components/common/ToTopButton";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Analytics } from "@vercel/analytics/next"
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -39,44 +40,47 @@ const App = ({ Component, pageProps }: AppProps) => {
   if (isTopPage === null) return null;
 
   return (
-    <AnimatePresence mode="wait">
-      { isTopPage ? (
-        <motion.div key={`page-${router.pathname}`}>
-          <Component {...pageProps} />
-          <motion.div
-            key={`overlay-${router.pathname}`}
-            className="irisOverlay"
-            initial={{ "--r": "110vw" }}
-            animate={{ "--r": "110vw" }}
-            exit={{ "--r": "0vw" }}
-            transition={{ duration: 2, ease: "easeInOut" }}
-          />
-        </motion.div>
-      ) : (
-        <motion.div key={`page-${router.pathname}`} className="page">
-          <Layout>
+    <>
+      <AnimatePresence mode="wait">
+        { isTopPage ? (
+          <motion.div key={`page-${router.pathname}`}>
             <Component {...pageProps} />
-            <ToTopButton />
-          </Layout>
-          <motion.div
-            key={`panel-top-${router.pathname}`}
-            className="panel top"
-            initial={{ "--pos": "0%" }}
-            animate={{ "--pos": "-100%" }}
-            exit={{ "--pos": "-100%" }}
-            transition={{ delay: 0.6, duration: 0.8, ease: "easeInOut" }}
-          />
-          <motion.div
-            key={`panel-bottom-${router.pathname}`}
-            className="panel bottom"
-            initial={{ "--pos": "0%" }}
-            animate={{ "--pos": "-100%" }}
-            exit={{ "--pos": "-100%" }}
-            transition={{ delay: 0.6, duration: 0.8, ease: "easeInOut" }}
-          />
-        </motion.div>
-      )}
-    </AnimatePresence>
+            <motion.div
+              key={`overlay-${router.pathname}`}
+              className="irisOverlay"
+              initial={{ "--r": "110vw" }}
+              animate={{ "--r": "110vw" }}
+              exit={{ "--r": "0vw" }}
+              transition={{ duration: 2, ease: "easeInOut" }}
+            />
+          </motion.div>
+        ) : (
+          <motion.div key={`page-${router.pathname}`} className="page">
+            <Layout>
+              <Component {...pageProps} />
+              <ToTopButton />
+            </Layout>
+            <motion.div
+              key={`panel-top-${router.pathname}`}
+              className="panel top"
+              initial={{ "--pos": "0%" }}
+              animate={{ "--pos": "-100%" }}
+              exit={{ "--pos": "-100%" }}
+              transition={{ delay: 0.6, duration: 0.8, ease: "easeInOut" }}
+            />
+            <motion.div
+              key={`panel-bottom-${router.pathname}`}
+              className="panel bottom"
+              initial={{ "--pos": "0%" }}
+              animate={{ "--pos": "-100%" }}
+              exit={{ "--pos": "-100%" }}
+              transition={{ delay: 0.6, duration: 0.8, ease: "easeInOut" }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <Analytics />
+    </>
   );
 }
 
