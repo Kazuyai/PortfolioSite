@@ -5,6 +5,13 @@ import "@/styles/sections/Gallery.module.scss";
 import "@/styles/sections/Skills.module.scss";
 import "@/styles/sections/Projects.module.scss";
 import "@/styles/sections/Top.module.scss";
+import "@/styles/pages/404.module.scss";
+import "@/styles/pages/projects.module.scss";
+import "@/styles/pages/gallery.module.scss";
+import "@/styles/Header.module.scss";
+import "@/styles/Footer.module.scss";
+import "@/styles/common/WIP.module.scss";
+
 import type { AppProps } from "next/app";
 import Layout from "@/components/Layout";
 import ToTopButton from "@/components/common/ToTopButton";
