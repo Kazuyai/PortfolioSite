@@ -3,6 +3,7 @@ import styles from "@/styles/sections/About.module.scss";
 import FadeinTitle from "../common/FadeinTitle";
 import useElementVisibility from "@/hooks/useElementVisibility";
 import Link from "next/link";
+import AutoSizeImage from "../common/AutoSizeImage";
 
 interface AboutProps {
   activeEvent: string | null;
@@ -62,7 +63,8 @@ const About = ({ activeEvent }: AboutProps) => {
         <div className={styles.link}>
           <Link href="https://github.com/Kazuyai" target="_blank" rel="noopener noreferrer">
             <figure>
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub" />
+              {/* <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub" /> */}
+              <AutoSizeImage src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub" />
             </figure>
           </Link>
         </div>

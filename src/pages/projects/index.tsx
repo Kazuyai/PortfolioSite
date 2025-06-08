@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "@/styles/pages/projects.module.scss";
 import Link from "next/link";
 import { getProjects, Project } from "@/lib/api/getProjects";
+import AutoSizeImage from "@/components/common/AutoSizeImage";
 
 type Props = {
   projects: Project[];
@@ -14,7 +15,7 @@ const Index = ({ projects }: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.mainVisual}>
-        <img src="./images/PC.png" alt="" />
+        <AutoSizeImage src="/images/PC.png" alt="" />
         <h2>Projects</h2>
       </div>
 

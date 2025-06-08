@@ -2,6 +2,7 @@ import { GetStaticProps } from "next";
 import React, { useState } from "react";
 import styles from "@/styles/pages/gallery.module.scss";
 import { getImages, Image } from "@/lib/api/getImages";
+import AutoSizeImage from "@/components/common/AutoSizeImage";
 
 type Props = {
   images: Image[];
@@ -13,7 +14,7 @@ const Index = ({ images }: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.mainVisual}>
-        <img src="./images/gallery/CloudWhale.png" alt="" />
+        <AutoSizeImage src="/images/gallery/CloudWhale.png" alt="Cloud Whale" />
         <h2>Gallery</h2>
       </div>
       <div className={styles.items}>

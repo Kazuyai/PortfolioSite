@@ -134,7 +134,9 @@
     }
 
     img {
-      width: 80%;
+      position: relative !important;
+      width: 80%  !important;
+      height: auto !important;
       object-fit: cover;
       border-radius: 1rem;
       box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);

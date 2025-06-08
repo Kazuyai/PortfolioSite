@@ -3,6 +3,8 @@ import styles from "@/styles/sections/Projects.module.scss";
 import FadeinTitle from "../common/FadeinTitle";
 import useElementVisibility from "@/hooks/useElementVisibility";
 import Link from "next/link";
+import AutoSizeImage from "../common/AutoSizeImage";
+import Image from "next/image";
 
 interface ProjectsProps {
   activeEvent: string | null;
@@ -38,7 +40,7 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Projects_01: (
     <div className={styles.eventContent}>
       <h2>ハノイの塔</h2>
-      <img src="/images/projects/hanoi.png" alt="" />
+      <Image src="/images/projects/hanoi.png" alt="ハノイの塔" className={styles.eventImage} fill />
       <p>
         大谷研究室の夏合宿恒例の「ハノイの塔」を遊べる作品です。
       </p>
@@ -52,7 +54,7 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Projects_02: (
     <div className={styles.eventContent}>
       <h2>PicPick</h2>
-      <img src="/images/projects/picpick.png" alt="" />
+      <Image src="/images/projects/picpick.png" alt="PicPick" className={styles.eventImage} fill />
       <p>
         2024年の大谷研究室の夏合宿ハッカソンでチームで作成した作品です。
         <br />
@@ -68,7 +70,7 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Projects_03: (
     <div className={styles.eventContent}>
       <h2>ポートフォリオサイト</h2>
-      <img src="/images/projects/thumbnail.png" alt="" />
+      <Image src="/images/projects/thumbnail.png" alt="ポートフォリオサイト" className={styles.eventImage} fill />
       <p>
         自分のポートフォリオサイトです。
       </p>
@@ -99,7 +101,7 @@ const Projects = ({ activeEvent }: ProjectsProps) => {
           projects.map((project, index) => (
             <div key={index} className={styles.projectsBoxItem} style={{ animationDelay: `${1 + index * 0.2}s` }}>
               <div className={styles.projectsBoxItemImage}>
-                <img src={project.img} alt={project.name} />
+                <AutoSizeImage src={project.img} alt={project.name} className={styles.projectsBoxItemImageInner} />
               </div>
               <div className={styles.projectsBoxItemText}>
                 <h3>{project.name}</h3>
