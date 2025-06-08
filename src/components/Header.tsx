@@ -23,20 +23,26 @@ const Header = () => {
   return (
     <header className={`${styles.header} ${isTop ? styles.isTop : ""}`}>
       <Link href="/" className={styles.icon} scroll={false}>
-        {/* <img src="./icon.png" alt=""/> */}
-        <AutoSizeImage src="/icon.png" alt="" className={styles.iconImage} />
+        {/* <img src="./icon.webp" alt=""/> */}
+        <AutoSizeImage src="/icon.webp" alt="" className={styles.iconImage} />
         <h1 className={styles.title}>Kazuya Okamura</h1>
       </Link>
       <nav>
         <ul>
           <li>
-            <Link href="/" scroll={false}>Home</Link>
+            <Link href="/" scroll={false}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link href="/projects" scroll={false}>Projects</Link>
+            <Link href="/projects" scroll={false}>
+              Projects
+            </Link>
           </li>
           <li>
-            <Link href="/gallery" scroll={false}>Gallery</Link>
+            <Link href="/gallery" scroll={false}>
+              Gallery
+            </Link>
           </li>
         </ul>
       </nav>

@@ -15,17 +15,13 @@ const Index = ({ projects }: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.mainVisual}>
-        <AutoSizeImage src="/images/PC.png" alt="" />
+        <AutoSizeImage src="/images/PC.webp" alt="" />
         <h2>Projects</h2>
       </div>
 
       <div className={styles.cards}>
         {projects.map((project) => (
-          <div
-            key={project.id}
-            className={styles.card}
-            onClick={() => setSelectedProject(project)}
-          >
+          <div key={project.id} className={styles.card} onClick={() => setSelectedProject(project)}>
             <div className={styles.cardHeader}>
               <div className={styles.cardHeaderImg}>
                 <img src={project.thumbnail.url} alt={project.title} />
@@ -42,9 +38,7 @@ const Index = ({ projects }: Props) => {
             </div>
             <div className={styles.cardFooter}>
               <div className={styles.category}>{project.category}</div>
-              <div className={styles.date}>
-                {new Date(project.date).toLocaleDateString()}
-              </div>
+              <div className={styles.date}>{new Date(project.date).toLocaleDateString()}</div>
             </div>
           </div>
         ))}
@@ -52,10 +46,7 @@ const Index = ({ projects }: Props) => {
 
       {selectedProject && (
         <div className={styles.popup} onClick={() => setSelectedProject(null)}>
-          <div
-            className={styles.popupExplain}
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className={styles.popupExplain} onClick={(e) => e.stopPropagation()}>
             <div className={styles.popupExplainInner}>
               <div className={styles.popupExplainHeader}>
                 <h3 className={styles.title}>{selectedProject.title}</h3>
@@ -69,11 +60,7 @@ const Index = ({ projects }: Props) => {
                 </div>
                 {selectedProject.url && (
                   <div className={styles.link}>
-                    <Link
-                      href={selectedProject.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <Link href={selectedProject.url} target="_blank" rel="noopener noreferrer">
                       公開ページへ
                     </Link>
                   </div>
@@ -82,10 +69,7 @@ const Index = ({ projects }: Props) => {
                   {new Date(selectedProject.date).toLocaleDateString()}
                 </div>
                 <div className={styles.imgContainer}>
-                  <img
-                    src={selectedProject.thumbnail.url}
-                    alt={selectedProject.title}
-                  />
+                  <img src={selectedProject.thumbnail.url} alt={selectedProject.title} />
                 </div>
               </div>
               <div
@@ -96,10 +80,7 @@ const Index = ({ projects }: Props) => {
               />
             </div>
           </div>
-          <div
-            className={styles.popupClose}
-            onClick={() => setSelectedProject(null)}
-          >
+          <div className={styles.popupClose} onClick={() => setSelectedProject(null)}>
             <span></span>
             <span></span>
           </div>

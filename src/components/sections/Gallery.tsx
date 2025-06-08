@@ -36,7 +36,12 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Gallery_01: (
     <div className={styles.eventContent}>
       <h2>天体観測</h2>
-      <Image src="/images/gallery/AstronomicalObservation.png" alt="天体観測" className={styles.eventImage} fill />
+      <Image
+        src="/images/gallery/AstronomicalObservation.webp"
+        alt="天体観測"
+        className={styles.eventImage}
+        fill
+      />
       <div className={styles.button}>
         <Link href="/gallery" scroll={false}>
           <span>詳細</span>
@@ -47,7 +52,12 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Gallery_02: (
     <div className={styles.eventContent}>
       <h2>クジラ雲</h2>
-      <Image src="/images/gallery/CloudWhale.png" alt="クジラ雲" className={styles.eventImage} fill />
+      <Image
+        src="/images/gallery/CloudWhale.webp"
+        alt="クジラ雲"
+        className={styles.eventImage}
+        fill
+      />
       <div className={styles.button}>
         <Link href="/gallery" scroll={false}>
           <span>詳細</span>
@@ -58,7 +68,7 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Gallery_03: (
     <div className={styles.eventContent}>
       <h2>街灯</h2>
-      <Image src="/images/gallery/StreetLamp.png" alt="街灯" className={styles.eventImage} fill />
+      <Image src="/images/gallery/StreetLamp.webp" alt="街灯" className={styles.eventImage} fill />
       <div className={styles.button}>
         <Link href="/gallery" scroll={false}>
           <span>詳細</span>
@@ -69,7 +79,12 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Gallery_04: (
     <div className={styles.eventContent}>
       <h2>キャラクター</h2>
-      <Image src="/images/gallery/Character.png" alt="キャラクター" className={styles.eventImage} fill />
+      <Image
+        src="/images/gallery/Character.webp"
+        alt="キャラクター"
+        className={styles.eventImage}
+        fill
+      />
       <div className={styles.button}>
         <Link href="/gallery" scroll={false}>
           <span>詳細</span>
@@ -80,12 +95,12 @@ const eventContent: { [key: string]: JSX.Element } = {
 };
 
 const photos = [
-  { name: "クジラ雲", img: "/images/gallery/CloudWhale.png" },
-  { name: "天体観測", img: "/images/gallery/AstronomicalObservation.png" },
-  { name: "街灯", img: "/images/gallery/StreetLamp.png" },
-  { name: "ハロウィン", img: "/images/gallery/Halloween.png" },
-  { name: "温泉", img: "/images/gallery/Onsen.png" },
-  { name: "ヤクモ", img: "/images/gallery/Yakumo.png" },
+  { name: "クジラ雲", img: "/images/gallery/CloudWhale.webp" },
+  { name: "天体観測", img: "/images/gallery/AstronomicalObservation.webp" },
+  { name: "街灯", img: "/images/gallery/StreetLamp.webp" },
+  { name: "ハロウィン", img: "/images/gallery/Halloween.webp" },
+  { name: "温泉", img: "/images/gallery/Onsen.webp" },
+  { name: "ヤクモ", img: "/images/gallery/Yakumo.webp" },
 ];
 
 const Gallery = ({ activeEvent }: GalleryProps) => {
@@ -101,7 +116,11 @@ const Gallery = ({ activeEvent }: GalleryProps) => {
         {photos.map((photo, index) => (
           <div key={index} className={styles.galleryBoxItem}>
             <div className={styles.galleryBoxItemImage}>
-              <AutoSizeImage src={photo.img} alt={photo.name} className={styles.galleryBoxItemImageInner} />
+              <AutoSizeImage
+                src={photo.img}
+                alt={photo.name}
+                className={styles.galleryBoxItemImageInner}
+              />
             </div>
           </div>
         ))}
@@ -111,7 +130,7 @@ const Gallery = ({ activeEvent }: GalleryProps) => {
           VIEW MORE
         </Link>
       </div>
-      
+
       {activeEvent && eventContent[activeEvent]}
     </section>
   );

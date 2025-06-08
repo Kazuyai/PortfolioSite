@@ -18,7 +18,7 @@ export const collisionData: {
   { position: [-4, -26, 3], size: [1, 2, 12] },
   { position: [3, -26, -3.5], size: [12, 2, 1] },
   { position: [7, -26, 0], size: [1, 2, 14] },
-  { position: [1, -26, 7], size: [12, 2, 1] }, 
+  { position: [1, -26, 7], size: [12, 2, 1] },
 ];
 
 export const eventData: {
@@ -36,10 +36,13 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Skills_01: (
     <div className={styles.eventContent}>
       <h2>Blenderを使った作品</h2>
-      <Image src="/images/gallery/CloudWhale.png" alt="クジラ雲" className={styles.eventImage} fill />
-      <p>
-        クジラ雲
-      </p>
+      <Image
+        src="/images/gallery/CloudWhale.webp"
+        alt="クジラ雲"
+        className={styles.eventImage}
+        fill
+      />
+      <p>クジラ雲</p>
       <div className={styles.button}>
         <Link href="/gallery" scroll={false}>
           <span>詳細</span>
@@ -50,10 +53,13 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Skills_02: (
     <div className={styles.eventContent}>
       <h2>TypeScriptを使った作品</h2>
-      <Image src="/images/projects/thumbnail.png" alt="ポートフォリオサイト" className={styles.eventImage} fill />
-      <p>
-        ポートフォリオサイト
-      </p>
+      <Image
+        src="/images/projects/thumbnail.webp"
+        alt="ポートフォリオサイト"
+        className={styles.eventImage}
+        fill
+      />
+      <p>ポートフォリオサイト</p>
       <div className={styles.button}>
         <Link href="/projects" scroll={false}>
           <span>詳細</span>
@@ -64,10 +70,8 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Skills_03: (
     <div className={styles.eventContent}>
       <h2>Reactを使った作品</h2>
-      <Image src="/images/projects/picpick.png" alt="PicPick" className={styles.eventImage} fill />
-      <p>
-        PicPick
-      </p>
+      <Image src="/images/projects/picpick.webp" alt="PicPick" className={styles.eventImage} fill />
+      <p>PicPick</p>
       <div className={styles.button}>
         <Link href="/projects" scroll={false}>
           <span>詳細</span>
@@ -78,10 +82,13 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Skills_04: (
     <div className={styles.eventContent}>
       <h2>Pythonを使った作品</h2>
-      <Image src="/images/projects/lyrics_wordcloud.png" alt="歌詞ワードクラウド" className={styles.eventImage} fill />
-      <p>
-        歌詞ワードクラウド
-      </p>
+      <Image
+        src="/images/projects/lyrics_wordcloud.webp"
+        alt="歌詞ワードクラウド"
+        className={styles.eventImage}
+        fill
+      />
+      <p>歌詞ワードクラウド</p>
       <div className={styles.button}>
         <Link href="/projects" scroll={false}>
           <span>詳細</span>
@@ -121,30 +128,46 @@ const Skills = ({ activeEvent }: SkillsProps) => {
   const { ref, isVisible } = useElementVisibility({ threshold: 0.1 });
 
   return (
-    <section ref={ref} id="skills" className={`${styles.skills} ${isVisible ? styles.visible : ""}`}>
+    <section
+      ref={ref}
+      id="skills"
+      className={`${styles.skills} ${isVisible ? styles.visible : ""}`}
+    >
       <FadeinTitle title="Skills" isVisible={isVisible} />
       <h3 className={styles.skillsSubTitle}>Programming Languages & Frameworks</h3>
       <div className={styles.skillsBox}>
-        {
-          skills.map((skill, index) => (
-            <div key={index} className={styles.skillsBoxItem} style={{ animationDelay: `${index * 0.1}s` }}>
-              <AutoSizeImage src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${skill.icon}`} alt={skill.name} className={styles.skillsBoxItemImage} />
-              <h2>{skill.name}</h2>
-            </div>
-          ))
-        }
+        {skills.map((skill, index) => (
+          <div
+            key={index}
+            className={styles.skillsBoxItem}
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            <AutoSizeImage
+              src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${skill.icon}`}
+              alt={skill.name}
+              className={styles.skillsBoxItemImage}
+            />
+            <h2>{skill.name}</h2>
+          </div>
+        ))}
       </div>
 
       <h3 className={styles.skillsSubTitle}>Tools</h3>
-      <div className={styles.skillsBox} >
-        {
-          tools.map((tool, index) => (
-            <div key={index} className={styles.skillsBoxItem} style={{ animationDelay: `${skills.length * 0.1 + index * 0.1}s` }}>
-              <AutoSizeImage src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tool.icon}`} alt={tool.name} className={styles.skillsBoxItemImage} />
-              <h2>{tool.name}</h2>
-            </div>
-          ))
-        }
+      <div className={styles.skillsBox}>
+        {tools.map((tool, index) => (
+          <div
+            key={index}
+            className={styles.skillsBoxItem}
+            style={{ animationDelay: `${skills.length * 0.1 + index * 0.1}s` }}
+          >
+            <AutoSizeImage
+              src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tool.icon}`}
+              alt={tool.name}
+              className={styles.skillsBoxItemImage}
+            />
+            <h2>{tool.name}</h2>
+          </div>
+        ))}
       </div>
       {activeEvent && eventContent[activeEvent]}
     </section>
