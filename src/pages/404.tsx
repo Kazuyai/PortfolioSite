@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from "@/styles/pages/404.module.scss";
-import AutoSizeImage from '@/components/common/AutoSizeImage';
 import Image from 'next/image';
 
 const Custom404 = () => {
