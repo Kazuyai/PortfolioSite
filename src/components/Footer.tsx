@@ -7,19 +7,25 @@ const Footer = () => {
     <footer className={`${styles.footer}`}>
       <Link href="/" className={styles.icon} scroll={false}>
         <div className={styles.img_container}>
-          <Image src="/icon.png" alt="" fill/>
+          <Image src="/icon.webp" alt="" fill />
         </div>
       </Link>
       <nav>
         <ul>
           <li>
-            <Link href="/" scroll={false}>Home</Link>
+            <Link href="/" scroll={false}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link href="/projects" scroll={false}>Projects</Link>
+            <Link href="/projects" scroll={false}>
+              Projects
+            </Link>
           </li>
           <li>
-            <Link href="/gallery" scroll={false}>Gallery</Link>
+            <Link href="/gallery" scroll={false}>
+              Gallery
+            </Link>
           </li>
         </ul>
       </nav>
