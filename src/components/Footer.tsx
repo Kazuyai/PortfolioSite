@@ -1,11 +1,14 @@
 import Link from "next/link";
 import styles from "@/styles/Footer.module.scss";
+import Image from "next/image";
 
 const Footer = () => {
   return (
     <footer className={`${styles.footer}`}>
       <Link href="/" className={styles.icon} scroll={false}>
-        <img src="./icon.png" alt=""/>
+        <div className={styles.img_container}>
+          <Image src="/icon.png" alt="" fill/>
+        </div>
       </Link>
       <nav>
         <ul>

@@ -3,6 +3,8 @@ import styles from "@/styles/sections/Skills.module.scss";
 import FadeinTitle from "../common/FadeinTitle";
 import useElementVisibility from "@/hooks/useElementVisibility";
 import Link from "next/link";
+import AutoSizeImage from "../common/AutoSizeImage";
+import Image from "next/image";
 
 interface SkillsProps {
   activeEvent: string | null;
@@ -34,7 +36,7 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Skills_01: (
     <div className={styles.eventContent}>
       <h2>Blenderを使った作品</h2>
-      <img src="/images/gallery/CloudWhale.png" alt="" />
+      <Image src="/images/gallery/CloudWhale.png" alt="クジラ雲" className={styles.eventImage} fill />
       <p>
         クジラ雲
       </p>
@@ -48,7 +50,7 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Skills_02: (
     <div className={styles.eventContent}>
       <h2>TypeScriptを使った作品</h2>
-      <img src="/images/projects/thumbnail.png" alt="" />
+      <Image src="/images/projects/thumbnail.png" alt="ポートフォリオサイト" className={styles.eventImage} fill />
       <p>
         ポートフォリオサイト
       </p>
@@ -62,7 +64,7 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Skills_03: (
     <div className={styles.eventContent}>
       <h2>Reactを使った作品</h2>
-      <img src="/images/projects/picpick.png" alt="" />
+      <Image src="/images/projects/picpick.png" alt="PicPick" className={styles.eventImage} fill />
       <p>
         PicPick
       </p>
@@ -76,7 +78,7 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Skills_04: (
     <div className={styles.eventContent}>
       <h2>Pythonを使った作品</h2>
-      <img src="/images/projects/lyrics_wordcloud.png" alt="" />
+      <Image src="/images/projects/lyrics_wordcloud.png" alt="歌詞ワードクラウド" className={styles.eventImage} fill />
       <p>
         歌詞ワードクラウド
       </p>
@@ -126,7 +128,7 @@ const Skills = ({ activeEvent }: SkillsProps) => {
         {
           skills.map((skill, index) => (
             <div key={index} className={styles.skillsBoxItem} style={{ animationDelay: `${index * 0.1}s` }}>
-              <img src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${skill.icon}`} />
+              <AutoSizeImage src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${skill.icon}`} alt={skill.name} className={styles.skillsBoxItemImage} />
               <h2>{skill.name}</h2>
             </div>
           ))
@@ -138,7 +140,7 @@ const Skills = ({ activeEvent }: SkillsProps) => {
         {
           tools.map((tool, index) => (
             <div key={index} className={styles.skillsBoxItem} style={{ animationDelay: `${skills.length * 0.1 + index * 0.1}s` }}>
-              <img src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tool.icon}`} />
+              <AutoSizeImage src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tool.icon}`} alt={tool.name} className={styles.skillsBoxItemImage} />
               <h2>{tool.name}</h2>
             </div>
           ))

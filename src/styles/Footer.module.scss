@@ -19,9 +19,20 @@
     width: fit-content;
     transition: all 0.15s ease-in-out;
     cursor: pointer;
-    img {
+
+    .img_container {
+      position: relative;
       height: 18vh;
+      width: auto;
+
+      img {
+        position: relative !important;
+        height: 100%;
+        width: auto;
+        object-fit: contain;
+      }
     }
+    
     &:hover {
       opacity: 0.6;
     }

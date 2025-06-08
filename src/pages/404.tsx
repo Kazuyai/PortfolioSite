@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from "@/styles/pages/404.module.scss";
+import Image from 'next/image';
 
 const Custom404 = () => {
   return (
@@ -13,7 +14,11 @@ const Custom404 = () => {
             URLが正しいか、ページが削除されていないかご確認ください。
           </p>
         </div>
-        <img src="./images/404.png" alt="404 Not Found" />
+        <Image
+          src="/images/404.png"
+          alt="404 Not Found"
+          fill
+        />
       </div>
     </div>
     </>

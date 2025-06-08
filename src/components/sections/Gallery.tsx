@@ -3,6 +3,8 @@ import styles from "@/styles/sections/Gallery.module.scss";
 import FadeinTitle from "../common/FadeinTitle";
 import useElementVisibility from "@/hooks/useElementVisibility";
 import Link from "next/link";
+import AutoSizeImage from "../common/AutoSizeImage";
+import Image from "next/image";
 
 interface GalleryProps {
   activeEvent: string | null;
@@ -34,7 +36,7 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Gallery_01: (
     <div className={styles.eventContent}>
       <h2>天体観測</h2>
-      <img src="/images/gallery/AstronomicalObservation.png" alt="" />
+      <Image src="/images/gallery/AstronomicalObservation.png" alt="天体観測" className={styles.eventImage} fill />
       <div className={styles.button}>
         <Link href="/gallery" scroll={false}>
           <span>詳細</span>
@@ -45,7 +47,7 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Gallery_02: (
     <div className={styles.eventContent}>
       <h2>クジラ雲</h2>
-      <img src="/images/gallery/CloudWhale.png" alt="" />
+      <Image src="/images/gallery/CloudWhale.png" alt="クジラ雲" className={styles.eventImage} fill />
       <div className={styles.button}>
         <Link href="/gallery" scroll={false}>
           <span>詳細</span>
@@ -56,7 +58,7 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Gallery_03: (
     <div className={styles.eventContent}>
       <h2>街灯</h2>
-      <img src="/images/gallery/StreetLamp.png" alt="" />
+      <Image src="/images/gallery/StreetLamp.png" alt="街灯" className={styles.eventImage} fill />
       <div className={styles.button}>
         <Link href="/gallery" scroll={false}>
           <span>詳細</span>
@@ -67,7 +69,7 @@ const eventContent: { [key: string]: JSX.Element } = {
   Event_Gallery_04: (
     <div className={styles.eventContent}>
       <h2>キャラクター</h2>
-      <img src="/images/gallery/Character.png" alt="" />
+      <Image src="/images/gallery/Character.png" alt="キャラクター" className={styles.eventImage} fill />
       <div className={styles.button}>
         <Link href="/gallery" scroll={false}>
           <span>詳細</span>
@@ -99,7 +101,7 @@ const Gallery = ({ activeEvent }: GalleryProps) => {
         {photos.map((photo, index) => (
           <div key={index} className={styles.galleryBoxItem}>
             <div className={styles.galleryBoxItemImage}>
-              <img src={photo.img} alt={photo.name} />
+              <AutoSizeImage src={photo.img} alt={photo.name} className={styles.galleryBoxItemImageInner} />
             </div>
           </div>
         ))}

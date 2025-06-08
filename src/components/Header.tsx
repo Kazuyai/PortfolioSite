@@ -1,6 +1,7 @@
 import styles from "@/styles/Header.module.scss";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import AutoSizeImage from "./common/AutoSizeImage";
 
 const Header = () => {
   const [isTop, setIsTop] = useState(true);
@@ -22,7 +23,8 @@ const Header = () => {
   return (
     <header className={`${styles.header} ${isTop ? styles.isTop : ""}`}>
       <Link href="/" className={styles.icon} scroll={false}>
-        <img src="./icon.png" alt=""/>
+        {/* <img src="./icon.png" alt=""/> */}
+        <AutoSizeImage src="/icon.png" alt="" className={styles.iconImage} />
         <h1 className={styles.title}>Kazuya Okamura</h1>
       </Link>
       <nav>
