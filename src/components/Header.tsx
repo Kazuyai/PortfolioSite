@@ -5,6 +5,7 @@ import AutoSizeImage from "./common/AutoSizeImage";
 
 const Header = () => {
   const [isTop, setIsTop] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,13 +22,21 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={`${styles.header} ${isTop ? styles.isTop : ""}`}>
+    <header className={`${styles.header} ${isTop ? styles.isTop : ""} ${isOpen ? styles.open : ""}`}>
       <Link href="/" className={styles.icon} scroll={false}>
         {/* <img src="./icon.webp" alt=""/> */}
         <AutoSizeImage src="/icon.webp" alt="" className={styles.iconImage} />
         <h1 className={styles.title}>Kazuya Okamura</h1>
       </Link>
-      <nav>
+      <div
+        className={styles.openButton + (isOpen ? ` ${styles.open}` : "")}
+        onClick={() => setIsOpen(!isOpen)} 
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav className={`${isOpen ? styles.open : ""}`}>
         <ul>
           <li>
             <Link href="/" scroll={false}>
