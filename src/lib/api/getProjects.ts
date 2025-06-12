@@ -39,5 +39,14 @@ export const getProjects = async (): Promise<Project[]> => {
     hasNext = offset < totalCount;
   }
 
+  // priorityが設定されていないプロジェクトを優先度0として扱う
+  allProjects.forEach((project) => {
+    if (project.priority === undefined) {
+      project.priority = 0; // デフォルトの優先度を0に設定
+    }
+  });
+  // 優先度でソート
+  allProjects.sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0));
+  
   return allProjects;
 };
