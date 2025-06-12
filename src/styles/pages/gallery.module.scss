@@ -9,6 +9,11 @@ $gap: 2rem;
   margin: 16rem 0;
   padding-inline: 10rem;
 
+  @media screen and (max-width: 768px) {
+    margin: 4rem 0;
+    padding-inline: 2rem;
+  }
+
   .item {
     break-inside: avoid;
     margin-bottom: $gap;
