@@ -40,10 +40,17 @@
   nav {
     display: flex;
     align-items: center;
+
     ul {
       display: flex;
       flex-direction: row;
       gap: 8rem;
+
+      @media screen and (max-width: 768px) {
+        gap: 3rem;
+        padding-inline: 2rem;
+      }
+
       li {
         height: fit-content;
         transition: all 0.15s ease-in-out;
