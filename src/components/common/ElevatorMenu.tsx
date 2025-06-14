@@ -3,7 +3,7 @@ import styles from "@/styles/common/ElevatorMenu.module.scss"
 import Link from 'next/link';
 
 interface ElevatorMenuProps {
-  sections: { id: string; label: string }[];
+  sections: { id: string; label: string, hasDetailPage: boolean }[];
 }
 
 const ElevatorMenu = ({ sections }: ElevatorMenuProps) => {
