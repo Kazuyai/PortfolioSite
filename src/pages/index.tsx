@@ -24,11 +24,11 @@ const hitBoxes = {
 
 const Home = () => {
   const sections = [
-    { id: "top", label: "Top", component: Top },
-    { id: "about", label: "About", component: About },
-    { id: "skills", label: "Skills", component: Skills },
-    { id: "projects", label: "Projects", component: Projects },
-    { id: "gallery", label: "Gallery", component: Gallery },
+    { id: "top", label: "Top", component: Top, hasDetailPage: false },
+    { id: "about", label: "About", component: About, hasDetailPage: false },
+    { id: "skills", label: "Skills", component: Skills, hasDetailPage: false },
+    { id: "projects", label: "Projects", component: Projects, hasDetailPage: true },
+    { id: "gallery", label: "Gallery", component: Gallery, hasDetailPage: true },
   ];
 
   const [activeEvent, setActiveEvent] = useState<string | null>(null);
