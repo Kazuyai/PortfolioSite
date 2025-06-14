@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import styles from "@/styles/common/ElevatorMenu.module.scss"
-import Link from 'next/link';
+import React, { useState } from "react";
+import styles from "@/styles/common/ElevatorMenu.module.scss";
+import Link from "next/link";
 
 interface ElevatorMenuProps {
-  sections: { id: string; label: string, hasDetailPage: boolean }[];
+  sections: { id: string; label: string; hasDetailPage: boolean }[];
 }
 
 const ElevatorMenu = ({ sections }: ElevatorMenuProps) => {
@@ -11,10 +11,7 @@ const ElevatorMenu = ({ sections }: ElevatorMenuProps) => {
 
   return (
     <div className={`${styles.elevatorMenu} ${isOpen ? styles.open : ""}`}>
-      <div 
-        className={styles.elevatorMenu__open_button}
-        onClick={() => setIsOpen(!isOpen)}  
-      >
+      <div className={styles.elevatorMenu__open_button} onClick={() => setIsOpen(!isOpen)}>
         <span></span>
         <span></span>
         <span></span>
@@ -26,7 +23,16 @@ const ElevatorMenu = ({ sections }: ElevatorMenuProps) => {
             <Link href={`#${section.id}`}>{sections.length - index}</Link>
           </div>
           <div className={styles.elevatorMenu__text}>
-            <p>{section.label}</p>
+            <div className={styles.elevatorMenu__text__container}>
+              <p>{section.label}</p>
+              {section.hasDetailPage && (
+                <div className={styles.elevatorMenu__detailLink__container}>
+                  <Link href={`/${section.id}`} className={styles.elevatorMenu__detailLink}>
+                    <span>詳細ページ</span>
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       ))}
@@ -55,7 +61,7 @@ const ElevatorMenu = ({ sections }: ElevatorMenuProps) => {
         </div>
       </div> */}
     </div>
-  )
-}
+  );
+};
 
-export default ElevatorMenu
+export default ElevatorMenu;
