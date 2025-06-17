@@ -125,8 +125,10 @@ const Projects = ({ activeEvent }: ProjectsProps) => {
       <FadeinTitle title="Projects" isVisible={isVisible} />
       <div className={styles.projectsBox}>
         {projects.map((project, index) => (
-          <div
+          <Link
             key={index}
+            href={`/projects/`}
+            scroll={false}
             className={styles.projectsBoxItem}
             style={{ animationDelay: `${1 + index * 0.2}s` }}
           >
@@ -141,7 +143,7 @@ const Projects = ({ activeEvent }: ProjectsProps) => {
               <h3>{project.name}</h3>
               <p>{project.description}</p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       <div className={styles.pageLink}>
