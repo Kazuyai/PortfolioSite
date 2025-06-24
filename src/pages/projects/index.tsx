@@ -58,11 +58,18 @@ const Index = ({ projects }: Props) => {
                     <span key={tech}>{tech}</span>
                   ))}
                 </div>
-                {selectedProject.url && (
-                  <div className={styles.link}>
-                    <Link href={selectedProject.url} target="_blank" rel="noopener noreferrer">
-                      公開ページへ
-                    </Link>
+                {(selectedProject.url || selectedProject.github) && (
+                  <div className={styles.links}>
+                    {selectedProject.github && (
+                      <Link className={styles.github} href={selectedProject.github} target="_blank" rel="noopener noreferrer">
+                        GitHubへ
+                      </Link>
+                    )}
+                    {selectedProject.url && (
+                      <Link className={styles.page} href={selectedProject.url} target="_blank" rel="noopener noreferrer">
+                        公開ページへ
+                      </Link>
+                    )}
                   </div>
                 )}
                 <div className={styles.date}>

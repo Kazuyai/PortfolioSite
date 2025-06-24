@@ -200,17 +200,28 @@
           }
         }
 
-        .link {
+        .links {
           display: flex;
           justify-content: center;
+          gap: 4rem;
           a {
             transition: all 0.1s ease-in-out;
             &::after {
               content: "\f08e";
               font-family: "Font Awesome 5 Free";
+              margin-left: 0.5em;
+            }
+            &.github {
+              &::before {
+                content: "\f09b";
+                font-family: "Font Awesome 5 Brands";
+                margin-right: 0.5em;
+              }
+            }
+            &::after,
+            &::before {
               font-weight: 600;
               font-size: 1.4rem;
-              margin-left: 0.5em;
             }
             &:hover {
               opacity: 0.6;
