@@ -76,7 +76,7 @@
         }
       }
     }
-  
+
     &Footer {
       position: relative;
       display: flex;
@@ -252,7 +252,13 @@
 
       .popupExplainBody {
         padding-inline: 2rem;
-        h2, h3 {
+        * {
+          line-height: 1.5;
+        }
+
+        h2,
+        h3,
+        h4 {
           margin-block: 4rem 2rem;
         }
         img {
@@ -261,6 +267,42 @@
           max-width: 50rem;
           height: auto;
           margin: 2rem auto;
+        }
+
+        ul {
+          padding-left: 2rem;
+          list-style: disc;
+        }
+
+        ol {
+          padding-left: 2rem;
+        }
+
+        li {
+          margin-top: 1rem;
+        }
+
+        hr {
+          margin-block: 4rem;
+        }
+
+        blockquote {
+          margin: 2rem 0;
+          padding-left: 1rem;
+          border-left: 0.5rem solid #ddd;
+          color: #666;
+        }
+
+        pre {
+          margin: 2rem 0;
+          padding: 1rem;
+          border-radius: 1rem;
+          background: #222;
+          color: #eee;
+          overflow-x: auto;
+          code {
+            font-family: "Courier New", Courier, monospace;
+          }
         }
       }
     }
