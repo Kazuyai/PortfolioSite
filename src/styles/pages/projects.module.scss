@@ -76,7 +76,7 @@
         }
       }
     }
-  
+
     &Footer {
       position: relative;
       display: flex;
@@ -256,7 +256,9 @@
           line-height: 1.5;
         }
 
-        h2, h3, h4 {
+        h2,
+        h3,
+        h4 {
           margin-block: 4rem 2rem;
         }
         img {
@@ -299,7 +301,7 @@
           color: #eee;
           overflow-x: auto;
           code {
-            font-family: 'Courier New', Courier, monospace;
+            font-family: "Courier New", Courier, monospace;
           }
         }
       }
