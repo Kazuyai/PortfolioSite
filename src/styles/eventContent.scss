@@ -1,0 +1,196 @@
+// グラスモーフィズム用のSCSS変数定義
+$glass-bg: rgba(20, 26, 46, 0.7);
+$glass-border: rgba(255, 255, 255, 0.15);
+$glass-glow: hsl(210, 100%, 70%);
+$glass-text: #ffffff;
+$glass-light-text: #f8faff;
+$glass-accent-text: #ffd580;
+
+// グラスモーフィズムの基本mixin
+@mixin glass-morphism($opacity: 0.7) {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04)),
+    rgba(20, 26, 46, $opacity);
+  border: 0.1rem solid $glass-border;
+  backdrop-filter: blur(1.5rem);
+  -webkit-backdrop-filter: blur(1.5rem);
+  filter: drop-shadow(0 1rem 3rem rgba(0, 0, 30, 0.4));
+  box-shadow: inset 0 0.1rem 0 rgba(255, 255, 255, 0.12), 0 0 0 0.1rem rgba(255, 255, 255, 0.03);
+}
+
+.eventContent {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  top: 50%;
+  left: 4%;
+  transform: translateY(-50%);
+  width: min(40rem, 32vw);
+  height: auto;
+  max-height: 60vh;
+  min-height: 30vh;
+  padding: 2.5rem;
+  @include glass-morphism(0.8);
+  border-radius: 2.5rem;
+  animation: fadeIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 9999;
+  overflow-y: auto;
+  box-sizing: border-box;
+  color: $glass-light-text;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      left: -96%;
+    }
+    to {
+      opacity: 1;
+      left: 4%;
+    }
+  }
+
+  h2 {
+    color: $glass-text;
+    text-shadow: 0 0 1.5rem rgba(255, 255, 255, 0.8), 0 0 3rem rgba(142, 197, 255, 0.6),
+      0 0.1rem 0.3rem rgba(0, 0, 0, 0.3);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  p {
+    color: $glass-light-text;
+    text-shadow: 0 0 1rem rgba(255, 255, 255, 0.7), 0 0.1rem 0.2rem rgba(0, 0, 0, 0.2);
+    text-align: center;
+    line-height: 1.6;
+    font-size: 1.4rem;
+
+    &.secretText {
+      color: transparent;
+
+      &::selection {
+        background: #0066cc;
+        color: white;
+      }
+    }
+  }
+
+  img {
+    position: relative !important;
+    width: 80% !important;
+    height: auto !important;
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+  }
+
+  .button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 12rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+    color: $glass-text;
+    background: rgba(255, 255, 255, 0.15);
+    border: 0.1rem solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(0.8rem);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 30, 0.2), inset 0 0.1rem 0 rgba(255, 255, 255, 0.2);
+    text-shadow: 0 0 1rem rgba(255, 255, 255, 0.8), 0 0.1rem 0.2rem rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-size: 1.4rem;
+
+    span {
+      position: relative;
+      z-index: 1;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -0.2rem;
+      left: -0.2rem;
+      width: calc(100% + 0.4rem);
+      height: calc(100% + 0.4rem);
+      transform: translateX(calc(-100% + 1rem));
+      border-radius: 0.8rem;
+      background: linear-gradient(45deg, #8ec5ff, #bba8ff, #ffd6a8);
+      pointer-events: none;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      border-radius: 1rem;
+      border: 0.2rem solid rgba(255, 255, 255, 0.3);
+      color: $glass-light-text;
+      transition: color 0.2s ease-in-out;
+    }
+
+    &:hover {
+      &::before {
+        transform: translateX(0);
+      }
+      a {
+        color: $glass-text;
+      }
+    }
+  }
+
+  // レスポンシブ対応
+  @media screen and (max-width: 1200px) {
+    width: min(38rem, 35vw);
+    left: 3%;
+    padding: 2.2rem;
+    gap: 1.3rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: min(32rem, 85vw);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    gap: 1.2rem;
+    max-height: min(40rem, 70vh);
+    min-height: 18rem;
+    border-radius: 2rem;
+
+    .button {
+      width: 12rem;
+      height: 3.5rem;
+      font-size: 1.4rem;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    width: min(28rem, 90vw);
+    padding: 1.8rem;
+    gap: 1rem;
+    max-height: min(35rem, 75vh);
+    min-height: 15rem;
+    border-radius: 1.5rem;
+
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.3rem;
+      line-height: 1.5;
+    }
+
+    .button {
+      width: 10rem;
+      height: 3rem;
+      font-size: 1.2rem;
+    }
+  }
+}

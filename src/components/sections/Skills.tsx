@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "@/styles/sections/Skills.module.scss";
 import FadeinTitle from "../common/FadeinTitle";
 import useElementVisibility from "@/hooks/useElementVisibility";
 import Link from "next/link";
 import AutoSizeImage from "../common/AutoSizeImage";
 import Image from "next/image";
+import { useEvent } from "@/contexts/EventContext";
 
-interface SkillsProps {
-  activeEvent: string | null;
-}
 
 export const collisionData: {
   position: [number, number, number];
@@ -32,71 +30,6 @@ export const eventData: {
   { id: "Event_Skills_04", position: [-2, -26, 0.4], size: [1, 2, 2] },
 ];
 
-const eventContent: { [key: string]: JSX.Element } = {
-  Event_Skills_01: (
-    <div className={styles.eventContent}>
-      <h2>Blenderを使った作品</h2>
-      <Image
-        src="/images/gallery/CloudWhale.webp"
-        alt="クジラ雲"
-        className={styles.eventImage}
-        fill
-      />
-      <p>クジラ雲</p>
-      <div className={styles.button}>
-        <Link href="/gallery" scroll={false}>
-          <span>詳細</span>
-        </Link>
-      </div>
-    </div>
-  ),
-  Event_Skills_02: (
-    <div className={styles.eventContent}>
-      <h2>TypeScriptを使った作品</h2>
-      <Image
-        src="/images/projects/thumbnail.webp"
-        alt="ポートフォリオサイト"
-        className={styles.eventImage}
-        fill
-      />
-      <p>ポートフォリオサイト</p>
-      <div className={styles.button}>
-        <Link href="/projects" scroll={false}>
-          <span>詳細</span>
-        </Link>
-      </div>
-    </div>
-  ),
-  Event_Skills_03: (
-    <div className={styles.eventContent}>
-      <h2>Reactを使った作品</h2>
-      <Image src="/images/projects/picpick.webp" alt="PicPick" className={styles.eventImage} fill />
-      <p>PicPick</p>
-      <div className={styles.button}>
-        <Link href="/projects" scroll={false}>
-          <span>詳細</span>
-        </Link>
-      </div>
-    </div>
-  ),
-  Event_Skills_04: (
-    <div className={styles.eventContent}>
-      <h2>Pythonを使った作品</h2>
-      <Image
-        src="/images/projects/lyrics_wordcloud.webp"
-        alt="歌詞ワードクラウド"
-        className={styles.eventImage}
-        fill
-      />
-      <p>歌詞ワードクラウド</p>
-      <div className={styles.button}>
-        <Link href="/projects" scroll={false}>
-          <span>詳細</span>
-        </Link>
-      </div>
-    </div>
-  ),
-};
 
 const skills = [
   { name: "TypeScript", icon: "typescript/typescript-original.svg" },
@@ -124,8 +57,76 @@ const tools = [
   { name: "Firebase", icon: "firebase/firebase-plain.svg" },
 ];
 
-const Skills = ({ activeEvent }: SkillsProps) => {
+const Skills = () => {
   const { ref, isVisible } = useElementVisibility({ threshold: 0.1 });
+  const { registerEventContent } = useEvent();
+
+  useEffect(() => {
+    // イベントコンテンツをContextに登録
+    registerEventContent("Event_Skills_01",
+      <div>
+        <h2>Blenderを使った作品</h2>
+        <Image
+          src="/images/gallery/CloudWhale.webp"
+          alt="クジラ雲"
+          fill
+        />
+        <p>クジラ雲</p>
+        <div className="button">
+          <Link href="/gallery" scroll={false}>
+            <span>詳細</span>
+          </Link>
+        </div>
+      </div>
+    );
+
+    registerEventContent("Event_Skills_02",
+      <div>
+        <h2>TypeScriptを使った作品</h2>
+        <Image
+          src="/images/gallery/yakumo.webp"
+          alt="ポートフォリオサイト"
+          fill
+        />
+        <p>ポートフォリオサイト</p>
+        <div className="button">
+          <Link href="/projects" scroll={false}>
+            <span>詳細</span>
+          </Link>
+        </div>
+      </div>
+    );
+
+    registerEventContent("Event_Skills_03",
+      <div>
+        <h2>Reactを使った作品</h2>
+        <Image src="/images/projects/picpick.webp" alt="PicPick" fill />
+        <p>PicPick</p>
+        <div className="button">
+          <Link href="/projects" scroll={false}>
+            <span>詳細</span>
+          </Link>
+        </div>
+      </div>
+    );
+
+    registerEventContent("Event_Skills_04",
+      <div>
+        <h2>Pythonを使った作品</h2>
+        <Image
+          src="/images/projects/lyrics_wordcloud.webp"
+          alt="歌詞ワードクラウド"
+          fill
+        />
+        <p>歌詞ワードクラウド</p>
+        <div className="button">
+          <Link href="/projects" scroll={false}>
+            <span>詳細</span>
+          </Link>
+        </div>
+      </div>
+    );
+  }, [registerEventContent]);
 
   return (
     <section
@@ -169,7 +170,6 @@ const Skills = ({ activeEvent }: SkillsProps) => {
           </div>
         ))}
       </div>
-      {activeEvent && eventContent[activeEvent]}
     </section>
   );
 };

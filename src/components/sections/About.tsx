@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "@/styles/sections/About.module.scss";
 import FadeinTitle from "../common/FadeinTitle";
 import useElementVisibility from "@/hooks/useElementVisibility";
 import Link from "next/link";
 import AutoSizeImage from "../common/AutoSizeImage";
-
-interface AboutProps {
-  activeEvent: string | null;
-}
+import { useEvent } from "@/contexts/EventContext";
 
 export const collisionData: {
   position: [number, number, number];
@@ -17,7 +14,7 @@ export const collisionData: {
   { position: [-4, -14, 3], size: [1, 2, 8] },
   { position: [3, -14, -3.5], size: [8, 2, 1] },
   { position: [7, -14, 0], size: [1, 2, 14] },
-  { position: [1, -14, 7], size: [12, 2, 1] },  
+  { position: [1, -14, 7], size: [12, 2, 1] },
 ];
 
 export const eventData: {
@@ -26,21 +23,25 @@ export const eventData: {
   size: [number, number, number];
 }[] = [{ id: "Event_About_01", position: [1, -14, -2], size: [2, 2, 1] }];
 
-const eventContent: { [key: string]: JSX.Element } = {
-  Event_About_01: (
-    <div className={styles.eventContent}>
-      <h2>ひみつのへや</h2>
-      <p>この建物のどこかに&quot;ひみつのへや&quot;が...</p>
-      <br></br>
-      <p>↓ ↓ ↓</p>
-      <p className={styles.secretText}>Projects階に…？</p>
-      <p>↑ ↑ ↑</p>
-    </div>
-  ),
-};
-
-const About = ({ activeEvent }: AboutProps) => {
+const About = () => {
   const { ref, isVisible } = useElementVisibility({ threshold: 0.1 });
+  const { registerEventContent } = useEvent();
+
+  useEffect(() => {
+    // イベントコンテンツをContextに登録
+    registerEventContent(
+      "Event_About_01",
+      <div>
+        <h2>ひみつのへや</h2>
+        <p>この建物のどこかに&quot;ひみつのへや&quot;が...</p>
+        <br></br>
+        <p>↓ ↓ ↓</p>
+        <p className="secretText">Projects階に…？</p>
+        <p>↑ ↑ ↑</p>
+      </div>
+    );
+  }, [registerEventContent]);
+
   return (
     <section ref={ref} id="about" className={`${styles.about} ${isVisible ? styles.visible : ""}`}>
       <FadeinTitle title="About" isVisible={isVisible} />
@@ -64,12 +65,14 @@ const About = ({ activeEvent }: AboutProps) => {
           <Link href="https://github.com/Kazuyai" target="_blank" rel="noopener noreferrer">
             <figure>
               {/* <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub" /> */}
-              <AutoSizeImage src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub" />
+              <AutoSizeImage
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
+                alt="GitHub"
+              />
             </figure>
           </Link>
         </div>
       </div>
-      {activeEvent && eventContent[activeEvent]}
     </section>
   );
 };
