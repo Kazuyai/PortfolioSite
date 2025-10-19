@@ -84,7 +84,7 @@ const Skills = () => {
       <div>
         <h2>TypeScriptを使った作品</h2>
         <Image
-          src="/images/gallery/yakumo.webp"
+          src="/images/projects/thumbnail.webp"
           alt="ポートフォリオサイト"
           fill
         />
