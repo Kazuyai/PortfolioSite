@@ -4,9 +4,16 @@ $primaryColor: #e0e5ec;
 
 .skills {
   @include common.section($primaryColor);
+
   &SubTitle {
     margin-block: 8rem 3rem;
     font-size: 2rem;
+    color: common.$glass-text;
+    text-shadow:
+      0 0 1.5rem rgba(255, 255, 255, 0.7),
+      0 0 3rem rgba(142, 197, 255, 0.5);
+    font-weight: 600;
+    text-align: center;
   }
 
   &.visible {
@@ -40,21 +47,40 @@ $primaryColor: #e0e5ec;
       width: 9.2rem;
       padding: 1.8rem 1rem;
       opacity: 0;
-      background: $primaryColor;
+      @include common.glass-morphism(0.6);
       border-radius: 1rem;
-      @include common.neu($primaryColor);
+      transition: all 0.3s ease;
+
       &:hover {
+        transform: translateY(-0.5rem);
+        @include common.glass-morphism(0.8);
+        box-shadow:
+          0 1rem 3rem rgba(0, 0, 30, 0.4),
+          inset 0 0.1rem 0 rgba(255, 255, 255, 0.12),
+          0 0 0 0.1rem rgba(255, 255, 255, 0.03),
+          0 0 2rem rgba(142, 197, 255, 0.3);
+
         img {
           transform: scale(1.2);
+          filter: brightness(1.2) drop-shadow(0 0 1rem rgba(255, 255, 255, 0.5));
         }
       }
+
       img {
         width: 5rem !important;
-        transition: all 0.2s;
+        transition: all 0.3s ease;
+        filter: brightness(1.1) contrast(1.1);
       }
+
       h2 {
         margin-top: 1.8rem;
         font-size: 1.4rem;
+        color: common.$glass-text;
+        text-align: center;
+        text-shadow:
+          0 0 1rem rgba(255, 255, 255, 0.8),
+          0 0.1rem 0.3rem rgba(0, 0, 0, 0.3);
+        font-weight: 600;
       }
     }
   }
