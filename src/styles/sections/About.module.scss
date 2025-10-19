@@ -10,41 +10,167 @@ $primaryColor: #a8b9ec;
     margin-top: 5rem;
     font-size: 1.8rem;
     text-align: center;
+    line-height: 1.9;
+    color: common.$glass-light-text;
 
     &.name {
-      font-size: 2rem;
-      font-weight: bold;
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin: 0.25rem 0 0.4rem;
+      position: relative;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      @include common.gradient-text();
+
+      /* グラデーション下線 */
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -0.6rem;
+        height: 0.3rem;
+        width: 100%;
+        border-radius: 99.9rem;
+        background: linear-gradient(90deg, #8ec5ff, #bba8ff 45%, #ffd6a8);
+        box-shadow: 0 0 1rem rgba(142, 197, 255, 0.35);
+      }
     }
 
     &.left {
       text-align: left;
+      position: relative;
+      padding-left: 1.4rem;
+
+      /* アクセントバー */
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.35em;
+        bottom: 0.35em;
+        width: 0.3rem;
+        border-radius: 0.3rem;
+        background: linear-gradient(180deg, #8ec5ff, #bba8ff 60%, #ffd6a8);
+        opacity: .8;
+      }
     }
   }
+
   .links {
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin-top: 5rem;
+    gap: 1.6rem;
+
     .link {
-      margin: 2rem;
-      border-radius: 100rem;
-      @include common.neu($primaryColor);
-      &:hover {
-        @include common.neu-inset($primaryColor);
-      }
+      @include common.glass-button();
+
       a {
         display: block;
-        padding: 1rem;
+        padding: 1.5rem;
+        border-radius: 50%;
+        position: relative;
+        z-index: 1;
+
         figure {
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 1rem;
+
           img {
-            width: 5rem !important;
+            width: 4rem !important;
+            height: 4rem !important;
+            transition: all 0.4s ease;
+            filter: brightness(0.9) contrast(1.2);
+          }
+        }
+
+        &:hover figure img {
+          filter: brightness(1.3) contrast(1.1);
+        }
+      }
+    }
+  }
+
+  .secretText {
+    font-weight: 700;
+    color: common.$glass-accent-text;
+    text-shadow: 0 0 0.8rem rgba(255, 221, 164, .28);
+  }
+
+  /* レスポンシブ対応 */
+  @media screen and (max-width: 768px) {
+    padding: 3rem 2rem;
+    border-radius: 1.6rem;
+
+    p {
+      font-size: 1.6rem;
+      margin-top: 3rem;
+
+      &.name {
+        font-size: 2.4rem;
+      }
+
+      &.left {
+        padding-left: 1.2rem;
+        font-size: 1.5rem;
+      }
+    }
+
+    .links {
+      gap: 1.2rem;
+      margin-top: 3rem;
+
+      .link {
+        a {
+          padding: 1.2rem;
+
+          figure img {
+            width: 3.5rem !important;
+            height: 3.5rem !important;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    padding: 2rem 1.5rem;
+
+    p {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+
+      &.name {
+        font-size: 2rem;
+      }
+
+      &.left {
+        padding-left: 1rem;
+        font-size: 1.3rem;
+      }
+    }
+
+    .links {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+
+      .link {
+        a {
+          padding: 1rem;
+
+          figure img {
+            width: 3rem !important;
+            height: 3rem !important;
           }
         }
       }
     }
   }
 }
+

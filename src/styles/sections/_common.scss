@@ -1,51 +1,159 @@
+// グラスモーフィズム用のSCSS変数定義
+$glass-bg: rgba(20, 26, 46, 0.7);
+$glass-border: rgba(255, 255, 255, 0.15);
+$glass-glow: hsl(210, 100%, 70%);
+$glass-text: #ffffff;
+$glass-light-text: #f8faff;
+$glass-accent-text: #ffd580;
+
+// グラスモーフィズムの基本mixin
+@mixin glass-morphism($opacity: 0.7) {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04)),
+    rgba(20, 26, 46, $opacity);
+  border: 0.1rem solid $glass-border;
+  backdrop-filter: blur(1.5rem);
+  -webkit-backdrop-filter: blur(1.5rem);
+  filter: drop-shadow(0 1rem 3rem rgba(0, 0, 30, 0.4));
+  box-shadow: inset 0 0.1rem 0 rgba(255, 255, 255, 0.12), 0 0 0 0.1rem rgba(255, 255, 255, 0.03);
+}
+
+// 星屑効果のmixin
+@mixin starfield-overlay() {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -0.1rem;
+    pointer-events: none;
+    border-radius: inherit;
+    background: radial-gradient(
+        0.2rem 0.2rem at 15% 20%,
+        rgba(255, 255, 255, 0.35),
+        transparent 55%
+      ),
+      radial-gradient(0.2rem 0.2rem at 85% 40%, rgba(255, 255, 255, 0.25), transparent 55%),
+      radial-gradient(0.15rem 0.15rem at 60% 10%, rgba(255, 255, 255, 0.22), transparent 55%),
+      radial-gradient(0.12rem 0.12rem at 35% 80%, rgba(255, 255, 255, 0.18), transparent 55%);
+    mask: linear-gradient(#000, transparent 85%);
+  }
+}
+
+// グラデーションテキストのmixin
+@mixin gradient-text(
+  $colors: (
+    #8ec5ff,
+    #bba8ff,
+    #ffd6a8,
+  )
+) {
+  background: linear-gradient(
+    90deg,
+    #{nth($colors, 1)},
+    #{nth($colors, 2)} 45%,
+    #{nth($colors, 3)}
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 1rem rgba(255, 255, 255, 0.5));
+}
+
+// 高視認性タイトルのmixin
+@mixin high-visibility-title() {
+  color: $glass-text;
+  text-shadow: 0 0 2rem rgba(255, 255, 255, 0.8), 0 0 4rem rgba(142, 197, 255, 0.6),
+    0 0.2rem 0.8rem rgba(0, 0, 0, 0.3);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+// グラスボタンのmixin
+@mixin glass-button($size: 4rem) {
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 0.1rem solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(1rem);
+  -webkit-backdrop-filter: blur(1rem);
+  box-shadow: 0 0.8rem 3.2rem rgba(0, 0, 30, 0.3), inset 0 0.1rem 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -0.1rem;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #8ec5ff, #bba8ff, #ffd6a8);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+  }
+
+  &:hover {
+    transform: translateY(-0.5rem) scale(1.05);
+    box-shadow: 0 1.6rem 4.8rem rgba(0, 0, 30, 0.4), 0 0 2rem rgba(142, 197, 255, 0.3),
+      inset 0 0.1rem 0 rgba(255, 255, 255, 0.3);
+
+    &::before {
+      opacity: 0.2;
+    }
+  }
+}
+
+// 従来のニューモーフィズム（互換性のため残す）
 @mixin neu($bg: #e0e0e0) {
   transition: box-shadow 0.2s ease-in-out;
   background-color: $bg;
-  box-shadow: 
-  0.5rem 0.5rem 1.2rem darken($bg, 10%), 
-  -0.5rem -0.5rem 1.2rem lighten($bg, 10%),
-  inset 0.5rem 0.5rem 1.2rem transparent,
-  inset -0.5rem -0.5rem 1.2rem transparent;
+  box-shadow: 0.5rem 0.5rem 1.2rem darken($bg, 10%), -0.5rem -0.5rem 1.2rem lighten($bg, 10%),
+    inset 0.5rem 0.5rem 1.2rem transparent, inset -0.5rem -0.5rem 1.2rem transparent;
 }
 
 @mixin neu-inset($bg: #e0e0e0) {
   background-color: $bg;
-  box-shadow:
-    0.5rem 0.5rem 1.2rem transparent,
-    -0.5rem -0.5rem 1.2rem transparent, 
-    inset 0.5rem 0.5rem 1.2rem darken($bg, 10%),
-    inset -0.5rem -0.5rem 1.2rem lighten($bg, 10%);
+  box-shadow: 0.5rem 0.5rem 1.2rem transparent, -0.5rem -0.5rem 1.2rem transparent,
+    inset 0.5rem 0.5rem 1.2rem darken($bg, 10%), inset -0.5rem -0.5rem 1.2rem lighten($bg, 10%);
 }
 
-@mixin section($primaryColor: #e0e0e0) {
+@mixin section($primaryColor: #e0e0e0, $useGlass: true) {
   width: 100%;
   max-width: 1000px;
   min-height: 250vh;
   margin: 25vh auto;
   padding: 5rem 3rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   border-radius: 0 5rem 5rem 0;
   opacity: 0;
-  background-color: $primaryColor;
+  position: relative;
+  color: $glass-text;
+  overflow: hidden;
+
+  @if $useGlass {
+    @include glass-morphism();
+    @include starfield-overlay();
+  } @else {
+    background-color: $primaryColor;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  }
   &:last-of-type {
     margin-bottom: 5vh;
   }
   &.visible {
-    animation: expand 1s ease-in-out forwards;
-    @keyframes expand {
-      0% {
-        opacity: 1;
-        clip-path: polygon(0 0, 0 0, 0 10rem, 0 10rem);
-        border-radius: 0;
+    animation: sectionPop 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    @keyframes sectionPop {
+      from {
+        opacity: 0;
+        // transform: translateY(0.8rem) scale(0.995);
       }
-      30% {
+      to {
         opacity: 1;
-        clip-path: polygon(0 0, 100% 0, 100% 10rem, 0 10rem);
+        // transform: translateY(0) scale(1);
       }
-      100% {
-        opacity: 1;
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-      }
+    }
+  }
+
+  /* アニメーション無効化（アクセシビリティ） */
+  @media (prefers-reduced-motion: reduce) {
+    &.visible {
+      animation: none;
     }
   }
 
@@ -63,6 +171,11 @@
       height: 100vh;
       margin-bottom: 3rem;
       font-size: 8rem;
+      @include high-visibility-title();
+
+      @media screen and (max-width: 768px) {
+        font-size: 6rem;
+      }
     }
   }
 
@@ -73,48 +186,68 @@
       display: block;
       width: fit-content;
       margin: 0 auto;
-      padding-inline: 0.3rem;
+      padding-inline: 0.8rem;
+      padding-block: 0.5rem;
       text-align: center;
       text-decoration: none;
       outline: none;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: $glass-text;
+      text-shadow: 0 0 1.5rem rgba(255, 255, 255, 0.9), 0 0 3rem rgba(142, 197, 255, 0.7),
+        0 0.1rem 0.3rem rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease-in-out;
+
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -0.5rem;
         left: 0;
         width: 100%;
-        height: 0.18rem;
+        height: 0.2rem;
         border-radius: 1rem;
-        background-color: #222;
+        background: linear-gradient(90deg, #8ec5ff, #bba8ff, #ffd6a8);
+        box-shadow: 0 0 1rem rgba(142, 197, 255, 0.6), 0 0 2rem rgba(187, 168, 255, 0.4);
         transform: scale(0, 1);
         transform-origin: right;
-        transition: transform 0.2s ease-in-out;
+        transition: transform 0.3s ease-in-out;
       }
-      &:hover::after {
-        transform: scale(1, 1);
-        transform-origin: left;
+
+      &:hover {
+        color: $glass-text;
+        text-shadow: 0 0 2rem rgba(255, 255, 255, 1), 0 0 4rem rgba(142, 197, 255, 0.9),
+          0 0 6rem rgba(187, 168, 255, 0.6), 0 0.1rem 0.4rem rgba(0, 0, 0, 0.5);
+
+        &::after {
+          transform: scale(1, 1);
+          transform-origin: left;
+          box-shadow: 0 0 1.5rem rgba(142, 197, 255, 0.8), 0 0 3rem rgba(187, 168, 255, 0.6);
+        }
       }
     }
   }
 
   .eventContent {
-    $bgColor: #eee;
     position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
     top: 50%;
     left: 4%;
     transform: translateY(-50%);
-    width: 32%;
-    height: 80%;
-    padding: 3rem;
-    background-color: $bgColor;
-    border-radius: 5rem;
-    box-shadow: 0 0 3rem rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.2s ease-in-out;
-    z-index: 2;
+    width: min(40rem, 32vw);
+    height: auto;
+    max-height: 60vh;
+    min-height: 30vh;
+    padding: 2.5rem;
+    @include glass-morphism(0.8);
+    border-radius: 2.5rem;
+    animation: fadeIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 9999;
+    overflow-y: auto;
+    box-sizing: border-box;
+    color: $glass-light-text;
 
     @keyframes fadeIn {
       from {
@@ -127,15 +260,31 @@
       }
     }
 
+    h2 {
+      color: $glass-text;
+      text-shadow: 0 0 1.5rem rgba(255, 255, 255, 0.8), 0 0 3rem rgba(142, 197, 255, 0.6),
+        0 0.1rem 0.3rem rgba(0, 0, 0, 0.3);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
     p {
+      color: $glass-light-text;
+      text-shadow: 0 0 1rem rgba(255, 255, 255, 0.7), 0 0.1rem 0.2rem rgba(0, 0, 0, 0.2);
+
       &.secretText {
-        color: $bgColor;
+        color: transparent;
+
+        &::selection {
+          background: #0066cc;
+          color: white;
+        }
       }
     }
 
     img {
       position: relative !important;
-      width: 80%  !important;
+      width: 80% !important;
       height: auto !important;
       object-fit: cover;
       border-radius: 1rem;
@@ -150,8 +299,12 @@
       width: 15rem;
       height: 4rem;
       border-radius: 1rem;
-      color: #222;
-      background: $bgColor;
+      color: $glass-text;
+      background: rgba(255, 255, 255, 0.15);
+      border: 0.1rem solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(0.8rem);
+      box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 30, 0.2), inset 0 0.1rem 0 rgba(255, 255, 255, 0.2);
+      text-shadow: 0 0 1rem rgba(255, 255, 255, 0.8), 0 0.1rem 0.2rem rgba(0, 0, 0, 0.3);
       overflow: hidden;
 
       span {
@@ -160,7 +313,7 @@
       }
 
       &::before {
-        content: '';
+        content: "";
         position: absolute;
         top: -0.2rem;
         left: -0.2rem;
@@ -168,7 +321,7 @@
         height: calc(100% + 0.4rem);
         transform: translateX(calc(-100% + 1rem));
         border-radius: 0.8rem;
-        background-color: #222;
+        background: linear-gradient(45deg, #8ec5ff, #bba8ff, #ffd6a8);
         pointer-events: none;
         transition: transform 0.2s ease-in-out;
       }
@@ -180,8 +333,8 @@
         width: 100%;
         height: 100%;
         border-radius: 1rem;
-        border: 0.2rem solid #222;
-        color: #222;
+        border: 0.2rem solid rgba(255, 255, 255, 0.3);
+        color: $glass-light-text;
         transition: color 0.2s ease-in-out;
       }
 
@@ -190,8 +343,58 @@
           transform: translateX(0);
         }
         a {
-          color: $bgColor;
+          color: $glass-text;
         }
+      }
+    }
+
+    // レスポンシブ対応
+    @media screen and (max-width: 1200px) {
+      width: min(38rem, 35vw);
+      left: 3%;
+      padding: 2.2rem;
+      gap: 1.3rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: min(32rem, 85vw);
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 2rem;
+      gap: 1.2rem;
+      max-height: min(40rem, 70vh);
+      min-height: 18rem;
+      border-radius: 2rem;
+
+      .button {
+        width: 12rem;
+        height: 3.5rem;
+        font-size: 1.4rem;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      width: min(28rem, 90vw);
+      padding: 1.8rem;
+      gap: 1rem;
+      max-height: min(35rem, 75vh);
+      min-height: 15rem;
+      border-radius: 1.5rem;
+
+      h2 {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        font-size: 1.3rem;
+        line-height: 1.5;
+      }
+
+      .button {
+        width: 10rem;
+        height: 3rem;
+        font-size: 1.2rem;
       }
     }
   }

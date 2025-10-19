@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "@/styles/sections/Projects.module.scss";
 import FadeinTitle from "../common/FadeinTitle";
 import useElementVisibility from "@/hooks/useElementVisibility";
 import Link from "next/link";
 import AutoSizeImage from "../common/AutoSizeImage";
 import Image from "next/image";
+import { useEvent } from "@/contexts/EventContext";
 
-interface ProjectsProps {
-  activeEvent: string | null;
-}
 
 export const collisionData: {
   position: [number, number, number];
@@ -36,58 +34,6 @@ export const eventData: {
   { id: "SECRET", position: [-5.5, -38, 2], size: [1, 2, 1] },
 ];
 
-const eventContent: { [key: string]: JSX.Element } = {
-  Event_Projects_01: (
-    <div className={styles.eventContent}>
-      <h2>ハノイの塔</h2>
-      <Image
-        src="/images/projects/hanoi.webp"
-        alt="ハノイの塔"
-        className={styles.eventImage}
-        fill
-      />
-      <p>大谷研究室の夏合宿恒例の「ハノイの塔」を遊べる作品です。</p>
-      <div className={styles.button}>
-        <Link href="/projects" scroll={false}>
-          <span>詳細</span>
-        </Link>
-      </div>
-    </div>
-  ),
-  Event_Projects_02: (
-    <div className={styles.eventContent}>
-      <h2>PicPick</h2>
-      <Image src="/images/projects/picpick.webp" alt="PicPick" className={styles.eventImage} fill />
-      <p>
-        2024年の大谷研究室の夏合宿ハッカソンでチームで作成した作品です。
-        <br />
-        気に入った写真を選んでいくだけで、旅行の計画を立てられるWebサービスです。
-      </p>
-      <div className={styles.button}>
-        <Link href="/projects" scroll={false}>
-          <span>詳細</span>
-        </Link>
-      </div>
-    </div>
-  ),
-  Event_Projects_03: (
-    <div className={styles.eventContent}>
-      <h2>ポートフォリオサイト</h2>
-      <Image
-        src="/images/projects/thumbnail.webp"
-        alt="ポートフォリオサイト"
-        className={styles.eventImage}
-        fill
-      />
-      <p>自分のポートフォリオサイトです。</p>
-      <div className={styles.button}>
-        <Link href="/projects" scroll={false}>
-          <span>詳細</span>
-        </Link>
-      </div>
-    </div>
-  ),
-};
 
 const projects = [
   {
@@ -113,8 +59,63 @@ const projects = [
   },
 ];
 
-const Projects = ({ activeEvent }: ProjectsProps) => {
+const Projects = () => {
   const { ref, isVisible } = useElementVisibility({ threshold: 0.1 });
+  const { registerEventContent } = useEvent();
+
+  useEffect(() => {
+    // イベントコンテンツをContextに登録
+    registerEventContent("Event_Projects_01",
+      <div>
+        <h2>ハノイの塔</h2>
+        <Image
+          src="/images/projects/hanoi.webp"
+          alt="ハノイの塔"
+          fill
+        />
+        <p>大谷研究室の夏合宿恒例の「ハノイの塔」を遊べる作品です。</p>
+        <div className="button">
+          <Link href="/projects" scroll={false}>
+            <span>詳細</span>
+          </Link>
+        </div>
+      </div>
+    );
+
+    registerEventContent("Event_Projects_02",
+      <div>
+        <h2>PicPick</h2>
+        <Image src="/images/projects/picpick.webp" alt="PicPick" fill />
+        <p>
+          2024年の大谷研究室の夏合宿ハッカソンでチームで作成した作品です。
+          <br />
+          気に入った写真を選んでいくだけで、旅行の計画を立てられるWebサービスです。
+        </p>
+        <div className="button">
+          <Link href="/projects" scroll={false}>
+            <span>詳細</span>
+          </Link>
+        </div>
+      </div>
+    );
+
+    registerEventContent("Event_Projects_03",
+      <div>
+        <h2>ポートフォリオサイト</h2>
+        <Image
+          src="/images/projects/thumbnail.webp"
+          alt="ポートフォリオサイト"
+          fill
+        />
+        <p>自分のポートフォリオサイトです。</p>
+        <div className="button">
+          <Link href="/projects" scroll={false}>
+            <span>詳細</span>
+          </Link>
+        </div>
+      </div>
+    );
+  }, [registerEventContent]);
 
   return (
     <section
@@ -151,8 +152,6 @@ const Projects = ({ activeEvent }: ProjectsProps) => {
           VIEW MORE
         </Link>
       </div>
-
-      {activeEvent && eventContent[activeEvent]}
     </section>
   );
 };

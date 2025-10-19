@@ -1,4 +1,5 @@
 import "@/styles/globals.scss";
+import "@/styles/eventContent.scss";
 import "@/styles/Home.module.scss";
 import "@/styles/sections/About.module.scss";
 import "@/styles/sections/Gallery.module.scss";

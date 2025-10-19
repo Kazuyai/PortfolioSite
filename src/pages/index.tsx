@@ -11,6 +11,8 @@ import Projects, { collisionData as projectsCollision, eventData as projectsEven
 import Gallery, { collisionData as galleryCollision, eventData as galleryEvents } from "@/components/sections/Gallery";
 import React, { useEffect, useState } from "react";
 import { useSectionProgress } from "@/hooks/useSectionProgress";
+import { EventProvider } from "@/contexts/EventContext";
+import GlobalEventPopup from "@/components/common/GlobalEventPopup";
 
 const R3FCanvas = dynamic(() => import("@/components/R3FCanvas"), { ssr: false });
 
@@ -96,8 +98,9 @@ const Home = () => {
         <meta name="description" content="3D Model Showcase" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      {showLoading && <Loading progress={totalProgress} startFadeOut={startFadeOut} />}
-      <div className={styles.vignette}></div>
+      <EventProvider activeEvent={activeEvent} setActiveEvent={setActiveEvent}>
+        {showLoading && <Loading progress={totalProgress} startFadeOut={startFadeOut} />}
+        <div className={styles.vignette}></div>
       <R3FCanvas
         spacerRefs={spacerRefs}
         currentSection={sections[currentIndex]?.id || "top"}
@@ -115,7 +118,7 @@ const Home = () => {
           return (
             <React.Fragment key={id}>
               {/* section */}
-              <SectionComp activeEvent={activeEvent} />
+              <SectionComp />
 
               {/* section間にspacerを配置 */}
               {idx < sections.length - 1 && (
@@ -137,6 +140,8 @@ const Home = () => {
           );
         })}
       </div>
+      <GlobalEventPopup />
+      </EventProvider>
       {/* {!isOpeningAnimationFinished && <Loading />} */}
     </>
   );
