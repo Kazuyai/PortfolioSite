@@ -20,7 +20,7 @@
     "gsap": "^3.12.7",
     "microcms-js-sdk": "^3.2.0",
     "motion": "^12.9.4",
-    "next": "15.1.7",
+    "next": "^15.1.9",
     "postprocessing": "^6.37.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
